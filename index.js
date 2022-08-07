@@ -117,12 +117,12 @@ const iswon = function () {
     activePlayer === 0 ? (playerOneScore += 1) : (playerTwoScore += 1);
     initiate();
   } else if (
-    divBox9.textContent === divBox5.textContent &&
-    divBox9.textContent === divBox1.textContent
+    divBox3.textContent === divBox5.textContent &&
+    divBox3.textContent === divBox7.textContent
   ) {
-    divBox9.style.color = "#a9e34b";
+    divBox3.style.color = "#a9e34b";
     divBox5.style.color = "#a9e34b";
-    divBox1.style.color = "#a9e34b";
+    divBox7.style.color = "#a9e34b";
     alreadyPlayedPositions[9] = -1;
     activePlayer === 0 ? (playerOneScore += 1) : (playerTwoScore += 1);
     initiate();
