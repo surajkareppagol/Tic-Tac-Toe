@@ -12,6 +12,12 @@ const divBox9 = document.querySelector(".box-9");
 const player1 = document.querySelector(".player--1-score");
 const player2 = document.querySelector(".player--2-score");
 const allBoxes = document.querySelectorAll(".game--box");
+const singlePlayer = document.querySelector(".single-player");
+const multiPlayer = document.querySelector(".multi-player");
+const mainboard = document.querySelector(".main--box");
+const optionBox = document.querySelector(".game--options");
+const goBack = document.querySelector(".back--option");
+const reset = document.querySelector(".reset--option");
 
 /////////////////////////////////////////////////////////
 
@@ -19,6 +25,7 @@ let alreadyPlayedPositions = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 let playerOneScore = 0,
   playerTwoScore = 0,
   playedFor = 0;
+
 /////////////////////////////////////////////////////////
 
 // SET AND INITIALIZE GAME CONDITIONS
@@ -33,7 +40,7 @@ const initiate = function () {
     });
     player1.textContent = playerOneScore;
     player2.textContent = playerTwoScore;
-  }, 1000);
+  }, 500);
 };
 /////////////////////////////////////////////////////////
 
@@ -124,133 +131,155 @@ const iswon = function () {
 
 /////////////////////////////////////////////////////////
 
-// GAME CLICK EVENTS
 let activePlayer = 0;
 
-divBox1.addEventListener("click", function () {
-  if (
-    !alreadyPlayedPositions.includes(1) &&
-    !alreadyPlayedPositions.includes(-1)
-  ) {
-    divBox1.style.color = "#fff";
-    divBox1.textContent = activePlayer === 0 ? "x" : "o";
-    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-    alreadyPlayedPositions[0] = 1;
-    playedFor += 1;
-    iswon();
-  } else if (playedFor === 9) initiate();
-});
+// SELECT GAME MODE
+multiPlayer.addEventListener("click", function () {
+  mainboard.classList.remove("display--hide");
+  goBack.classList.remove("display--hide");
+  reset.classList.remove("display--hide");
+  optionBox.classList.add("display--hide");
+  divBox1.addEventListener("click", function () {
+    if (
+      !alreadyPlayedPositions.includes(1) &&
+      !alreadyPlayedPositions.includes(-1)
+    ) {
+      divBox1.style.color = "#fff";
+      divBox1.textContent = activePlayer === 0 ? "x" : "o";
+      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+      alreadyPlayedPositions[0] = 1;
+      playedFor += 1;
+      iswon();
+    } else if (playedFor === 9) initiate();
+  });
 
-divBox2.addEventListener("click", function () {
-  if (
-    !alreadyPlayedPositions.includes(2) &&
-    !alreadyPlayedPositions.includes(-1)
-  ) {
-    divBox2.style.color = "#fff";
-    divBox2.textContent = activePlayer === 0 ? "x" : "o";
-    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-    alreadyPlayedPositions[1] = 2;
-    playedFor += 1;
-    iswon();
-  } else if (playedFor === 9) initiate();
-});
+  divBox2.addEventListener("click", function () {
+    if (
+      !alreadyPlayedPositions.includes(2) &&
+      !alreadyPlayedPositions.includes(-1)
+    ) {
+      divBox2.style.color = "#fff";
+      divBox2.textContent = activePlayer === 0 ? "x" : "o";
+      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+      alreadyPlayedPositions[1] = 2;
+      playedFor += 1;
+      iswon();
+    } else if (playedFor === 9) initiate();
+  });
 
-divBox3.addEventListener("click", function () {
-  if (
-    !alreadyPlayedPositions.includes(3) &&
-    !alreadyPlayedPositions.includes(-1)
-  ) {
-    divBox3.style.color = "#fff";
-    divBox3.textContent = activePlayer === 0 ? "x" : "o";
-    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-    alreadyPlayedPositions[2] = 3;
-    playedFor += 1;
-    iswon();
-  } else if (playedFor === 9) initiate();
-});
+  divBox3.addEventListener("click", function () {
+    if (
+      !alreadyPlayedPositions.includes(3) &&
+      !alreadyPlayedPositions.includes(-1)
+    ) {
+      divBox3.style.color = "#fff";
+      divBox3.textContent = activePlayer === 0 ? "x" : "o";
+      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+      alreadyPlayedPositions[2] = 3;
+      playedFor += 1;
+      iswon();
+    } else if (playedFor === 9) initiate();
+  });
 
-divBox4.addEventListener("click", function () {
-  if (
-    !alreadyPlayedPositions.includes(4) &&
-    !alreadyPlayedPositions.includes(-1)
-  ) {
-    divBox4.style.color = "#fff";
-    divBox4.textContent = activePlayer === 0 ? "x" : "o";
-    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-    alreadyPlayedPositions[3] = 4;
-    playedFor += 1;
-    iswon();
-  } else if (playedFor === 9) initiate();
-});
+  divBox4.addEventListener("click", function () {
+    if (
+      !alreadyPlayedPositions.includes(4) &&
+      !alreadyPlayedPositions.includes(-1)
+    ) {
+      divBox4.style.color = "#fff";
+      divBox4.textContent = activePlayer === 0 ? "x" : "o";
+      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+      alreadyPlayedPositions[3] = 4;
+      playedFor += 1;
+      iswon();
+    } else if (playedFor === 9) initiate();
+  });
 
-divBox5.addEventListener("click", function () {
-  if (
-    !alreadyPlayedPositions.includes(5) &&
-    !alreadyPlayedPositions.includes(-1)
-  ) {
-    divBox5.style.color = "#fff";
-    divBox5.textContent = activePlayer === 0 ? "x" : "o";
-    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-    alreadyPlayedPositions[4] = 5;
-    playedFor += 1;
-    iswon();
-  } else if (playedFor === 9) initiate();
-});
+  divBox5.addEventListener("click", function () {
+    if (
+      !alreadyPlayedPositions.includes(5) &&
+      !alreadyPlayedPositions.includes(-1)
+    ) {
+      divBox5.style.color = "#fff";
+      divBox5.textContent = activePlayer === 0 ? "x" : "o";
+      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+      alreadyPlayedPositions[4] = 5;
+      playedFor += 1;
+      iswon();
+    } else if (playedFor === 9) initiate();
+  });
 
-divBox6.addEventListener("click", function () {
-  if (
-    !alreadyPlayedPositions.includes(6) &&
-    !alreadyPlayedPositions.includes(-1)
-  ) {
-    divBox6.style.color = "#fff";
-    divBox6.textContent = activePlayer === 0 ? "x" : "o";
-    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-    alreadyPlayedPositions[5] = 6;
-    playedFor += 1;
-    iswon();
-  } else if (playedFor === 9) initiate();
-});
+  divBox6.addEventListener("click", function () {
+    if (
+      !alreadyPlayedPositions.includes(6) &&
+      !alreadyPlayedPositions.includes(-1)
+    ) {
+      divBox6.style.color = "#fff";
+      divBox6.textContent = activePlayer === 0 ? "x" : "o";
+      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+      alreadyPlayedPositions[5] = 6;
+      playedFor += 1;
+      iswon();
+    } else if (playedFor === 9) initiate();
+  });
 
-divBox7.addEventListener("click", function () {
-  if (
-    !alreadyPlayedPositions.includes(7) &&
-    !alreadyPlayedPositions.includes(-1)
-  ) {
-    divBox7.style.color = "#fff";
-    divBox7.textContent = activePlayer === 0 ? "x" : "o";
-    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-    alreadyPlayedPositions[6] = 7;
-    playedFor += 1;
-    iswon();
-  } else if (playedFor === 9) initiate();
-});
+  divBox7.addEventListener("click", function () {
+    if (
+      !alreadyPlayedPositions.includes(7) &&
+      !alreadyPlayedPositions.includes(-1)
+    ) {
+      divBox7.style.color = "#fff";
+      divBox7.textContent = activePlayer === 0 ? "x" : "o";
+      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+      alreadyPlayedPositions[6] = 7;
+      playedFor += 1;
+      iswon();
+    } else if (playedFor === 9) initiate();
+  });
 
-divBox8.addEventListener("click", function () {
-  if (
-    !alreadyPlayedPositions.includes(8) &&
-    !alreadyPlayedPositions.includes(-1)
-  ) {
-    divBox8.style.color = "#fff";
-    divBox8.textContent = activePlayer === 0 ? "x" : "o";
-    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-    alreadyPlayedPositions[7] = 8;
-    playedFor += 1;
-    iswon();
-  } else if (playedFor === 9) initiate();
-});
+  divBox8.addEventListener("click", function () {
+    if (
+      !alreadyPlayedPositions.includes(8) &&
+      !alreadyPlayedPositions.includes(-1)
+    ) {
+      divBox8.style.color = "#fff";
+      divBox8.textContent = activePlayer === 0 ? "x" : "o";
+      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+      alreadyPlayedPositions[7] = 8;
+      playedFor += 1;
+      iswon();
+    } else if (playedFor === 9) initiate();
+  });
 
-divBox9.addEventListener("click", function () {
-  if (
-    !alreadyPlayedPositions.includes(9) &&
-    !alreadyPlayedPositions.includes(-1)
-  ) {
-    divBox9.style.color = "#fff";
-    divBox9.textContent = activePlayer === 0 ? "x" : "o";
-    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-    alreadyPlayedPositions[8] = 9;
-    playedFor += 1;
-    iswon();
-  } else if (playedFor === 9) initiate();
+  divBox9.addEventListener("click", function () {
+    if (
+      !alreadyPlayedPositions.includes(9) &&
+      !alreadyPlayedPositions.includes(-1)
+    ) {
+      divBox9.style.color = "#fff";
+      divBox9.textContent = activePlayer === 0 ? "x" : "o";
+      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+      alreadyPlayedPositions[8] = 9;
+      playedFor += 1;
+      iswon();
+    } else if (playedFor === 9) initiate();
+  });
+});
+/////////////////////////////////////////////////////////
+
+// GO BACK
+goBack.addEventListener("click", function () {
+  mainboard.classList.add("display--hide");
+  optionBox.classList.remove("display--hide");
+  goBack.classList.add("display--hide");
+  reset.classList.add("display--hide");
 });
 
 /////////////////////////////////////////////////////////
+
+// RESET
+reset.addEventListener("click", function () {
+  initiate();
+  playerOneScore = 0;
+  playerTwoScore = 0;
+});
