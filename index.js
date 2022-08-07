@@ -118,11 +118,11 @@ const iswon = function () {
     initiate();
   } else if (
     divBox9.textContent === divBox5.textContent &&
-    divBox9.textContent === divBox7.textContent
+    divBox9.textContent === divBox1.textContent
   ) {
     divBox9.style.color = "#a9e34b";
     divBox5.style.color = "#a9e34b";
-    divBox7.style.color = "#a9e34b";
+    divBox1.style.color = "#a9e34b";
     alreadyPlayedPositions[9] = -1;
     activePlayer === 0 ? (playerOneScore += 1) : (playerTwoScore += 1);
     initiate();
