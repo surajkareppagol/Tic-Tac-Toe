@@ -1,11 +1,9 @@
 # TIC TAC TOE
 
-This is your basic Tic Tac Toe game created using HTML, CSS and some JAVASCRIPT.Enjoy the game.
+`Tic Tac Toe` game created with html, css and javascript.
 
-Single player coming soon...
+[Check out the game 🔗🔗](https://dev-shadoww.github.io/tic-tac-toe)
 
-[Click here to check out the game...](https://dev-shadoww.github.io/tic-tac-toe)
+![GameImage](img/gameDemo1.png)
 
-![GameImage](img/gameImg1.png)
-
-![GameImage](img/gameImg2.png)
+![GameImage](img/gameDemo2.png)

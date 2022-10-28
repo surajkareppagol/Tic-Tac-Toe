@@ -1,40 +1,53 @@
 "use strict";
 
-const divBox1 = document.querySelector(".box-1");
-const divBox2 = document.querySelector(".box-2");
-const divBox3 = document.querySelector(".box-3");
-const divBox4 = document.querySelector(".box-4");
-const divBox5 = document.querySelector(".box-5");
-const divBox6 = document.querySelector(".box-6");
-const divBox7 = document.querySelector(".box-7");
-const divBox8 = document.querySelector(".box-8");
-const divBox9 = document.querySelector(".box-9");
-const player1 = document.querySelector(".player--1-score");
-const player2 = document.querySelector(".player--2-score");
-const allBoxes = document.querySelectorAll(".game--box");
-const singlePlayer = document.querySelector(".single-player");
-const multiPlayer = document.querySelector(".multi-player");
-const mainboard = document.querySelector(".main--box");
-const optionBox = document.querySelector(".game--options");
-const goBack = document.querySelector(".back--option");
-const reset = document.querySelector(".reset--option");
+/**************************************/
+/*  DOM ELEMENTS  */
+/**************************************/
 
-/////////////////////////////////////////////////////////
+const navBox = document.querySelector(".nav-options");
+const headText = document.querySelector(".primary-heading");
+const backOption = document.querySelector(".back-option");
+const resetOption = document.querySelector(".reset-option");
+const optionBox = document.querySelector(".game-mode-box");
+const spButton = document.querySelector(".sp-button");
+const mpButton = document.querySelector(".mp-button");
+const board = document.querySelector(".game-board");
+const allBox = document.querySelectorAll(".board");
+const divBoard1 = document.querySelector(".board-1");
+const divBoard2 = document.querySelector(".board-2");
+const divBoard3 = document.querySelector(".board-3");
+const divBoard4 = document.querySelector(".board-4");
+const divBoard5 = document.querySelector(".board-5");
+const divBoard6 = document.querySelector(".board-6");
+const divBoard7 = document.querySelector(".board-7");
+const divBoard8 = document.querySelector(".board-8");
+const divBoard9 = document.querySelector(".board-9");
+const player1 = document.querySelector(".player-score-1");
+const player2 = document.querySelector(".player-score-2");
+const note = document.querySelector(".note");
 
-let alreadyPlayedPositions = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+/**************************************/
+/*  VARIABLES  */
+/**************************************/
+
+let alreadyPlayedPositions = Array.from({ length: 10 }, () => 0);
 let playerOneScore = 0,
   playerTwoScore = 0,
-  playedFor = 0;
-
-/////////////////////////////////////////////////////////
-
-// SET AND INITIALIZE GAME CONDITIONS
-const initiate = function () {
-  alreadyPlayedPositions = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  gamePlayedFor = 0,
   activePlayer = 0;
-  playedFor = 0;
+let winColor = "#a9e34b",
+  boardColor = "#fff";
+
+/**************************************/
+/* SET AND INITIALIZE GAME CONDITIONS */
+/**************************************/
+
+const initiate = function () {
+  alreadyPlayedPositions = Array.from({ length: 10 }, () => 0);
+  activePlayer = 0;
+  gamePlayedFor = 0;
   setTimeout(function () {
-    allBoxes.forEach((box, i) => {
+    allBox.forEach((box, i) => {
       box.style.color = "#000";
       box.textContent = i + 1;
     });
@@ -42,243 +55,252 @@ const initiate = function () {
     player2.textContent = playerTwoScore;
   }, 500);
 };
-/////////////////////////////////////////////////////////
 
-// CHECK WIN CONDITION
-const iswon = function () {
+/**************************************/
+/* CHECK WIN CONDITION */
+/**************************************/
+
+const gameOver = function () {
   if (
-    divBox1.textContent === divBox2.textContent &&
-    divBox1.textContent === divBox3.textContent
+    divBoard1.textContent === divBoard2.textContent &&
+    divBoard1.textContent === divBoard3.textContent
   ) {
-    divBox1.style.color = "#a9e34b";
-    divBox2.style.color = "#a9e34b";
-    divBox3.style.color = "#a9e34b";
+    divBoard1.style.color = winColor;
+    divBoard2.style.color = winColor;
+    divBoard3.style.color = winColor;
     alreadyPlayedPositions[9] = -1;
-    activePlayer === 0 ? (playerOneScore += 1) : (playerTwoScore += 1);
+    activePlayer === 0 ? (playerTwoScore += 1) : (playerOneScore += 1);
     initiate();
   } else if (
-    divBox4.textContent === divBox5.textContent &&
-    divBox4.textContent === divBox6.textContent
+    divBoard4.textContent === divBoard5.textContent &&
+    divBoard4.textContent === divBoard6.textContent
   ) {
-    divBox4.style.color = "#a9e34b";
-    divBox5.style.color = "#a9e34b";
-    divBox6.style.color = "#a9e34b";
+    divBoard4.style.color = winColor;
+    divBoard5.style.color = winColor;
+    divBoard6.style.color = winColor;
     alreadyPlayedPositions[9] = -1;
-    activePlayer === 0 ? (playerOneScore += 1) : (playerTwoScore += 1);
+    activePlayer === 0 ? (playerTwoScore += 1) : (playerOneScore += 1);
     initiate();
   } else if (
-    divBox7.textContent === divBox8.textContent &&
-    divBox7.textContent === divBox9.textContent
+    divBoard7.textContent === divBoard8.textContent &&
+    divBoard7.textContent === divBoard9.textContent
   ) {
-    divBox7.style.color = "#a9e34b";
-    divBox8.style.color = "#a9e34b";
-    divBox9.style.color = "#a9e34b";
+    divBoard7.style.color = winColor;
+    divBoard8.style.color = winColor;
+    divBoard9.style.color = winColor;
     alreadyPlayedPositions[9] = -1;
-    activePlayer === 0 ? (playerOneScore += 1) : (playerTwoScore += 1);
+    activePlayer === 0 ? (playerTwoScore += 1) : (playerOneScore += 1);
     initiate();
   } else if (
-    divBox1.textContent === divBox4.textContent &&
-    divBox1.textContent === divBox7.textContent
+    divBoard1.textContent === divBoard4.textContent &&
+    divBoard1.textContent === divBoard7.textContent
   ) {
-    divBox1.style.color = "#a9e34b";
-    divBox4.style.color = "#a9e34b";
-    divBox7.style.color = "#a9e34b";
+    divBoard1.style.color = winColor;
+    divBoard4.style.color = winColor;
+    divBoard7.style.color = winColor;
     alreadyPlayedPositions[9] = -1;
-    activePlayer === 0 ? (playerOneScore += 1) : (playerTwoScore += 1);
+    activePlayer === 0 ? (playerTwoScore += 1) : (playerOneScore += 1);
     initiate();
   } else if (
-    divBox2.textContent === divBox5.textContent &&
-    divBox2.textContent === divBox8.textContent
+    divBoard2.textContent === divBoard5.textContent &&
+    divBoard2.textContent === divBoard8.textContent
   ) {
-    divBox2.style.color = "#a9e34b";
-    divBox5.style.color = "#a9e34b";
-    divBox8.style.color = "#a9e34b";
+    divBoard2.style.color = winColor;
+    divBoard5.style.color = winColor;
+    divBoard8.style.color = winColor;
     alreadyPlayedPositions[9] = -1;
-    activePlayer === 0 ? (playerOneScore += 1) : (playerTwoScore += 1);
+    activePlayer === 0 ? (playerTwoScore += 1) : (playerOneScore += 1);
     initiate();
   } else if (
-    divBox3.textContent === divBox6.textContent &&
-    divBox3.textContent === divBox9.textContent
+    divBoard3.textContent === divBoard6.textContent &&
+    divBoard3.textContent === divBoard9.textContent
   ) {
-    divBox3.style.color = "#a9e34b";
-    divBox6.style.color = "#a9e34b";
-    divBox9.style.color = "#a9e34b";
+    divBoard3.style.color = winColor;
+    divBoard6.style.color = winColor;
+    divBoard9.style.color = winColor;
     alreadyPlayedPositions[9] = -1;
-    activePlayer === 0 ? (playerOneScore += 1) : (playerTwoScore += 1);
+    activePlayer === 0 ? (playerTwoScore += 1) : (playerOneScore += 1);
     initiate();
   } else if (
-    divBox1.textContent === divBox5.textContent &&
-    divBox1.textContent === divBox9.textContent
+    divBoard1.textContent === divBoard5.textContent &&
+    divBoard1.textContent === divBoard9.textContent
   ) {
-    divBox1.style.color = "#a9e34b";
-    divBox5.style.color = "#a9e34b";
-    divBox9.style.color = "#a9e34b";
+    divBoard1.style.color = winColor;
+    divBoard5.style.color = winColor;
+    divBoard9.style.color = winColor;
     alreadyPlayedPositions[9] = -1;
-    activePlayer === 0 ? (playerOneScore += 1) : (playerTwoScore += 1);
+    activePlayer === 0 ? (playerTwoScore += 1) : (playerOneScore += 1);
     initiate();
   } else if (
-    divBox3.textContent === divBox5.textContent &&
-    divBox3.textContent === divBox7.textContent
+    divBoard3.textContent === divBoard5.textContent &&
+    divBoard3.textContent === divBoard7.textContent
   ) {
-    divBox3.style.color = "#a9e34b";
-    divBox5.style.color = "#a9e34b";
-    divBox7.style.color = "#a9e34b";
+    divBoard3.style.color = winColor;
+    divBoard5.style.color = winColor;
+    divBoard7.style.color = winColor;
     alreadyPlayedPositions[9] = -1;
-    activePlayer === 0 ? (playerOneScore += 1) : (playerTwoScore += 1);
+    activePlayer === 0 ? (playerTwoScore += 1) : (playerOneScore += 1);
     initiate();
   }
 };
 
-/////////////////////////////////////////////////////////
+/**************************************/
+/*  MULTI PLAYER MODE  */
+/**************************************/
 
-let activePlayer = 0;
-
-// SELECT GAME MODE
-multiPlayer.addEventListener("click", function () {
-  mainboard.classList.remove("display--hide");
-  goBack.classList.remove("display--hide");
-  reset.classList.remove("display--hide");
-  optionBox.classList.add("display--hide");
-  divBox1.addEventListener("click", function () {
+mpButton.addEventListener("click", function () {
+  board.classList.remove("display-hide");
+  backOption.classList.remove("display-hide");
+  resetOption.classList.remove("display-hide");
+  optionBox.classList.add("display-hide");
+  note.classList.add("display-hide");
+  headText.classList.add("display-hide");
+  navBox.style.marginTop = "4rem";
+  divBoard1.addEventListener("click", function () {
     if (
       !alreadyPlayedPositions.includes(1) &&
       !alreadyPlayedPositions.includes(-1)
     ) {
-      divBox1.style.color = "#fff";
-      divBox1.textContent = activePlayer === 0 ? "x" : "o";
+      divBoard1.style.color = boardColor;
+      divBoard1.textContent = activePlayer === 0 ? "x" : "o";
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       alreadyPlayedPositions[0] = 1;
-      playedFor += 1;
-      iswon();
-    } else if (playedFor === 9) initiate();
+      gamePlayedFor += 1;
+      gameOver();
+    } else if (gamePlayedFor === 9) initiate();
   });
 
-  divBox2.addEventListener("click", function () {
+  divBoard2.addEventListener("click", function () {
     if (
       !alreadyPlayedPositions.includes(2) &&
       !alreadyPlayedPositions.includes(-1)
     ) {
-      divBox2.style.color = "#fff";
-      divBox2.textContent = activePlayer === 0 ? "x" : "o";
+      divBoard2.style.color = boardColor;
+      divBoard2.textContent = activePlayer === 0 ? "x" : "o";
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       alreadyPlayedPositions[1] = 2;
-      playedFor += 1;
-      iswon();
-    } else if (playedFor === 9) initiate();
+      gamePlayedFor += 1;
+      gameOver();
+    } else if (gamePlayedFor === 9) initiate();
   });
 
-  divBox3.addEventListener("click", function () {
+  divBoard3.addEventListener("click", function () {
     if (
       !alreadyPlayedPositions.includes(3) &&
       !alreadyPlayedPositions.includes(-1)
     ) {
-      divBox3.style.color = "#fff";
-      divBox3.textContent = activePlayer === 0 ? "x" : "o";
+      divBoard3.style.color = boardColor;
+      divBoard3.textContent = activePlayer === 0 ? "x" : "o";
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       alreadyPlayedPositions[2] = 3;
-      playedFor += 1;
-      iswon();
-    } else if (playedFor === 9) initiate();
+      gamePlayedFor += 1;
+      gameOver();
+    } else if (gamePlayedFor === 9) initiate();
   });
 
-  divBox4.addEventListener("click", function () {
+  divBoard4.addEventListener("click", function () {
     if (
       !alreadyPlayedPositions.includes(4) &&
       !alreadyPlayedPositions.includes(-1)
     ) {
-      divBox4.style.color = "#fff";
-      divBox4.textContent = activePlayer === 0 ? "x" : "o";
+      divBoard4.style.color = boardColor;
+      divBoard4.textContent = activePlayer === 0 ? "x" : "o";
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       alreadyPlayedPositions[3] = 4;
-      playedFor += 1;
-      iswon();
-    } else if (playedFor === 9) initiate();
+      gamePlayedFor += 1;
+      gameOver();
+    } else if (gamePlayedFor === 9) initiate();
   });
 
-  divBox5.addEventListener("click", function () {
+  divBoard5.addEventListener("click", function () {
     if (
       !alreadyPlayedPositions.includes(5) &&
       !alreadyPlayedPositions.includes(-1)
     ) {
-      divBox5.style.color = "#fff";
-      divBox5.textContent = activePlayer === 0 ? "x" : "o";
+      divBoard5.style.color = boardColor;
+      divBoard5.textContent = activePlayer === 0 ? "x" : "o";
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       alreadyPlayedPositions[4] = 5;
-      playedFor += 1;
-      iswon();
-    } else if (playedFor === 9) initiate();
+      gamePlayedFor += 1;
+      gameOver();
+    } else if (gamePlayedFor === 9) initiate();
   });
 
-  divBox6.addEventListener("click", function () {
+  divBoard6.addEventListener("click", function () {
     if (
       !alreadyPlayedPositions.includes(6) &&
       !alreadyPlayedPositions.includes(-1)
     ) {
-      divBox6.style.color = "#fff";
-      divBox6.textContent = activePlayer === 0 ? "x" : "o";
+      divBoard6.style.color = boardColor;
+      divBoard6.textContent = activePlayer === 0 ? "x" : "o";
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       alreadyPlayedPositions[5] = 6;
-      playedFor += 1;
-      iswon();
-    } else if (playedFor === 9) initiate();
+      gamePlayedFor += 1;
+      gameOver();
+    } else if (gamePlayedFor === 9) initiate();
   });
 
-  divBox7.addEventListener("click", function () {
+  divBoard7.addEventListener("click", function () {
     if (
       !alreadyPlayedPositions.includes(7) &&
       !alreadyPlayedPositions.includes(-1)
     ) {
-      divBox7.style.color = "#fff";
-      divBox7.textContent = activePlayer === 0 ? "x" : "o";
+      divBoard7.style.color = boardColor;
+      divBoard7.textContent = activePlayer === 0 ? "x" : "o";
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       alreadyPlayedPositions[6] = 7;
-      playedFor += 1;
-      iswon();
-    } else if (playedFor === 9) initiate();
+      gamePlayedFor += 1;
+      gameOver();
+    } else if (gamePlayedFor === 9) initiate();
   });
 
-  divBox8.addEventListener("click", function () {
+  divBoard8.addEventListener("click", function () {
     if (
       !alreadyPlayedPositions.includes(8) &&
       !alreadyPlayedPositions.includes(-1)
     ) {
-      divBox8.style.color = "#fff";
-      divBox8.textContent = activePlayer === 0 ? "x" : "o";
+      divBoard8.style.color = boardColor;
+      divBoard8.textContent = activePlayer === 0 ? "x" : "o";
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       alreadyPlayedPositions[7] = 8;
-      playedFor += 1;
-      iswon();
-    } else if (playedFor === 9) initiate();
+      gamePlayedFor += 1;
+      gameOver();
+    } else if (gamePlayedFor === 9) initiate();
   });
 
-  divBox9.addEventListener("click", function () {
+  divBoard9.addEventListener("click", function () {
     if (
       !alreadyPlayedPositions.includes(9) &&
       !alreadyPlayedPositions.includes(-1)
     ) {
-      divBox9.style.color = "#fff";
-      divBox9.textContent = activePlayer === 0 ? "x" : "o";
+      divBoard9.style.color = boardColor;
+      divBoard9.textContent = activePlayer === 0 ? "x" : "o";
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       alreadyPlayedPositions[8] = 9;
-      playedFor += 1;
-      iswon();
-    } else if (playedFor === 9) initiate();
+      gamePlayedFor += 1;
+      gameOver();
+    } else if (gamePlayedFor === 9) initiate();
   });
 });
-/////////////////////////////////////////////////////////
 
-// GO BACK
-goBack.addEventListener("click", function () {
-  mainboard.classList.add("display--hide");
-  optionBox.classList.remove("display--hide");
-  goBack.classList.add("display--hide");
-  reset.classList.add("display--hide");
+/**************************************/
+/*  BACK - NAV  */
+/**************************************/
+
+backOption.addEventListener("click", function () {
+  board.classList.add("display-hide");
+  optionBox.classList.remove("display-hide");
+  backOption.classList.add("display-hide");
+  resetOption.classList.add("display-hide");
+  note.classList.remove("display-hide");
+  headText.classList.remove("display-hide");
 });
 
-/////////////////////////////////////////////////////////
+/**************************************/
+/*  RESET - NAV */
+/**************************************/
 
-// RESET
-reset.addEventListener("click", function () {
+resetOption.addEventListener("click", function () {
   initiate();
   playerOneScore = 0;
   playerTwoScore = 0;

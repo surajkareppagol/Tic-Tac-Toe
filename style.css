@@ -1,4 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Tomorrow:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+/**************************************/
+/*  ELEMENTS  */
+/**************************************/
 
 * {
   margin: 0;
@@ -13,7 +17,7 @@ html {
 body {
   max-width: 120rem;
   margin: 0 auto;
-  font-family: "Tomorrow", sans-serif;
+  font-family: "Press Start 2P", cursive;
   font-weight: 400;
   line-height: 1;
   background-color: black;
@@ -25,40 +29,11 @@ body {
   height: 100vh;
 }
 
-.game--options {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4rem;
-}
+/**************************************/
+/*  SELECTORS  */
+/**************************************/
 
-.game--option {
-  background-color: #fff;
-  border-radius: 50px;
-  padding: 1rem 8rem;
-  font-size: 6.4rem;
-  font-weight: 500;
-  text-transform: capitalize;
-}
-
-.game--option:hover {
-  background-color: #eeeeee;
-  cursor: pointer;
-}
-
-.main--box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4rem;
-}
-
-.display--hide {
-  display: none;
-}
-
-.reset--options {
+.nav-options {
   /* max-width: 100%; */
   max-width: 200rem;
   /* margin: 0 auto; */
@@ -68,113 +43,159 @@ body {
   gap: 20rem;
 }
 
-.reset--option {
+.nav-option {
   color: #fff;
   font-size: 2rem;
   text-transform: capitalize;
   margin-top: 2rem;
 }
 
-.back--option {
-  color: #fff;
-  font-size: 2rem;
-  text-transform: capitalize;
-  margin-top: 2rem;
-}
-
-.reset--option:hover,
-.back--option:hover {
+.nav-option:hover {
   color: #eeeeee;
   cursor: pointer;
 }
 
-.name {
+.primary-heading {
   color: #fff;
-  font-size: 4.2rem;
+  font-size: 10rem;
   text-transform: capitalize;
   margin-top: 2rem;
 }
 
-.name:hover {
+.primary-heading:hover {
   color: #eeeeee;
   cursor: pointer;
 }
 
-.game--boxes {
+.game-mode-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
+
+.game-mode-card {
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 8rem 5rem;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.game-mode {
+  font-size: 6.4rem;
+}
+
+.play-button {
+  color: #fff;
+  background-color: #000;
+  font-size: 4rem;
+  margin-top: 4rem;
+  padding: 1rem;
+  transition: all 0.3s;
+}
+
+.play-button:hover {
+  cursor: pointer;
+  transform: translateY(-2px);
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
+
+.display-hide {
+  display: none;
+}
+
+.boards-box {
   display: grid;
   grid-template-columns: repeat(3, 160px);
 }
 
-.game--box {
+.board {
   padding: 4rem;
   font-size: 8.6rem;
   text-align: center;
 }
 
-.box-1 {
-  border-bottom: 1px solid #fff;
-  border-right: 1px solid #fff;
+.board-1 {
+  border-bottom: 2.4px solid #fff;
+  border-right: 2.4px solid #fff;
 }
 
-.box-2 {
-  border-bottom: 1px solid #fff;
-  border-left: 1px solid #fff;
-  border-right: 1px solid #fff;
+.board-2 {
+  border-bottom: 2.4px solid #fff;
+  border-left: 2.4px solid #fff;
+  border-right: 2.4px solid #fff;
 }
 
-.box-3 {
-  border-bottom: 1px solid #fff;
-  border-left: 1px solid #fff;
+.board-3 {
+  border-bottom: 2.4px solid #fff;
+  border-left: 2.4px solid #fff;
 }
 
-.box-4 {
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-  border-right: 1px solid #fff;
+.board-4 {
+  border-top: 2.4px solid #fff;
+  border-bottom: 2.4px solid #fff;
+  border-right: 2.4px solid #fff;
 }
 
-.box-5 {
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-  border-left: 1px solid #fff;
-  border-right: 1px solid #fff;
+.board-5 {
+  border-top: 2.4px solid #fff;
+  border-bottom: 2.4px solid #fff;
+  border-left: 2.4px solid #fff;
+  border-right: 2.4px solid #fff;
 }
 
-.box-6 {
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-  border-left: 1px solid #fff;
+.board-6 {
+  border-top: 2.4px solid #fff;
+  border-bottom: 2.4px solid #fff;
+  border-left: 2.4px solid #fff;
 }
 
-.box-7 {
-  border-top: 1px solid #fff;
-  border-right: 1px solid #fff;
+.board-7 {
+  border-top: 2.4px solid #fff;
+  border-right: 2.4px solid #fff;
 }
 
-.box-8 {
-  border-top: 1px solid #fff;
-  border-left: 1px solid #fff;
-  border-right: 1px solid #fff;
+.board-8 {
+  border-top: 2.4px solid #fff;
+  border-left: 2.4px solid #fff;
+  border-right: 2.4px solid #fff;
 }
 
-.box-9 {
-  border-top: 1px solid #fff;
-  border-left: 1px solid #fff;
+.board-9 {
+  border-top: 2.4px solid #fff;
+  border-left: 2.4px solid #fff;
 }
 
-.game--details {
+.score-box {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8rem;
 }
 
-.player {
-  font-size: 4.2rem;
+.player-text {
+  font-size: 2rem;
   color: #fff;
   text-transform: capitalize;
   font-weight: 100;
+  margin-bottom: 4rem;
 }
+
+.note {
+  color: #fff;
+}
+
+/**************************************/
+/*  RESPONSIVE DESIGN  */
+/**************************************/
 
 @media (max-width: 1000px) {
   body {
@@ -185,47 +206,62 @@ body {
     max-width: 100rem;
   }
 
-  .game--options {
+  .primary-heading {
+    font-size: 2.6rem;
+  }
+
+  .game-mode-box {
     flex-direction: column;
   }
 
-  .game--option {
-    background-color: #fff;
-    border-radius: 50px;
-    padding: 0.6rem 4rem;
+  .game-mode {
     font-size: 3.2rem;
-    font-weight: 500;
-    text-transform: capitalize;
   }
 
-  .reset--options {
+  .game-mode-card {
+    padding: 2rem 1rem;
+    margin: 0 2rem;
+  }
+
+  .play-button {
+    font-size: 2rem;
+    margin-top: 2rem;
+  }
+
+  .nav-options {
     gap: 2rem;
   }
 
-  .reset--option,
-  .back--option {
-    font-size: 1.6rem;
+  .nav-option {
+    font-size: 1rem;
   }
 
-  .name {
-    font-size: 2.4rem;
+  .primary-heading {
+    font-size: 2rem;
   }
 
-  .game--details {
+  .score-box {
     gap: 2rem;
   }
 
-  .player {
-    font-size: 2.4rem;
-    font-weight: 300;
+  .player-text {
+    font-size: 1rem;
   }
 
-  .game--boxes {
+  .boards-box {
     grid-template-columns: repeat(3, 90px);
   }
 
-  .game--box {
+  .board {
     padding: 2rem;
     font-size: 4.3rem;
   }
+
+  .note {
+    text-align: center;
+    line-height: 1.2;
+  }
 }
+
+/**************************************/
+/**************************************/

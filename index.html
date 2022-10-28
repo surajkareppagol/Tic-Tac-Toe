@@ -8,33 +8,53 @@
     <title>TicTacToe</title>
   </head>
   <body>
-    <div class="reset--options">
-      <p class="back--option display--hide">go back</p>
-      <h1 class="name">tic tac toe</h1>
-      <p class="reset--option display--hide">reset</p>
+    <!-- NAVIGATION -->
+    <div class="nav-options">
+      <p class="nav-option display-hide back-option">go back</p>
+      <h1 class="primary-heading">tic tac toe</h1>
+      <p class="nav-option display-hide reset-option">reset</p>
     </div>
 
-    <div class="game--options">
-      <p class="game--option single-player">Single Player</p>
-      <p class="game--option multi-player">Multi Player</p>
-    </div>
-    <div class="main--box display--hide">
-      <div class="game--boxes">
-        <div class="game--box box-1">1</div>
-        <div class="game--box box-2">2</div>
-        <div class="game--box box-3">3</div>
-        <div class="game--box box-4">4</div>
-        <div class="game--box box-5">5</div>
-        <div class="game--box box-6">6</div>
-        <div class="game--box box-7">7</div>
-        <div class="game--box box-8">8</div>
-        <div class="game--box box-9">9</div>
+    <!-- GAME MODE OPTIONS -->
+    <div class="game-mode-box">
+      <div class="game-mode-card">
+        <p class="game-mode">Single Player</p>
+        <p class="play-button sp-button">play Now</p>
       </div>
-      <div class="game--details">
-        <p class="player">player 1 : <span class="player--1-score">0</span></p>
-        <p class="player">player 2 : <span class="player--2-score">0</span></p>
+      <div class="game-mode-card">
+        <p class="game-mode">Multi Player</p>
+        <p class="play-button mp-button">play Now</p>
       </div>
     </div>
+
+    <!-- GAME BOARD -->
+    <div class="game-board display-hide">
+      <div class="boards-box">
+        <div class="board board-1">1</div>
+        <div class="board board-2">2</div>
+        <div class="board board-3">3</div>
+        <div class="board board-4">4</div>
+        <div class="board board-5">5</div>
+        <div class="board board-6">6</div>
+        <div class="board board-7">7</div>
+        <div class="board board-8">8</div>
+        <div class="board board-9">9</div>
+      </div>
+
+      <!-- SCORE -->
+      <div class="score-box">
+        <p class="player-text">
+          player 1 : <span class="player-score-1">0</span>
+        </p>
+        <p class="player-text">
+          player 2 : <span class="player-score-2">0</span>
+        </p>
+      </div>
+    </div>
+
+    <p class="note">&ast; Single mode is still in development.</p>
+
+    <!-- JS FILE -->
     <script src="index.js"></script>
   </body>
 </html>
