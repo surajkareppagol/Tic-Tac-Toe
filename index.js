@@ -30,28 +30,28 @@ const note = document.querySelector('.note');
 /*  VARIABLES  */
 /**************************************/
 
-let alreadyPlayedPositions = Array.from({ length: 10 }, () => 0);
+let alreadyPlayedPositions = Array.from({ length: 9 }, () => 0);
 let playerOneScore = 0,
   playerTwoScore = 0,
   gamePlayedFor = 0,
-  activePlayer = 0,
-  indexI = 0,
-  indexJ = 0;
+  activePlayer = 0;
 let winColor = '#a9e34b',
   boardColor = '#fff';
+let isGameOver = false;
 
 /**************************************/
 /* FUNCTIONS */
 /**************************************/
 
 const initiate = function () {
-  alreadyPlayedPositions = Array.from({ length: 10 }, () => 0);
+  alreadyPlayedPositions = Array.from({ length: 9 }, () => 0);
   activePlayer = 0;
   gamePlayedFor = 0;
+  isGameOver = false;
   setTimeout(function () {
-    allBox.forEach((box, i) => {
+    allBox.forEach((box, index) => {
       box.style.color = '#000';
-      box.textContent = i + 1;
+      box.textContent = index + 1;
     });
     player1.textContent = playerOneScore;
     player2.textContent = playerTwoScore;
@@ -68,7 +68,7 @@ const contentVisible = function () {
 };
 
 const setGameOver = function () {
-  alreadyPlayedPositions[9] = -1;
+  isGameOver = true;
   activePlayer === 0 ? (playerTwoScore += 1) : (playerOneScore += 1);
 };
 
@@ -149,6 +149,8 @@ const gameOver = function () {
     divBoard7.style.color = winColor;
     setGameOver();
     initiate();
+  } else if (gamePlayedFor === 9) {
+    initiate();
   }
 };
 
@@ -158,130 +160,18 @@ const gameOver = function () {
 
 mpButton.addEventListener('click', function () {
   contentVisible();
-  divBoard1.addEventListener('click', function () {
-    if (
-      !alreadyPlayedPositions.includes(1) &&
-      !alreadyPlayedPositions.includes(-1)
-    ) {
-      divBoard1.style.color = boardColor;
-      divBoard1.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[0] = 1;
-      gamePlayedFor += 1;
-      gameOver();
-    } else if (gamePlayedFor === 9) initiate();
-  });
-
-  divBoard2.addEventListener('click', function () {
-    if (
-      !alreadyPlayedPositions.includes(2) &&
-      !alreadyPlayedPositions.includes(-1)
-    ) {
-      divBoard2.style.color = boardColor;
-      divBoard2.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[1] = 2;
-      gamePlayedFor += 1;
-      gameOver();
-    } else if (gamePlayedFor === 9) initiate();
-  });
-
-  divBoard3.addEventListener('click', function () {
-    if (
-      !alreadyPlayedPositions.includes(3) &&
-      !alreadyPlayedPositions.includes(-1)
-    ) {
-      divBoard3.style.color = boardColor;
-      divBoard3.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[2] = 3;
-      gamePlayedFor += 1;
-      gameOver();
-    } else if (gamePlayedFor === 9) initiate();
-  });
-
-  divBoard4.addEventListener('click', function () {
-    if (
-      !alreadyPlayedPositions.includes(4) &&
-      !alreadyPlayedPositions.includes(-1)
-    ) {
-      divBoard4.style.color = boardColor;
-      divBoard4.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[3] = 4;
-      gamePlayedFor += 1;
-      gameOver();
-    } else if (gamePlayedFor === 9) initiate();
-  });
-
-  divBoard5.addEventListener('click', function () {
-    if (
-      !alreadyPlayedPositions.includes(5) &&
-      !alreadyPlayedPositions.includes(-1)
-    ) {
-      divBoard5.style.color = boardColor;
-      divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[4] = 5;
-      gamePlayedFor += 1;
-      gameOver();
-    } else if (gamePlayedFor === 9) initiate();
-  });
-
-  divBoard6.addEventListener('click', function () {
-    if (
-      !alreadyPlayedPositions.includes(6) &&
-      !alreadyPlayedPositions.includes(-1)
-    ) {
-      divBoard6.style.color = boardColor;
-      divBoard6.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[5] = 6;
-      gamePlayedFor += 1;
-      gameOver();
-    } else if (gamePlayedFor === 9) initiate();
-  });
-
-  divBoard7.addEventListener('click', function () {
-    if (
-      !alreadyPlayedPositions.includes(7) &&
-      !alreadyPlayedPositions.includes(-1)
-    ) {
-      divBoard7.style.color = boardColor;
-      divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[6] = 7;
-      gamePlayedFor += 1;
-      gameOver();
-    } else if (gamePlayedFor === 9) initiate();
-  });
-
-  divBoard8.addEventListener('click', function () {
-    if (
-      !alreadyPlayedPositions.includes(8) &&
-      !alreadyPlayedPositions.includes(-1)
-    ) {
-      divBoard8.style.color = boardColor;
-      divBoard8.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[7] = 8;
-      gamePlayedFor += 1;
-      gameOver();
-    } else if (gamePlayedFor === 9) initiate();
-  });
-
-  divBoard9.addEventListener('click', function () {
-    if (
-      !alreadyPlayedPositions.includes(9) &&
-      !alreadyPlayedPositions.includes(-1)
-    ) {
-      divBoard9.style.color = boardColor;
-      divBoard9.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[8] = 9;
-      gamePlayedFor += 1;
-      gameOver();
-    } else if (gamePlayedFor === 9) initiate();
+  allBox.forEach((box, index) => {
+    box.addEventListener('click', function () {
+      if (!alreadyPlayedPositions[index] && !isGameOver) {
+        box.style.color = '#fff';
+        box.textContent = activePlayer === 0 ? 'x' : 'o';
+        activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+        alreadyPlayedPositions[index] = 1;
+        console.log(alreadyPlayedPositions);
+        gamePlayedFor += 1;
+        gameOver();
+      }
+    });
   });
 });
 

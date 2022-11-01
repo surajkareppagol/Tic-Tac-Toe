@@ -15,18 +15,17 @@ html {
 }
 
 body {
-  max-width: 120rem;
-  margin: 0 auto;
-  font-family: 'Press Start 2P', cursive;
-  font-weight: 400;
-  line-height: 1;
-  background-color: black;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   gap: 4rem;
+  max-width: 120rem;
   height: 100vh;
+  font-family: 'Press Start 2P', cursive;
+  line-height: 1;
+  background-color: black;
+  margin: 0 auto;
 }
 
 /**************************************/
@@ -39,6 +38,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 20rem;
+  margin-top: 2rem;
 }
 
 .nav-option {
@@ -231,7 +231,7 @@ body {
   }
 
   .nav-option {
-    font-size: 1rem;
+    font-size: 1.8rem;
   }
 
   .primary-heading {
@@ -243,7 +243,7 @@ body {
   }
 
   .player-text {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   .boards-box {
@@ -251,8 +251,8 @@ body {
   }
 
   .board {
-    padding: 2rem;
-    font-size: 4.3rem;
+    padding: 3rem 4rem;
+    font-size: 4.6rem;
   }
 
   .note {
