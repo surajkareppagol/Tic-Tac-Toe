@@ -122,18 +122,23 @@ body {
 }
 
 .board-1 {
+  border-top: 2.4px solid transparent;
   border-bottom: 2.4px solid #fff;
   border-right: 2.4px solid #fff;
+  border-left: 2.4px solid transparent;
 }
 
 .board-2 {
+  border-top: 2.4px solid transparent;
   border-bottom: 2.4px solid #fff;
   border-left: 2.4px solid #fff;
   border-right: 2.4px solid #fff;
 }
 
 .board-3 {
+  border-top: 2.4px solid transparent;
   border-bottom: 2.4px solid #fff;
+  border-right: 2.4px solid transparent;
   border-left: 2.4px solid #fff;
 }
 
@@ -141,6 +146,7 @@ body {
   border-top: 2.4px solid #fff;
   border-bottom: 2.4px solid #fff;
   border-right: 2.4px solid #fff;
+  border-left: 2.4px solid transparent;
 }
 
 .board-5 {
@@ -153,23 +159,29 @@ body {
 .board-6 {
   border-top: 2.4px solid #fff;
   border-bottom: 2.4px solid #fff;
+  border-right: 2.4px solid transparent;
   border-left: 2.4px solid #fff;
 }
 
 .board-7 {
   border-top: 2.4px solid #fff;
   border-right: 2.4px solid #fff;
+  border-bottom: 2.4px solid transparent;
+  border-left: 2.4px solid transparent;
 }
 
 .board-8 {
   border-top: 2.4px solid #fff;
   border-left: 2.4px solid #fff;
   border-right: 2.4px solid #fff;
+  border-bottom: 2.4px solid transparent;
 }
 
 .board-9 {
   border-top: 2.4px solid #fff;
+  border-bottom: 2.4px solid transparent;
   border-left: 2.4px solid #fff;
+  border-right: 2.4px solid transparent;
 }
 
 .score-box {
@@ -251,8 +263,9 @@ body {
   }
 
   .board {
-    padding: 3rem 4rem;
+    padding: 3rem 1rem;
     font-size: 4.6rem;
+    text-align: center;
   }
 
   .note {
