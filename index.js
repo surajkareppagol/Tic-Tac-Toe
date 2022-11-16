@@ -1,10 +1,5 @@
 'use strict';
 
-/**************************************/
-/*  DOM ELEMENTS  */
-/**************************************/
-
-const navBox = document.querySelector('.nav-options');
 const headText = document.querySelector('.primary-heading');
 const backOption = document.querySelector('.back-option');
 const resetOption = document.querySelector('.reset-option');
@@ -26,10 +21,6 @@ const player1 = document.querySelector('.player-score-1');
 const player2 = document.querySelector('.player-score-2');
 const note = document.querySelector('.note');
 
-/**************************************/
-/*  VARIABLES  */
-/**************************************/
-
 let alreadyPlayedPositions = Array.from({ length: 9 }, () => 0);
 let playerOneScore = 0,
   playerTwoScore = 0,
@@ -39,11 +30,8 @@ let winColor = '#a9e34b',
   boardColor = '#fff';
 let isGameOver = false;
 
-/**************************************/
-/* FUNCTIONS */
-/**************************************/
-
-const initiate = function () {
+// Reset game conditions.
+const initialConditions = function () {
   alreadyPlayedPositions = Array.from({ length: 9 }, () => 0);
   activePlayer = 0;
   gamePlayedFor = 0;
@@ -67,15 +55,13 @@ const contentVisible = function () {
   headText.classList.toggle('display-hide');
 };
 
+// Set other conditions when game is over.
 const setGameOver = function () {
   isGameOver = true;
   activePlayer === 0 ? (playerTwoScore += 1) : (playerOneScore += 1);
 };
 
-/**************************************/
-/* CHECK WIN CONDITION */
-/**************************************/
-
+// Check if game is over or not.
 const gameOver = function () {
   if (
     divBoard1.textContent === divBoard2.textContent &&
@@ -85,7 +71,7 @@ const gameOver = function () {
     divBoard2.style.color = winColor;
     divBoard3.style.color = winColor;
     setGameOver();
-    initiate();
+    initialConditions();
   } else if (
     divBoard4.textContent === divBoard5.textContent &&
     divBoard4.textContent === divBoard6.textContent
@@ -94,7 +80,7 @@ const gameOver = function () {
     divBoard5.style.color = winColor;
     divBoard6.style.color = winColor;
     setGameOver();
-    initiate();
+    initialConditions();
   } else if (
     divBoard7.textContent === divBoard8.textContent &&
     divBoard7.textContent === divBoard9.textContent
@@ -103,7 +89,7 @@ const gameOver = function () {
     divBoard8.style.color = winColor;
     divBoard9.style.color = winColor;
     setGameOver();
-    initiate();
+    initialConditions();
   } else if (
     divBoard1.textContent === divBoard4.textContent &&
     divBoard1.textContent === divBoard7.textContent
@@ -112,7 +98,7 @@ const gameOver = function () {
     divBoard4.style.color = winColor;
     divBoard7.style.color = winColor;
     setGameOver();
-    initiate();
+    initialConditions();
   } else if (
     divBoard2.textContent === divBoard5.textContent &&
     divBoard2.textContent === divBoard8.textContent
@@ -121,7 +107,7 @@ const gameOver = function () {
     divBoard5.style.color = winColor;
     divBoard8.style.color = winColor;
     setGameOver();
-    initiate();
+    initialConditions();
   } else if (
     divBoard3.textContent === divBoard6.textContent &&
     divBoard3.textContent === divBoard9.textContent
@@ -130,7 +116,7 @@ const gameOver = function () {
     divBoard6.style.color = winColor;
     divBoard9.style.color = winColor;
     setGameOver();
-    initiate();
+    initialConditions();
   } else if (
     divBoard1.textContent === divBoard5.textContent &&
     divBoard1.textContent === divBoard9.textContent
@@ -139,7 +125,7 @@ const gameOver = function () {
     divBoard5.style.color = winColor;
     divBoard9.style.color = winColor;
     setGameOver();
-    initiate();
+    initialConditions();
   } else if (
     divBoard3.textContent === divBoard5.textContent &&
     divBoard3.textContent === divBoard7.textContent
@@ -148,28 +134,32 @@ const gameOver = function () {
     divBoard5.style.color = winColor;
     divBoard7.style.color = winColor;
     setGameOver();
-    initiate();
+    initialConditions();
   } else if (gamePlayedFor === 9) {
-    initiate();
+    initialConditions();
   }
 };
 
-/**************************************/
-/*  RANDOM NUMBER GENRATOR  */
-/**************************************/
+// Check if random number is valid.
+const checkRandomNumber = function (randomNumber) {
+  allBox.forEach((box, index) => {
+    if (box.textContent == 'o' && index === randomNumber) return 0;
+    else return 1;
+  });
+};
 
+// Generate random number between 0 to 8.
 const randInt = (min, max) => Math.floor(Math.random() * (max - min) + 1) + min;
 
+// If no position is possible for computer.
 const noPositionPlayed = function (positionPlayed) {
-  // No position are played
   let randomNumber = randInt(0, 8);
-  console.log(`FIRST : ${randomNumber}`);
   while (
     randomNumber === positionPlayed &&
-    alreadyPlayedPositions[randomNumber] === 1
+    alreadyPlayedPositions[randomNumber] === 1 &&
+    checkRandomNumber()
   )
     randomNumber = randInt(0, 8);
-  console.log(`SECOND : ${randomNumber}`);
   switch (randomNumber) {
     case 0:
       divBoard1.style.color = '#fff';
@@ -228,8 +218,8 @@ const noPositionPlayed = function (positionPlayed) {
       gameOver();
       break;
     case 7:
-      divBoard7.style.color = '#fff';
-      divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
+      divBoard8.style.color = '#fff';
+      divBoard8.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       alreadyPlayedPositions[7] = 1;
       gamePlayedFor += 1;
@@ -245,10 +235,8 @@ const noPositionPlayed = function (positionPlayed) {
       break;
   }
 };
-/**************************************/
-/*  SINGLE PLAYER COMPUTER  */
-/**************************************/
 
+// Function to operate gameplay of computer.
 const computerPlays = function (positionPlayed) {
   console.log('ENTERD THE FUNCTION');
   // box 1
@@ -531,7 +519,7 @@ const computerPlays = function (positionPlayed) {
       divBoard1.textContent !== 'o' &&
       divBoard9.textContent !== 'o'
     ) {
-      // 2
+      // 1
       divBoard9.style.color = '#fff';
       divBoard9.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
@@ -555,7 +543,7 @@ const computerPlays = function (positionPlayed) {
       divBoard2.textContent !== 'o' &&
       divBoard7.textContent !== 'o'
     ) {
-      // 2
+      // 3
       divBoard7.style.color = '#fff';
       divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
@@ -591,7 +579,7 @@ const computerPlays = function (positionPlayed) {
       divBoard2.textContent !== 'o' &&
       divBoard3.textContent !== 'o'
     ) {
-      // 2
+      // 7
       divBoard3.style.color = '#fff';
       divBoard3.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
@@ -612,7 +600,7 @@ const computerPlays = function (positionPlayed) {
       gameOver();
     } else if (
       alreadyPlayedPositions[8] &&
-      divBoard2.textContent !== 'o' &&
+      divBoard9.textContent !== 'o' &&
       divBoard1.textContent !== 'o'
     ) {
       // 2
@@ -900,73 +888,64 @@ const computerPlays = function (positionPlayed) {
   }
 };
 
-const playMP = function () {
-  allBox.forEach((box, index) => {
-    box.addEventListener('click', function () {
-      if (!alreadyPlayedPositions[index] && !isGameOver) {
-        box.style.color = '#fff';
-        box.textContent = activePlayer === 0 ? 'x' : 'o';
-        activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-        alreadyPlayedPositions[index] = 1;
-        gamePlayedFor += 1;
-        gameOver();
-      }
-    });
-  });
-};
-
+// Function to operate single-player mode.
 const playSP = function () {
+  console.log('SP CLICKED');
+  contentVisible();
   allBox.forEach((box, index) => {
     box.addEventListener('click', function () {
       if (!alreadyPlayedPositions[index] && !isGameOver) {
+        console.log('SP PLAYING');
         box.style.color = '#fff';
         box.textContent = activePlayer === 0 ? 'x' : 'o';
         activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
         alreadyPlayedPositions[index] = 1;
         gamePlayedFor += 1;
         gameOver();
-        computerPlays(index);
+        setTimeout(function () {
+          computerPlays(index);
+        }, 500);
       }
     });
   });
 };
 
-/**************************************/
-/*  MULTI PLAYER MODE  */
-/**************************************/
-
-mpButton.addEventListener('click', function () {
+// Function to operate multi-player mode.
+const playMP = function () {
+  console.log('MP CLICKED');
   contentVisible();
-  console.log();
-  playMP();
-});
+  allBox.forEach((box, index) => {
+    box.addEventListener('click', function () {
+      if (!alreadyPlayedPositions[index] && !isGameOver) {
+        console.log('MP PLAYING');
+        box.style.color = '#fff';
+        box.textContent = activePlayer === 0 ? 'x' : 'o';
+        activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+        alreadyPlayedPositions[index] = 1;
+        gamePlayedFor += 1;
+        gameOver();
+      }
+    });
+  });
+};
 
-/**************************************/
-/*  SINGLE PLAYER MODE  */
-/**************************************/
+// Single player button - listen to event.
+spButton.addEventListener('click', playSP);
 
-spButton.addEventListener('click', function () {
-  contentVisible();
-  playSP();
-});
+// Multi player button - listen to event.
+mpButton.addEventListener('click', playMP);
 
-/**************************************/
-/*  BACK - NAV  */
-/**************************************/
-
+// Go Back - option.
 backOption.addEventListener('click', function () {
   contentVisible();
   playerOneScore = 0;
   playerTwoScore = 0;
-  initiate();
+  initialConditions();
 });
 
-/**************************************/
-/*  RESET - NAV */
-/**************************************/
-
+// Reset - option.
 resetOption.addEventListener('click', function () {
   playerOneScore = 0;
   playerTwoScore = 0;
-  initiate();
+  initialConditions();
 });
