@@ -29,6 +29,7 @@ let playerOneScore = 0,
 let winColor = '#a9e34b',
   boardColor = '#fff';
 let isGameOver = false;
+let gameMode = 'single';
 
 // Reset game conditions.
 const initialConditions = function () {
@@ -238,7 +239,6 @@ const noPositionPlayed = function (positionPlayed) {
 
 // Function to operate gameplay of computer.
 const computerPlays = function (positionPlayed) {
-  console.log('ENTERD THE FUNCTION');
   // box 1
   if (positionPlayed === 0) {
     console.log(0);
@@ -890,12 +890,15 @@ const computerPlays = function (positionPlayed) {
 
 // Function to operate single-player mode.
 const playSP = function () {
-  console.log('SP CLICKED');
   contentVisible();
+  gameMode = 'single';
   allBox.forEach((box, index) => {
     box.addEventListener('click', function () {
-      if (!alreadyPlayedPositions[index] && !isGameOver) {
-        console.log('SP PLAYING');
+      if (
+        !alreadyPlayedPositions[index] &&
+        !isGameOver &&
+        gameMode === 'single'
+      ) {
         box.style.color = '#fff';
         box.textContent = activePlayer === 0 ? 'x' : 'o';
         activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
@@ -912,12 +915,15 @@ const playSP = function () {
 
 // Function to operate multi-player mode.
 const playMP = function () {
-  console.log('MP CLICKED');
   contentVisible();
+  gameMode = 'multi';
   allBox.forEach((box, index) => {
     box.addEventListener('click', function () {
-      if (!alreadyPlayedPositions[index] && !isGameOver) {
-        console.log('MP PLAYING');
+      if (
+        !alreadyPlayedPositions[index] &&
+        !isGameOver &&
+        gameMode === 'multi'
+      ) {
         box.style.color = '#fff';
         box.textContent = activePlayer === 0 ? 'x' : 'o';
         activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
