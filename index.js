@@ -1,11 +1,23 @@
+/*
+ *  Created by : Shadoww
+ *  Github : https://github.com/dev-shadoww
+ *
+ *  Tic tac toe game created as a side project, built with html, css and javascript and
+ *  includes both single player and multi player modes.
+ *
+ *  Warning : playComp() function it contains a bug that is the value automatically changes.
+ */
+
 'use strict';
 
 const headText = document.querySelector('.primary-heading');
 const backOption = document.querySelector('.back-option');
 const resetOption = document.querySelector('.reset-option');
 const optionBox = document.querySelector('.game-mode-box');
-const spButton = document.querySelector('.sp-button');
-const mpButton = document.querySelector('.mp-button');
+const singlePlayerButton = document.querySelector('.sp-button');
+const multiPlayerButton = document.querySelector('.mp-button');
+
+// Selecting the boards
 const board = document.querySelector('.game-board');
 const allBox = document.querySelectorAll('.board');
 const divBoard1 = document.querySelector('.board-1');
@@ -17,23 +29,29 @@ const divBoard6 = document.querySelector('.board-6');
 const divBoard7 = document.querySelector('.board-7');
 const divBoard8 = document.querySelector('.board-8');
 const divBoard9 = document.querySelector('.board-9');
+
 const player1 = document.querySelector('.player-score-1');
 const player2 = document.querySelector('.player-score-2');
 const note = document.querySelector('.note');
 
-let alreadyPlayedPositions = Array.from({ length: 9 }, () => 0);
-let playerOneScore = 0,
-  playerTwoScore = 0,
-  gamePlayedFor = 0,
-  activePlayer = 0;
-let winColor = '#a9e34b',
-  boardColor = '#fff';
+let playedBoxes = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+let playerOneScore = 0;
+let playerTwoScore = 0;
+let gamePlayedFor = 0;
+let activePlayer = 0;
+let winColor = '#a9e34b';
+let boardColor = '#fff';
 let isGameOver = false;
-let gameMode = 'single';
+let gameMode = false;
 
 // Reset game conditions.
-const initialConditions = function () {
-  alreadyPlayedPositions = Array.from({ length: 9 }, () => 0);
+const resetGame = function (allConditions) {
+  if (allConditions) {
+    isGameOver = true;
+    activePlayer === 0 ? (playerTwoScore += 1) : (playerOneScore += 1);
+  }
+
+  playedBoxes = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   activePlayer = 0;
   gamePlayedFor = 0;
   isGameOver = false;
@@ -44,10 +62,10 @@ const initialConditions = function () {
     });
     player1.textContent = playerOneScore;
     player2.textContent = playerTwoScore;
-  }, 500);
+  }, 400);
 };
 
-const contentVisible = function () {
+const showContent = function () {
   board.classList.toggle('display-hide');
   backOption.classList.toggle('display-hide');
   resetOption.classList.toggle('display-hide');
@@ -56,11 +74,8 @@ const contentVisible = function () {
   headText.classList.toggle('display-hide');
 };
 
-// Set other conditions when game is over.
-const setGameOver = function () {
-  isGameOver = true;
-  activePlayer === 0 ? (playerTwoScore += 1) : (playerOneScore += 1);
-};
+/********************************************************************************/
+// Code related to game mechanics.
 
 // Check if game is over or not.
 const gameOver = function () {
@@ -68,76 +83,76 @@ const gameOver = function () {
     divBoard1.textContent === divBoard2.textContent &&
     divBoard1.textContent === divBoard3.textContent
   ) {
-    divBoard1.style.color = winColor;
-    divBoard2.style.color = winColor;
-    divBoard3.style.color = winColor;
-    setGameOver();
-    initialConditions();
+    divBoard1.style.color =
+      divBoard2.style.color =
+      divBoard3.style.color =
+        winColor;
+    resetGame(1);
   } else if (
     divBoard4.textContent === divBoard5.textContent &&
     divBoard4.textContent === divBoard6.textContent
   ) {
-    divBoard4.style.color = winColor;
-    divBoard5.style.color = winColor;
-    divBoard6.style.color = winColor;
-    setGameOver();
-    initialConditions();
+    divBoard4.style.color =
+      divBoard5.style.color =
+      divBoard6.style.color =
+        winColor;
+    resetGame(1);
   } else if (
     divBoard7.textContent === divBoard8.textContent &&
     divBoard7.textContent === divBoard9.textContent
   ) {
-    divBoard7.style.color = winColor;
-    divBoard8.style.color = winColor;
-    divBoard9.style.color = winColor;
-    setGameOver();
-    initialConditions();
+    divBoard7.style.color =
+      divBoard8.style.color =
+      divBoard9.style.color =
+        winColor;
+    resetGame(1);
   } else if (
     divBoard1.textContent === divBoard4.textContent &&
     divBoard1.textContent === divBoard7.textContent
   ) {
-    divBoard1.style.color = winColor;
-    divBoard4.style.color = winColor;
-    divBoard7.style.color = winColor;
-    setGameOver();
-    initialConditions();
+    divBoard1.style.color =
+      divBoard4.style.color =
+      divBoard7.style.color =
+        winColor;
+    resetGame(1);
   } else if (
     divBoard2.textContent === divBoard5.textContent &&
     divBoard2.textContent === divBoard8.textContent
   ) {
-    divBoard2.style.color = winColor;
-    divBoard5.style.color = winColor;
-    divBoard8.style.color = winColor;
-    setGameOver();
-    initialConditions();
+    divBoard2.style.color =
+      divBoard5.style.color =
+      divBoard8.style.color =
+        winColor;
+    resetGame(1);
   } else if (
     divBoard3.textContent === divBoard6.textContent &&
     divBoard3.textContent === divBoard9.textContent
   ) {
-    divBoard3.style.color = winColor;
-    divBoard6.style.color = winColor;
-    divBoard9.style.color = winColor;
-    setGameOver();
-    initialConditions();
+    divBoard3.style.color =
+      divBoard6.style.color =
+      divBoard9.style.color =
+        winColor;
+    resetGame(1);
   } else if (
     divBoard1.textContent === divBoard5.textContent &&
     divBoard1.textContent === divBoard9.textContent
   ) {
-    divBoard1.style.color = winColor;
-    divBoard5.style.color = winColor;
-    divBoard9.style.color = winColor;
-    setGameOver();
-    initialConditions();
+    divBoard1.style.color =
+      divBoard5.style.color =
+      divBoard9.style.color =
+        winColor;
+    resetGame(1);
   } else if (
     divBoard3.textContent === divBoard5.textContent &&
     divBoard3.textContent === divBoard7.textContent
   ) {
-    divBoard3.style.color = winColor;
-    divBoard5.style.color = winColor;
-    divBoard7.style.color = winColor;
-    setGameOver();
-    initialConditions();
+    divBoard3.style.color =
+      divBoard5.style.color =
+      divBoard7.style.color =
+        winColor;
+    resetGame(1);
   } else if (gamePlayedFor === 9) {
-    initialConditions();
+    resetGame(0);
   }
 };
 
@@ -153,97 +168,27 @@ const checkRandomNumber = function (randomNumber) {
 const randInt = (min, max) => Math.floor(Math.random() * (max - min) + 1) + min;
 
 // If no position is possible for computer.
-const noPositionPlayed = function (positionPlayed) {
+const playRandom = function (positionPlayed) {
   let randomNumber = randInt(0, 8);
   while (
     randomNumber === positionPlayed &&
-    alreadyPlayedPositions[randomNumber] === 1 &&
+    playedBoxes[randomNumber] === 1 &&
     checkRandomNumber()
   )
     randomNumber = randInt(0, 8);
-  switch (randomNumber) {
-    case 0:
-      divBoard1.style.color = '#fff';
-      divBoard1.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[0] = 1;
-      gamePlayedFor += 1;
-      gameOver();
-      break;
-    case 1:
-      divBoard2.style.color = '#fff';
-      divBoard2.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[1] = 1;
-      gamePlayedFor += 1;
-      gameOver();
-      break;
-    case 2:
-      divBoard3.style.color = '#fff';
-      divBoard3.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[2] = 1;
-      gamePlayedFor += 1;
-      gameOver();
-      break;
-    case 3:
-      divBoard4.style.color = '#fff';
-      divBoard4.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[3] = 1;
-      gamePlayedFor += 1;
-      gameOver();
-      break;
-    case 4:
-      divBoard5.style.color = '#fff';
-      divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[4] = 1;
-      gamePlayedFor += 1;
-      gameOver();
-      break;
-    case 5:
-      divBoard6.style.color = '#fff';
-      divBoard6.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[5] = 1;
-      gamePlayedFor += 1;
-      gameOver();
-      break;
-    case 6:
-      divBoard7.style.color = '#fff';
-      divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[6] = 1;
-      gamePlayedFor += 1;
-      gameOver();
-      break;
-    case 7:
-      divBoard8.style.color = '#fff';
-      divBoard8.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[7] = 1;
-      gamePlayedFor += 1;
-      gameOver();
-      break;
-    case 8:
-      divBoard9.style.color = '#fff';
-      divBoard9.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[8] = 1;
-      gamePlayedFor += 1;
-      gameOver();
-      break;
-  }
+  allBox.forEach((box, index) => {
+    if (randomNumber === index) {
+      playGame(box, index);
+    }
+  });
 };
 
 // Function to operate gameplay of computer.
-const computerPlays = function (positionPlayed) {
-  // box 1
+const playComp = function (positionPlayed) {
   if (positionPlayed === 0) {
     console.log(0);
     if (
-      alreadyPlayedPositions[2] &&
+      playedBoxes[2] &&
       divBoard3.textContent !== 'o' &&
       divBoard2.textContent !== 'o'
     ) {
@@ -251,11 +196,11 @@ const computerPlays = function (positionPlayed) {
       divBoard2.style.color = '#fff';
       divBoard2.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[1] = 1;
+      playedBoxes[1] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[1] &&
+      playedBoxes[1] &&
       divBoard2.textContent !== 'o' &&
       divBoard3.textContent !== 'o'
     ) {
@@ -263,11 +208,11 @@ const computerPlays = function (positionPlayed) {
       divBoard3.style.color = '#fff';
       divBoard3.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[2] = 1;
+      playedBoxes[2] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[6] &&
+      playedBoxes[6] &&
       divBoard7.textContent !== 'o' &&
       divBoard4.textContent !== 'o'
     ) {
@@ -275,11 +220,11 @@ const computerPlays = function (positionPlayed) {
       divBoard4.style.color = '#fff';
       divBoard4.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[3] = 1;
+      playedBoxes[3] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[3] &&
+      playedBoxes[3] &&
       divBoard4.textContent !== 'o' &&
       divBoard7.textContent !== 'o'
     ) {
@@ -287,11 +232,11 @@ const computerPlays = function (positionPlayed) {
       divBoard7.style.color = '#fff';
       divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[6] = 1;
+      playedBoxes[6] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[8] &&
+      playedBoxes[8] &&
       divBoard9.textContent !== 'o' &&
       divBoard5.textContent !== 'o'
     ) {
@@ -299,11 +244,11 @@ const computerPlays = function (positionPlayed) {
       divBoard5.style.color = '#fff';
       divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[4] = 1;
+      playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[4] &&
+      playedBoxes[4] &&
       divBoard5.textContent !== 'o' &&
       divBoard9.textContent !== 'o'
     ) {
@@ -311,19 +256,16 @@ const computerPlays = function (positionPlayed) {
       divBoard9.style.color = '#fff';
       divBoard9.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[8] = 1;
+      playedBoxes[8] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else {
-      noPositionPlayed(positionPlayed);
+      playRandom(positionPlayed);
     }
-  }
-
-  // box 2
-  else if (positionPlayed === 1) {
+  } else if (positionPlayed === 1) {
     console.log(1);
     if (
-      alreadyPlayedPositions[0] &&
+      playedBoxes[0] &&
       divBoard1.textContent !== 'o' &&
       divBoard3.textContent !== 'o'
     ) {
@@ -331,11 +273,11 @@ const computerPlays = function (positionPlayed) {
       divBoard3.style.color = '#fff';
       divBoard3.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[2] = 1;
+      playedBoxes[2] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[2] &&
+      playedBoxes[2] &&
       divBoard3.textContent !== 'o' &&
       divBoard1.textContent !== 'o'
     ) {
@@ -343,11 +285,11 @@ const computerPlays = function (positionPlayed) {
       divBoard1.style.color = '#fff';
       divBoard1.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[0] = 1;
+      playedBoxes[0] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[7] &&
+      playedBoxes[7] &&
       divBoard8.textContent !== 'o' &&
       divBoard5.textContent !== 'o'
     ) {
@@ -355,11 +297,11 @@ const computerPlays = function (positionPlayed) {
       divBoard5.style.color = '#fff';
       divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[4] = 1;
+      playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[4] &&
+      playedBoxes[4] &&
       divBoard5.textContent !== 'o' &&
       divBoard8.textContent !== 'o'
     ) {
@@ -367,19 +309,16 @@ const computerPlays = function (positionPlayed) {
       divBoard8.style.color = '#fff';
       divBoard8.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[7] = 1;
+      playedBoxes[7] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else {
-      noPositionPlayed(positionPlayed);
+      playRandom(positionPlayed);
     }
-  }
-
-  // box 3
-  else if (positionPlayed === 2) {
+  } else if (positionPlayed === 2) {
     console.log(2);
     if (
-      alreadyPlayedPositions[0] &&
+      playedBoxes[0] &&
       divBoard1.textContent !== 'o' &&
       divBoard2.textContent !== 'o'
     ) {
@@ -387,11 +326,11 @@ const computerPlays = function (positionPlayed) {
       divBoard2.style.color = '#fff';
       divBoard2.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[1] = 1;
+      playedBoxes[1] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[1] &&
+      playedBoxes[1] &&
       divBoard2.textContent !== 'o' &&
       divBoard1.textContent !== 'o'
     ) {
@@ -399,11 +338,11 @@ const computerPlays = function (positionPlayed) {
       divBoard1.style.color = '#fff';
       divBoard1.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[0] = 1;
+      playedBoxes[0] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[8] &&
+      playedBoxes[8] &&
       divBoard9.textContent !== 'o' &&
       divBoard6.textContent !== 'o'
     ) {
@@ -411,11 +350,11 @@ const computerPlays = function (positionPlayed) {
       divBoard6.style.color = '#fff';
       divBoard6.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[5] = 1;
+      playedBoxes[5] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[5] &&
+      playedBoxes[5] &&
       divBoard6.textContent !== 'o' &&
       divBoard9.textContent !== 'o'
     ) {
@@ -423,11 +362,11 @@ const computerPlays = function (positionPlayed) {
       divBoard9.style.color = '#fff';
       divBoard9.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[8] = 1;
+      playedBoxes[8] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[6] &&
+      playedBoxes[6] &&
       divBoard7.textContent !== 'o' &&
       divBoard5.textContent !== 'o'
     ) {
@@ -435,11 +374,11 @@ const computerPlays = function (positionPlayed) {
       divBoard5.style.color = '#fff';
       divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[4] = 1;
+      playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[4] &&
+      playedBoxes[4] &&
       divBoard5.textContent !== 'o' &&
       divBoard7.textContent !== 'o'
     ) {
@@ -447,19 +386,16 @@ const computerPlays = function (positionPlayed) {
       divBoard7.style.color = '#fff';
       divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[6] = 1;
+      playedBoxes[6] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else {
-      noPositionPlayed(positionPlayed);
+      playRandom(positionPlayed);
     }
-  }
-
-  // box 4
-  else if (positionPlayed === 3) {
+  } else if (positionPlayed === 3) {
     console.log(3);
     if (
-      alreadyPlayedPositions[0] &&
+      playedBoxes[0] &&
       divBoard1.textContent !== 'o' &&
       divBoard7.textContent !== 'o'
     ) {
@@ -467,11 +403,11 @@ const computerPlays = function (positionPlayed) {
       divBoard7.style.color = '#fff';
       divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[6] = 1;
+      playedBoxes[6] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[6] &&
+      playedBoxes[6] &&
       divBoard7.textContent !== 'o' &&
       divBoard1.textContent !== 'o'
     ) {
@@ -479,11 +415,11 @@ const computerPlays = function (positionPlayed) {
       divBoard1.style.color = '#fff';
       divBoard1.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[0] = 1;
+      playedBoxes[0] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[5] &&
+      playedBoxes[5] &&
       divBoard6.textContent !== 'o' &&
       divBoard5.textContent !== 'o'
     ) {
@@ -491,11 +427,11 @@ const computerPlays = function (positionPlayed) {
       divBoard5.style.color = '#fff';
       divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[4] = 1;
+      playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[4] &&
+      playedBoxes[4] &&
       divBoard5.textContent !== 'o' &&
       divBoard6.textContent !== 'o'
     ) {
@@ -503,19 +439,16 @@ const computerPlays = function (positionPlayed) {
       divBoard6.style.color = '#fff';
       divBoard6.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[5] = 1;
+      playedBoxes[5] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else {
-      noPositionPlayed(positionPlayed);
+      playRandom(positionPlayed);
     }
-  }
-
-  // box 5
-  else if (positionPlayed === 4) {
+  } else if (positionPlayed === 4) {
     console.log(4);
     if (
-      alreadyPlayedPositions[0] &&
+      playedBoxes[0] &&
       divBoard1.textContent !== 'o' &&
       divBoard9.textContent !== 'o'
     ) {
@@ -523,11 +456,11 @@ const computerPlays = function (positionPlayed) {
       divBoard9.style.color = '#fff';
       divBoard9.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[8] = 1;
+      playedBoxes[8] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[1] &&
+      playedBoxes[1] &&
       divBoard2.textContent !== 'o' &&
       divBoard8.textContent !== 'o'
     ) {
@@ -535,11 +468,11 @@ const computerPlays = function (positionPlayed) {
       divBoard8.style.color = '#fff';
       divBoard8.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[7] = 1;
+      playedBoxes[7] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[2] &&
+      playedBoxes[2] &&
       divBoard2.textContent !== 'o' &&
       divBoard7.textContent !== 'o'
     ) {
@@ -547,11 +480,11 @@ const computerPlays = function (positionPlayed) {
       divBoard7.style.color = '#fff';
       divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[6] = 1;
+      playedBoxes[6] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[3] &&
+      playedBoxes[3] &&
       divBoard4.textContent !== 'o' &&
       divBoard6.textContent !== 'o'
     ) {
@@ -559,11 +492,11 @@ const computerPlays = function (positionPlayed) {
       divBoard6.style.color = '#fff';
       divBoard6.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[5] = 1;
+      playedBoxes[5] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[5] &&
+      playedBoxes[5] &&
       divBoard6.textContent !== 'o' &&
       divBoard4.textContent !== 'o'
     ) {
@@ -571,11 +504,11 @@ const computerPlays = function (positionPlayed) {
       divBoard4.style.color = '#fff';
       divBoard4.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[3] = 1;
+      playedBoxes[3] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[6] &&
+      playedBoxes[6] &&
       divBoard2.textContent !== 'o' &&
       divBoard3.textContent !== 'o'
     ) {
@@ -583,11 +516,11 @@ const computerPlays = function (positionPlayed) {
       divBoard3.style.color = '#fff';
       divBoard3.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[2] = 1;
+      playedBoxes[2] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[7] &&
+      playedBoxes[7] &&
       divBoard8.textContent !== 'o' &&
       divBoard2.textContent !== 'o'
     ) {
@@ -595,11 +528,11 @@ const computerPlays = function (positionPlayed) {
       divBoard2.style.color = '#fff';
       divBoard2.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[1] = 1;
+      playedBoxes[1] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[8] &&
+      playedBoxes[8] &&
       divBoard9.textContent !== 'o' &&
       divBoard1.textContent !== 'o'
     ) {
@@ -607,19 +540,16 @@ const computerPlays = function (positionPlayed) {
       divBoard1.style.color = '#fff';
       divBoard1.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[0] = 1;
+      playedBoxes[0] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else {
-      noPositionPlayed(positionPlayed);
+      playRandom(positionPlayed);
     }
-  }
-
-  // box 6
-  else if (positionPlayed === 5) {
+  } else if (positionPlayed === 5) {
     console.log(5);
     if (
-      alreadyPlayedPositions[2] &&
+      playedBoxes[2] &&
       divBoard3.textContent !== 'o' &&
       divBoard9.textContent !== 'o'
     ) {
@@ -627,11 +557,11 @@ const computerPlays = function (positionPlayed) {
       divBoard9.style.color = '#fff';
       divBoard9.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[8] = 1;
+      playedBoxes[8] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[3] &&
+      playedBoxes[3] &&
       divBoard4.textContent !== 'o' &&
       divBoard5.textContent !== 'o'
     ) {
@@ -639,11 +569,11 @@ const computerPlays = function (positionPlayed) {
       divBoard5.style.color = '#fff';
       divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[4] = 1;
+      playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[4] &&
+      playedBoxes[4] &&
       divBoard5.textContent !== 'o' &&
       divBoard4.textContent !== 'o'
     ) {
@@ -651,11 +581,11 @@ const computerPlays = function (positionPlayed) {
       divBoard4.style.color = '#fff';
       divBoard4.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[3] = 1;
+      playedBoxes[3] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[8] &&
+      playedBoxes[8] &&
       divBoard9.textContent !== 'o' &&
       divBoard3.textContent !== 'o'
     ) {
@@ -663,19 +593,16 @@ const computerPlays = function (positionPlayed) {
       divBoard3.style.color = '#fff';
       divBoard3.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[2] = 1;
+      playedBoxes[2] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else {
-      noPositionPlayed(positionPlayed);
+      playRandom(positionPlayed);
     }
-  }
-
-  // box 7
-  else if (positionPlayed === 6) {
+  } else if (positionPlayed === 6) {
     console.log(6);
     if (
-      alreadyPlayedPositions[0] &&
+      playedBoxes[0] &&
       divBoard1.textContent !== 'o' &&
       divBoard4.textContent !== 'o'
     ) {
@@ -683,11 +610,11 @@ const computerPlays = function (positionPlayed) {
       divBoard4.style.color = '#fff';
       divBoard4.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[3] = 1;
+      playedBoxes[3] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[2] &&
+      playedBoxes[2] &&
       divBoard3.textContent !== 'o' &&
       divBoard5.textContent !== 'o'
     ) {
@@ -695,11 +622,11 @@ const computerPlays = function (positionPlayed) {
       divBoard5.style.color = '#fff';
       divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[4] = 1;
+      playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[3] &&
+      playedBoxes[3] &&
       divBoard4.textContent !== 'o' &&
       divBoard1.textContent !== 'o'
     ) {
@@ -707,11 +634,11 @@ const computerPlays = function (positionPlayed) {
       divBoard1.style.color = '#fff';
       divBoard1.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[0] = 1;
+      playedBoxes[0] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[4] &&
+      playedBoxes[4] &&
       divBoard5.textContent !== 'o' &&
       divBoard3.textContent !== 'o'
     ) {
@@ -719,11 +646,11 @@ const computerPlays = function (positionPlayed) {
       divBoard3.style.color = '#fff';
       divBoard3.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[2] = 1;
+      playedBoxes[2] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[7] &&
+      playedBoxes[7] &&
       divBoard8.textContent !== 'o' &&
       divBoard9.textContent !== 'o'
     ) {
@@ -731,11 +658,11 @@ const computerPlays = function (positionPlayed) {
       divBoard9.style.color = '#fff';
       divBoard9.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[8] = 1;
+      playedBoxes[8] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[8] &&
+      playedBoxes[8] &&
       divBoard9.textContent !== 'o' &&
       divBoard8.textContent !== 'o'
     ) {
@@ -743,19 +670,16 @@ const computerPlays = function (positionPlayed) {
       divBoard8.style.color = '#fff';
       divBoard8.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[7] = 1;
+      playedBoxes[7] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else {
-      noPositionPlayed(positionPlayed);
+      playRandom(positionPlayed);
     }
-  }
-
-  // box 8
-  else if (positionPlayed === 7) {
+  } else if (positionPlayed === 7) {
     console.log(7);
     if (
-      alreadyPlayedPositions[1] &&
+      playedBoxes[1] &&
       divBoard2.textContent !== 'o' &&
       divBoard5.textContent !== 'o'
     ) {
@@ -763,11 +687,11 @@ const computerPlays = function (positionPlayed) {
       divBoard5.style.color = '#fff';
       divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[4] = 1;
+      playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[4] &&
+      playedBoxes[4] &&
       divBoard5.textContent !== 'o' &&
       divBoard2.textContent !== 'o'
     ) {
@@ -775,11 +699,11 @@ const computerPlays = function (positionPlayed) {
       divBoard2.style.color = '#fff';
       divBoard2.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[1] = 1;
+      playedBoxes[1] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[6] &&
+      playedBoxes[6] &&
       divBoard7.textContent !== 'o' &&
       divBoard9.textContent !== 'o'
     ) {
@@ -787,11 +711,11 @@ const computerPlays = function (positionPlayed) {
       divBoard9.style.color = '#fff';
       divBoard9.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[8] = 1;
+      playedBoxes[8] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[8] &&
+      playedBoxes[8] &&
       divBoard9.textContent !== 'o' &&
       divBoard7.textContent !== 'o'
     ) {
@@ -799,19 +723,16 @@ const computerPlays = function (positionPlayed) {
       divBoard7.style.color = '#fff';
       divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[6] = 1;
+      playedBoxes[6] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else {
-      noPositionPlayed(positionPlayed);
+      playRandom(positionPlayed);
     }
-  }
-
-  // box 9
-  else if (positionPlayed === 8) {
+  } else if (positionPlayed === 8) {
     console.log(8);
     if (
-      alreadyPlayedPositions[0] &&
+      playedBoxes[0] &&
       divBoard1.textContent !== 'o' &&
       divBoard5.textContent !== 'o'
     ) {
@@ -819,11 +740,11 @@ const computerPlays = function (positionPlayed) {
       divBoard5.style.color = '#fff';
       divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[4] = 1;
+      playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[2] &&
+      playedBoxes[2] &&
       divBoard3.textContent !== 'o' &&
       divBoard6.textContent !== 'o'
     ) {
@@ -831,11 +752,11 @@ const computerPlays = function (positionPlayed) {
       divBoard6.style.color = '#fff';
       divBoard6.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[5] = 1;
+      playedBoxes[5] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[4] &&
+      playedBoxes[4] &&
       divBoard5.textContent !== 'o' &&
       divBoard1.textContent !== 'o'
     ) {
@@ -843,11 +764,11 @@ const computerPlays = function (positionPlayed) {
       divBoard1.style.color = '#fff';
       divBoard1.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[0] = 1;
+      playedBoxes[0] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[5] &&
+      playedBoxes[5] &&
       divBoard6.textContent !== 'o' &&
       divBoard3.textContent !== 'o'
     ) {
@@ -855,11 +776,11 @@ const computerPlays = function (positionPlayed) {
       divBoard3.style.color = '#fff';
       divBoard3.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[2] = 1;
+      playedBoxes[2] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[6] &&
+      playedBoxes[6] &&
       divBoard7.textContent !== 'o' &&
       divBoard8.textContent !== 'o'
     ) {
@@ -867,11 +788,11 @@ const computerPlays = function (positionPlayed) {
       divBoard8.style.color = '#fff';
       divBoard8.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[7] = 1;
+      playedBoxes[7] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      alreadyPlayedPositions[7] &&
+      playedBoxes[7] &&
       divBoard8.textContent !== 'o' &&
       divBoard7.textContent !== 'o'
     ) {
@@ -879,79 +800,71 @@ const computerPlays = function (positionPlayed) {
       divBoard7.style.color = '#fff';
       divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      alreadyPlayedPositions[6] = 1;
+      playedBoxes[6] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else {
-      noPositionPlayed(positionPlayed);
+      playRandom(positionPlayed);
     }
   }
 };
 
+const playGame = function (box, index) {
+  box.style.color = '#fff';
+  box.textContent = activePlayer === 0 ? 'x' : 'o';
+  activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+  playedBoxes[index] = 1;
+  gamePlayedFor += 1;
+  gameOver();
+};
+
 // Function to operate single-player mode.
-const playSP = function () {
-  contentVisible();
-  gameMode = 'single';
+const singlePlayerMode = function () {
+  showContent();
+  gameMode = false;
   allBox.forEach((box, index) => {
     box.addEventListener('click', function () {
-      if (
-        !alreadyPlayedPositions[index] &&
-        !isGameOver &&
-        gameMode === 'single'
-      ) {
-        box.style.color = '#fff';
-        box.textContent = activePlayer === 0 ? 'x' : 'o';
-        activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-        alreadyPlayedPositions[index] = 1;
-        gamePlayedFor += 1;
-        gameOver();
-        setTimeout(function () {
-          computerPlays(index);
-        }, 500);
+      if (!playedBoxes[index] && !isGameOver && !gameMode) {
+        playGame(box, index);
+        if (!isGameOver)
+          setTimeout(function () {
+            playComp(index);
+          }, 200);
       }
     });
   });
 };
 
 // Function to operate multi-player mode.
-const playMP = function () {
-  contentVisible();
-  gameMode = 'multi';
+const multiPlayerMode = function () {
+  showContent();
+  gameMode = true;
   allBox.forEach((box, index) => {
     box.addEventListener('click', function () {
-      if (
-        !alreadyPlayedPositions[index] &&
-        !isGameOver &&
-        gameMode === 'multi'
-      ) {
-        box.style.color = '#fff';
-        box.textContent = activePlayer === 0 ? 'x' : 'o';
-        activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-        alreadyPlayedPositions[index] = 1;
-        gamePlayedFor += 1;
-        gameOver();
-      }
+      if (!playedBoxes[index] && !isGameOver && gameMode) playGame(box, index);
     });
   });
 };
 
 // Single player button - listen to event.
-spButton.addEventListener('click', playSP);
+singlePlayerButton.addEventListener('click', singlePlayerMode);
 
 // Multi player button - listen to event.
-mpButton.addEventListener('click', playMP);
+multiPlayerButton.addEventListener('click', multiPlayerMode);
+
+/********************************************************************************/
 
 // Go Back - option.
 backOption.addEventListener('click', function () {
-  contentVisible();
+  showContent();
   playerOneScore = 0;
   playerTwoScore = 0;
-  initialConditions();
+  resetGame(0);
 });
 
 // Reset - option.
 resetOption.addEventListener('click', function () {
   playerOneScore = 0;
   playerTwoScore = 0;
-  initialConditions();
+  resetGame(0);
 });

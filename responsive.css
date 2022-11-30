@@ -1,0 +1,58 @@
+@media (max-width: 1200px) {
+  body {
+    max-width: 100rem;
+  }
+
+  .nav-options {
+    gap: 2rem;
+  }
+
+  .nav-option {
+    font-size: 1.8rem;
+  }
+
+  .primary-heading {
+    font-size: 2rem;
+  }
+
+  .game-mode-box {
+    flex-direction: column;
+  }
+
+  .game-mode-card {
+    padding: 2rem 1rem;
+    margin: 0 2rem;
+  }
+
+  .game-mode {
+    font-size: 3.2rem;
+  }
+
+  .play-button {
+    font-size: 2rem;
+    margin-top: 2rem;
+  }
+
+  .board-box {
+    grid-template-columns: repeat(3, 90px);
+  }
+
+  .board {
+    padding: 3rem 1rem;
+    font-size: 4.6rem;
+    text-align: center;
+  }
+
+  .score-box {
+    gap: 2rem;
+  }
+
+  .player-text {
+    font-size: 1.2rem;
+  }
+
+  .note {
+    text-align: center;
+    line-height: 1.2;
+  }
+}

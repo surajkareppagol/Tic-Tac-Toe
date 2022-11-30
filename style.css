@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
 /**************************************/
 /*  ELEMENTS  */
 /**************************************/
@@ -15,22 +13,17 @@ html {
 }
 
 body {
+  font-family: 'Press Start 2P', sans-serif;
+  max-width: 120rem;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: black;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 4rem;
-  max-width: 120rem;
-  height: 100vh;
-  font-family: 'Press Start 2P', cursive;
-  line-height: 1;
-  background-color: black;
-  margin: 0 auto;
 }
-
-/**************************************/
-/*  SELECTORS  */
-/**************************************/
 
 .nav-options {
   max-width: 200rem;
@@ -110,7 +103,7 @@ body {
   display: none;
 }
 
-.boards-box {
+.board-box {
   display: grid;
   grid-template-columns: repeat(3, 160px);
 }
@@ -119,6 +112,7 @@ body {
   padding: 4rem;
   font-size: 8.6rem;
   text-align: center;
+  cursor: pointer;
 }
 
 .board-1 {
@@ -202,77 +196,3 @@ body {
 .note {
   color: #fff;
 }
-
-/**************************************/
-/*  RESPONSIVE DESIGN  */
-/**************************************/
-
-@media (max-width: 1000px) {
-  body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    max-width: 100rem;
-  }
-
-  .primary-heading {
-    font-size: 2.6rem;
-  }
-
-  .game-mode-box {
-    flex-direction: column;
-  }
-
-  .game-mode {
-    font-size: 3.2rem;
-  }
-
-  .game-mode-card {
-    padding: 2rem 1rem;
-    margin: 0 2rem;
-  }
-
-  .play-button {
-    font-size: 2rem;
-    margin-top: 2rem;
-  }
-
-  .nav-options {
-    gap: 2rem;
-  }
-
-  .nav-option {
-    font-size: 1.8rem;
-  }
-
-  .primary-heading {
-    font-size: 2rem;
-  }
-
-  .score-box {
-    gap: 2rem;
-  }
-
-  .player-text {
-    font-size: 1.2rem;
-  }
-
-  .boards-box {
-    grid-template-columns: repeat(3, 90px);
-  }
-
-  .board {
-    padding: 3rem 1rem;
-    font-size: 4.6rem;
-    text-align: center;
-  }
-
-  .note {
-    text-align: center;
-    line-height: 1.2;
-  }
-}
-
-/**************************************/
-/**************************************/
