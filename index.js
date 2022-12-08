@@ -1,38 +1,33 @@
 /*
- *  Created by : Shadoww
+ *  Created by Shadoww
  *  Github : https://github.com/dev-shadoww
- *
- *  Tic tac toe game created as a side project, built with html, css and javascript and
- *  includes both single player and multi player modes.
- *
- *  Warning : playComp() function it contains a bug that is the value automatically changes.
  */
 
 'use strict';
 
-const headText = document.querySelector('.primary-heading');
-const backOption = document.querySelector('.back-option');
-const resetOption = document.querySelector('.reset-option');
-const optionBox = document.querySelector('.game-mode-box');
-const singlePlayerButton = document.querySelector('.sp-button');
-const multiPlayerButton = document.querySelector('.mp-button');
+const headText = document.querySelector('.nav__heading');
+const backOption = document.querySelector('.nav__back');
+const resetOption = document.querySelector('.nav__reset');
+const optionBox = document.querySelector('.mode');
+const singlePlayerButton = document.querySelector('.mode__single-player');
+const multiPlayerButton = document.querySelector('.mode__multi-player');
 
+/********************************************************************************/
 // Selecting the boards
-const board = document.querySelector('.game-board');
-const allBox = document.querySelectorAll('.board');
-const divBoard1 = document.querySelector('.board-1');
-const divBoard2 = document.querySelector('.board-2');
-const divBoard3 = document.querySelector('.board-3');
-const divBoard4 = document.querySelector('.board-4');
-const divBoard5 = document.querySelector('.board-5');
-const divBoard6 = document.querySelector('.board-6');
-const divBoard7 = document.querySelector('.board-7');
-const divBoard8 = document.querySelector('.board-8');
-const divBoard9 = document.querySelector('.board-9');
+const board = document.querySelector('.board');
+const boards = document.querySelectorAll('.board__board');
+const board1 = document.querySelector('.board__board--1');
+const board2 = document.querySelector('.board__board--2');
+const board3 = document.querySelector('.board__board--3');
+const board4 = document.querySelector('.board__board--4');
+const board5 = document.querySelector('.board__board--5');
+const board6 = document.querySelector('.board__board--6');
+const board7 = document.querySelector('.board__board--7');
+const board8 = document.querySelector('.board__board--8');
+const board9 = document.querySelector('.board__board--9');
 
-const player1 = document.querySelector('.player-score-1');
-const player2 = document.querySelector('.player-score-2');
-const note = document.querySelector('.note');
+const player1 = document.querySelector('.score__score--1');
+const player2 = document.querySelector('.score__score--2');
 
 let playedBoxes = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 let playerOneScore = 0;
@@ -44,6 +39,7 @@ let boardColor = '#fff';
 let isGameOver = false;
 let gameMode = false;
 
+/********************************************************************************/
 // Reset game conditions.
 const resetGame = function (allConditions) {
   if (allConditions) {
@@ -56,7 +52,7 @@ const resetGame = function (allConditions) {
   gamePlayedFor = 0;
   isGameOver = false;
   setTimeout(function () {
-    allBox.forEach((box, index) => {
+    boards.forEach((box, index) => {
       box.style.color = '#000';
       box.textContent = index + 1;
     });
@@ -66,12 +62,11 @@ const resetGame = function (allConditions) {
 };
 
 const showContent = function () {
-  board.classList.toggle('display-hide');
-  backOption.classList.toggle('display-hide');
-  resetOption.classList.toggle('display-hide');
-  optionBox.classList.toggle('display-hide');
-  note.classList.toggle('display-hide');
-  headText.classList.toggle('display-hide');
+  board.classList.toggle('u-display-hide');
+  backOption.classList.toggle('u-display-hide');
+  resetOption.classList.toggle('u-display-hide');
+  optionBox.classList.toggle('u-display-hide');
+  headText.classList.toggle('u-display-hide');
 };
 
 /********************************************************************************/
@@ -80,76 +75,60 @@ const showContent = function () {
 // Check if game is over or not.
 const gameOver = function () {
   if (
-    divBoard1.textContent === divBoard2.textContent &&
-    divBoard1.textContent === divBoard3.textContent
+    board1.textContent === board2.textContent &&
+    board1.textContent === board3.textContent &&
+    !isGameOver
   ) {
-    divBoard1.style.color =
-      divBoard2.style.color =
-      divBoard3.style.color =
-        winColor;
+    board1.style.color = board2.style.color = board3.style.color = winColor;
     resetGame(1);
   } else if (
-    divBoard4.textContent === divBoard5.textContent &&
-    divBoard4.textContent === divBoard6.textContent
+    board4.textContent === board5.textContent &&
+    board4.textContent === board6.textContent &&
+    !isGameOver
   ) {
-    divBoard4.style.color =
-      divBoard5.style.color =
-      divBoard6.style.color =
-        winColor;
+    board4.style.color = board5.style.color = board6.style.color = winColor;
     resetGame(1);
   } else if (
-    divBoard7.textContent === divBoard8.textContent &&
-    divBoard7.textContent === divBoard9.textContent
+    board7.textContent === board8.textContent &&
+    board7.textContent === board9.textContent &&
+    !isGameOver
   ) {
-    divBoard7.style.color =
-      divBoard8.style.color =
-      divBoard9.style.color =
-        winColor;
+    board7.style.color = board8.style.color = board9.style.color = winColor;
     resetGame(1);
   } else if (
-    divBoard1.textContent === divBoard4.textContent &&
-    divBoard1.textContent === divBoard7.textContent
+    board1.textContent === board4.textContent &&
+    board1.textContent === board7.textContent &&
+    !isGameOver
   ) {
-    divBoard1.style.color =
-      divBoard4.style.color =
-      divBoard7.style.color =
-        winColor;
+    board1.style.color = board4.style.color = board7.style.color = winColor;
     resetGame(1);
   } else if (
-    divBoard2.textContent === divBoard5.textContent &&
-    divBoard2.textContent === divBoard8.textContent
+    board2.textContent === board5.textContent &&
+    board2.textContent === board8.textContent &&
+    !isGameOver
   ) {
-    divBoard2.style.color =
-      divBoard5.style.color =
-      divBoard8.style.color =
-        winColor;
+    board2.style.color = board5.style.color = board8.style.color = winColor;
     resetGame(1);
   } else if (
-    divBoard3.textContent === divBoard6.textContent &&
-    divBoard3.textContent === divBoard9.textContent
+    board3.textContent === board6.textContent &&
+    board3.textContent === board9.textContent &&
+    !isGameOver
   ) {
-    divBoard3.style.color =
-      divBoard6.style.color =
-      divBoard9.style.color =
-        winColor;
+    board3.style.color = board6.style.color = board9.style.color = winColor;
     resetGame(1);
   } else if (
-    divBoard1.textContent === divBoard5.textContent &&
-    divBoard1.textContent === divBoard9.textContent
+    board1.textContent === board5.textContent &&
+    board1.textContent === board9.textContent &&
+    !isGameOver
   ) {
-    divBoard1.style.color =
-      divBoard5.style.color =
-      divBoard9.style.color =
-        winColor;
+    board1.style.color = board5.style.color = board9.style.color = winColor;
     resetGame(1);
   } else if (
-    divBoard3.textContent === divBoard5.textContent &&
-    divBoard3.textContent === divBoard7.textContent
+    board3.textContent === board5.textContent &&
+    board3.textContent === board7.textContent &&
+    !isGameOver
   ) {
-    divBoard3.style.color =
-      divBoard5.style.color =
-      divBoard7.style.color =
-        winColor;
+    board3.style.color = board5.style.color = board7.style.color = winColor;
     resetGame(1);
   } else if (gamePlayedFor === 9) {
     resetGame(0);
@@ -158,7 +137,7 @@ const gameOver = function () {
 
 // Check if random number is valid.
 const checkRandomNumber = function (randomNumber) {
-  allBox.forEach((box, index) => {
+  boards.forEach((box, index) => {
     if (box.textContent == 'o' && index === randomNumber) return 0;
     else return 1;
   });
@@ -176,7 +155,7 @@ const playRandom = function (positionPlayed) {
     checkRandomNumber()
   )
     randomNumber = randInt(0, 8);
-  allBox.forEach((box, index) => {
+  boards.forEach((box, index) => {
     if (randomNumber === index) {
       playGame(box, index);
     }
@@ -186,359 +165,397 @@ const playRandom = function (positionPlayed) {
 // Function to operate gameplay of computer.
 const playComp = function (positionPlayed) {
   if (positionPlayed === 0) {
+    console.log('-------------ENTERING---------------');
     console.log(0);
+    console.log(playedBoxes);
     if (
-      playedBoxes[2] &&
-      divBoard3.textContent !== 'o' &&
-      divBoard2.textContent !== 'o'
-    ) {
-      // 3
-      divBoard2.style.color = '#fff';
-      divBoard2.textContent = activePlayer === 0 ? 'x' : 'o';
-      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      playedBoxes[1] = 1;
-      gamePlayedFor += 1;
-      gameOver();
-    } else if (
       playedBoxes[1] &&
-      divBoard2.textContent !== 'o' &&
-      divBoard3.textContent !== 'o'
+      board2.textContent !== 'o' &&
+      board3.textContent !== 'o' &&
+      board3.textContent !== 'x'
     ) {
       // 2
-      divBoard3.style.color = '#fff';
-      divBoard3.textContent = activePlayer === 0 ? 'x' : 'o';
+      board3.style.color = '#fff';
+      board3.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[2] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      playedBoxes[6] &&
-      divBoard7.textContent !== 'o' &&
-      divBoard4.textContent !== 'o'
+      playedBoxes[2] &&
+      board3.textContent !== 'o' &&
+      board2.textContent !== 'o' &&
+      board2.textContent !== 'x'
     ) {
-      // 7
-      divBoard4.style.color = '#fff';
-      divBoard4.textContent = activePlayer === 0 ? 'x' : 'o';
+      // 3
+      board2.style.color = '#fff';
+      board2.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      playedBoxes[3] = 1;
+      playedBoxes[1] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[3] &&
-      divBoard4.textContent !== 'o' &&
-      divBoard7.textContent !== 'o'
+      board4.textContent !== 'o' &&
+      board7.textContent !== 'o' &&
+      board7.textContent !== 'x'
     ) {
       // 4
-      divBoard7.style.color = '#fff';
-      divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
+      board7.style.color = '#fff';
+      board7.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[6] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      playedBoxes[8] &&
-      divBoard9.textContent !== 'o' &&
-      divBoard5.textContent !== 'o'
+      playedBoxes[4] &&
+      board5.textContent !== 'o' &&
+      board9.textContent !== 'o' &&
+      board9.textContent !== 'x'
     ) {
-      // 9
-      divBoard5.style.color = '#fff';
-      divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
+      // 5
+      board9.style.color = '#fff';
+      board9.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      playedBoxes[4] = 1;
+      playedBoxes[8] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      playedBoxes[4] &&
-      divBoard5.textContent !== 'o' &&
-      divBoard9.textContent !== 'o'
+      playedBoxes[6] &&
+      board7.textContent !== 'o' &&
+      board4.textContent !== 'o' &&
+      board4.textContent !== 'x'
     ) {
-      // 5
-      divBoard9.style.color = '#fff';
-      divBoard9.textContent = activePlayer === 0 ? 'x' : 'o';
+      // 7
+      board4.style.color = '#fff';
+      board4.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      playedBoxes[8] = 1;
+      playedBoxes[3] = 1;
+      gamePlayedFor += 1;
+      gameOver();
+    } else if (
+      playedBoxes[8] &&
+      board9.textContent !== 'o' &&
+      board5.textContent !== 'o' &&
+      board5.textContent !== 'x'
+    ) {
+      // 9
+      board5.style.color = '#fff';
+      board5.textContent = activePlayer === 0 ? 'x' : 'o';
+      activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+      playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else {
       playRandom(positionPlayed);
     }
   } else if (positionPlayed === 1) {
+    console.log('-------------ENTERING---------------');
     console.log(1);
+    console.log(playedBoxes);
     if (
       playedBoxes[0] &&
-      divBoard1.textContent !== 'o' &&
-      divBoard3.textContent !== 'o'
+      board1.textContent !== 'o' &&
+      board3.textContent !== 'o' &&
+      board3.textContent !== 'x'
     ) {
       // 1
-      divBoard3.style.color = '#fff';
-      divBoard3.textContent = activePlayer === 0 ? 'x' : 'o';
+      board3.style.color = '#fff';
+      board3.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[2] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[2] &&
-      divBoard3.textContent !== 'o' &&
-      divBoard1.textContent !== 'o'
+      board3.textContent !== 'o' &&
+      board1.textContent !== 'o' &&
+      board1.textContent !== 'x'
     ) {
       // 3
-      divBoard1.style.color = '#fff';
-      divBoard1.textContent = activePlayer === 0 ? 'x' : 'o';
+      board1.style.color = '#fff';
+      board1.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[0] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      playedBoxes[7] &&
-      divBoard8.textContent !== 'o' &&
-      divBoard5.textContent !== 'o'
+      playedBoxes[4] &&
+      board5.textContent !== 'o' &&
+      board8.textContent !== 'o' &&
+      board8.textContent !== 'x'
     ) {
-      // 8
-      divBoard5.style.color = '#fff';
-      divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
+      // 5
+      board8.style.color = '#fff';
+      board8.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      playedBoxes[4] = 1;
+      playedBoxes[7] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      playedBoxes[4] &&
-      divBoard5.textContent !== 'o' &&
-      divBoard8.textContent !== 'o'
+      playedBoxes[7] &&
+      board8.textContent !== 'o' &&
+      board5.textContent !== 'o' &&
+      board5.textContent !== 'x'
     ) {
-      // 5
-      divBoard8.style.color = '#fff';
-      divBoard8.textContent = activePlayer === 0 ? 'x' : 'o';
+      // 8
+      board5.style.color = '#fff';
+      board5.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      playedBoxes[7] = 1;
+      playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else {
       playRandom(positionPlayed);
     }
   } else if (positionPlayed === 2) {
+    console.log('-------------ENTERING---------------');
     console.log(2);
+    console.log(playedBoxes);
     if (
       playedBoxes[0] &&
-      divBoard1.textContent !== 'o' &&
-      divBoard2.textContent !== 'o'
+      board1.textContent !== 'o' &&
+      board2.textContent !== 'o' &&
+      board2.textContent !== 'x'
     ) {
       // 3
-      divBoard2.style.color = '#fff';
-      divBoard2.textContent = activePlayer === 0 ? 'x' : 'o';
+      board2.style.color = '#fff';
+      board2.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[1] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[1] &&
-      divBoard2.textContent !== 'o' &&
-      divBoard1.textContent !== 'o'
+      board2.textContent !== 'o' &&
+      board1.textContent !== 'o' &&
+      board1.textContent !== 'x'
     ) {
       // 2
-      divBoard1.style.color = '#fff';
-      divBoard1.textContent = activePlayer === 0 ? 'x' : 'o';
+      board1.style.color = '#fff';
+      board1.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[0] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      playedBoxes[8] &&
-      divBoard9.textContent !== 'o' &&
-      divBoard6.textContent !== 'o'
+      playedBoxes[4] &&
+      board5.textContent !== 'o' &&
+      board7.textContent !== 'o' &&
+      board7.textContent !== 'x'
     ) {
-      // 7
-      divBoard6.style.color = '#fff';
-      divBoard6.textContent = activePlayer === 0 ? 'x' : 'o';
+      // 5
+      board7.style.color = '#fff';
+      board7.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      playedBoxes[5] = 1;
+      playedBoxes[6] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[5] &&
-      divBoard6.textContent !== 'o' &&
-      divBoard9.textContent !== 'o'
+      board6.textContent !== 'o' &&
+      board9.textContent !== 'o' &&
+      board9.textContent !== 'x'
     ) {
       // 4
-      divBoard9.style.color = '#fff';
-      divBoard9.textContent = activePlayer === 0 ? 'x' : 'o';
+      board9.style.color = '#fff';
+      board9.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[8] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[6] &&
-      divBoard7.textContent !== 'o' &&
-      divBoard5.textContent !== 'o'
+      board7.textContent !== 'o' &&
+      board5.textContent !== 'o' &&
+      board5.textContent !== 'x'
     ) {
       // 9
-      divBoard5.style.color = '#fff';
-      divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
+      board5.style.color = '#fff';
+      board5.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      playedBoxes[4] &&
-      divBoard5.textContent !== 'o' &&
-      divBoard7.textContent !== 'o'
+      playedBoxes[8] &&
+      board9.textContent !== 'o' &&
+      board6.textContent !== 'o' &&
+      board6.textContent !== 'x'
     ) {
-      // 5
-      divBoard7.style.color = '#fff';
-      divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
+      // 7
+      board6.style.color = '#fff';
+      board6.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      playedBoxes[6] = 1;
+      playedBoxes[5] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else {
       playRandom(positionPlayed);
     }
   } else if (positionPlayed === 3) {
+    console.log('-------------ENTERING---------------');
     console.log(3);
+    console.log(playedBoxes);
     if (
       playedBoxes[0] &&
-      divBoard1.textContent !== 'o' &&
-      divBoard7.textContent !== 'o'
+      board1.textContent !== 'o' &&
+      board7.textContent !== 'o' &&
+      board7.textContent !== 'x'
     ) {
       // 1
-      divBoard7.style.color = '#fff';
-      divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
+      board7.style.color = '#fff';
+      board7.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[6] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      playedBoxes[6] &&
-      divBoard7.textContent !== 'o' &&
-      divBoard1.textContent !== 'o'
+      playedBoxes[4] &&
+      board5.textContent !== 'o' &&
+      board6.textContent !== 'o' &&
+      board6.textContent !== 'x'
     ) {
-      // 7
-      divBoard1.style.color = '#fff';
-      divBoard1.textContent = activePlayer === 0 ? 'x' : 'o';
+      // 5
+      board6.style.color = '#fff';
+      board6.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      playedBoxes[0] = 1;
+      playedBoxes[5] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[5] &&
-      divBoard6.textContent !== 'o' &&
-      divBoard5.textContent !== 'o'
+      board6.textContent !== 'o' &&
+      board5.textContent !== 'o' &&
+      board5.textContent !== 'x'
     ) {
       // 6
-      divBoard5.style.color = '#fff';
-      divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
+      board5.style.color = '#fff';
+      board5.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
-      playedBoxes[4] &&
-      divBoard5.textContent !== 'o' &&
-      divBoard6.textContent !== 'o'
+      playedBoxes[6] &&
+      board7.textContent !== 'o' &&
+      board1.textContent !== 'o' &&
+      board1.textContent !== 'x'
     ) {
-      // 5
-      divBoard6.style.color = '#fff';
-      divBoard6.textContent = activePlayer === 0 ? 'x' : 'o';
+      // 7
+      board1.style.color = '#fff';
+      board1.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-      playedBoxes[5] = 1;
+      playedBoxes[0] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else {
       playRandom(positionPlayed);
     }
   } else if (positionPlayed === 4) {
+    console.log('-------------ENTERING---------------');
     console.log(4);
+    console.log(playedBoxes);
     if (
       playedBoxes[0] &&
-      divBoard1.textContent !== 'o' &&
-      divBoard9.textContent !== 'o'
+      board1.textContent !== 'o' &&
+      board9.textContent !== 'o' &&
+      board9.textContent !== 'x'
     ) {
       // 1
-      divBoard9.style.color = '#fff';
-      divBoard9.textContent = activePlayer === 0 ? 'x' : 'o';
+      board9.style.color = '#fff';
+      board9.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[8] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[1] &&
-      divBoard2.textContent !== 'o' &&
-      divBoard8.textContent !== 'o'
+      board2.textContent !== 'o' &&
+      board8.textContent !== 'o' &&
+      board8.textContent !== 'x'
     ) {
       // 2
-      divBoard8.style.color = '#fff';
-      divBoard8.textContent = activePlayer === 0 ? 'x' : 'o';
+      board8.style.color = '#fff';
+      board8.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[7] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[2] &&
-      divBoard2.textContent !== 'o' &&
-      divBoard7.textContent !== 'o'
+      board2.textContent !== 'o' &&
+      board7.textContent !== 'o' &&
+      board7.textContent !== 'x'
     ) {
       // 3
-      divBoard7.style.color = '#fff';
-      divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
+      board7.style.color = '#fff';
+      board7.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[6] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[3] &&
-      divBoard4.textContent !== 'o' &&
-      divBoard6.textContent !== 'o'
+      board4.textContent !== 'o' &&
+      board6.textContent !== 'o' &&
+      board6.textContent !== 'x'
     ) {
       // 4
-      divBoard6.style.color = '#fff';
-      divBoard6.textContent = activePlayer === 0 ? 'x' : 'o';
+      board6.style.color = '#fff';
+      board6.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[5] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[5] &&
-      divBoard6.textContent !== 'o' &&
-      divBoard4.textContent !== 'o'
+      board6.textContent !== 'o' &&
+      board4.textContent !== 'o' &&
+      board4.textContent !== 'x'
     ) {
       // 6
-      divBoard4.style.color = '#fff';
-      divBoard4.textContent = activePlayer === 0 ? 'x' : 'o';
+      board4.style.color = '#fff';
+      board4.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[3] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[6] &&
-      divBoard2.textContent !== 'o' &&
-      divBoard3.textContent !== 'o'
+      board2.textContent !== 'o' &&
+      board3.textContent !== 'o' &&
+      board3.textContent !== 'x'
     ) {
       // 7
-      divBoard3.style.color = '#fff';
-      divBoard3.textContent = activePlayer === 0 ? 'x' : 'o';
+      board3.style.color = '#fff';
+      board3.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[2] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[7] &&
-      divBoard8.textContent !== 'o' &&
-      divBoard2.textContent !== 'o'
+      board8.textContent !== 'o' &&
+      board2.textContent !== 'o' &&
+      board2.textContent !== 'x'
     ) {
       // 8
-      divBoard2.style.color = '#fff';
-      divBoard2.textContent = activePlayer === 0 ? 'x' : 'o';
+      board2.style.color = '#fff';
+      board2.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[1] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[8] &&
-      divBoard9.textContent !== 'o' &&
-      divBoard1.textContent !== 'o'
+      board9.textContent !== 'o' &&
+      board1.textContent !== 'o' &&
+      board1.textContent !== 'x'
     ) {
       // 2
-      divBoard1.style.color = '#fff';
-      divBoard1.textContent = activePlayer === 0 ? 'x' : 'o';
+      board1.style.color = '#fff';
+      board1.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[0] = 1;
       gamePlayedFor += 1;
@@ -547,51 +564,57 @@ const playComp = function (positionPlayed) {
       playRandom(positionPlayed);
     }
   } else if (positionPlayed === 5) {
+    console.log('-------------ENTERING---------------');
     console.log(5);
+    console.log(playedBoxes);
     if (
       playedBoxes[2] &&
-      divBoard3.textContent !== 'o' &&
-      divBoard9.textContent !== 'o'
+      board3.textContent !== 'o' &&
+      board9.textContent !== 'o' &&
+      board9.textContent !== 'x'
     ) {
       // 3
-      divBoard9.style.color = '#fff';
-      divBoard9.textContent = activePlayer === 0 ? 'x' : 'o';
+      board9.style.color = '#fff';
+      board9.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[8] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[3] &&
-      divBoard4.textContent !== 'o' &&
-      divBoard5.textContent !== 'o'
+      board4.textContent !== 'o' &&
+      board5.textContent !== 'o' &&
+      board5.textContent !== 'x'
     ) {
       // 4
-      divBoard5.style.color = '#fff';
-      divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
+      board5.style.color = '#fff';
+      board5.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[4] &&
-      divBoard5.textContent !== 'o' &&
-      divBoard4.textContent !== 'o'
+      board5.textContent !== 'o' &&
+      board4.textContent !== 'o' &&
+      board4.textContent !== 'x'
     ) {
       // 5
-      divBoard4.style.color = '#fff';
-      divBoard4.textContent = activePlayer === 0 ? 'x' : 'o';
+      board4.style.color = '#fff';
+      board4.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[3] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[8] &&
-      divBoard9.textContent !== 'o' &&
-      divBoard3.textContent !== 'o'
+      board9.textContent !== 'o' &&
+      board3.textContent !== 'o' &&
+      board3.textContent !== 'x'
     ) {
       // 9
-      divBoard3.style.color = '#fff';
-      divBoard3.textContent = activePlayer === 0 ? 'x' : 'o';
+      board3.style.color = '#fff';
+      board3.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[2] = 1;
       gamePlayedFor += 1;
@@ -600,75 +623,83 @@ const playComp = function (positionPlayed) {
       playRandom(positionPlayed);
     }
   } else if (positionPlayed === 6) {
+    console.log('-------------ENTERING---------------');
     console.log(6);
+    console.log(playedBoxes);
     if (
       playedBoxes[0] &&
-      divBoard1.textContent !== 'o' &&
-      divBoard4.textContent !== 'o'
+      board1.textContent !== 'o' &&
+      board4.textContent !== 'o' &&
+      board4.textContent !== 'x'
     ) {
       // 1
-      divBoard4.style.color = '#fff';
-      divBoard4.textContent = activePlayer === 0 ? 'x' : 'o';
+      board4.style.color = '#fff';
+      board4.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[3] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[2] &&
-      divBoard3.textContent !== 'o' &&
-      divBoard5.textContent !== 'o'
+      board3.textContent !== 'o' &&
+      board5.textContent !== 'o' &&
+      board5.textContent !== 'x'
     ) {
       // 3
-      divBoard5.style.color = '#fff';
-      divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
+      board5.style.color = '#fff';
+      board5.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[3] &&
-      divBoard4.textContent !== 'o' &&
-      divBoard1.textContent !== 'o'
+      board4.textContent !== 'o' &&
+      board1.textContent !== 'o' &&
+      board1.textContent !== 'x'
     ) {
       // 4
-      divBoard1.style.color = '#fff';
-      divBoard1.textContent = activePlayer === 0 ? 'x' : 'o';
+      board1.style.color = '#fff';
+      board1.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[0] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[4] &&
-      divBoard5.textContent !== 'o' &&
-      divBoard3.textContent !== 'o'
+      board5.textContent !== 'o' &&
+      board3.textContent !== 'o' &&
+      board3.textContent !== 'x'
     ) {
       // 5
-      divBoard3.style.color = '#fff';
-      divBoard3.textContent = activePlayer === 0 ? 'x' : 'o';
+      board3.style.color = '#fff';
+      board3.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[2] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[7] &&
-      divBoard8.textContent !== 'o' &&
-      divBoard9.textContent !== 'o'
+      board8.textContent !== 'o' &&
+      board9.textContent !== 'o' &&
+      board9.textContent !== 'x'
     ) {
       // 8
-      divBoard9.style.color = '#fff';
-      divBoard9.textContent = activePlayer === 0 ? 'x' : 'o';
+      board9.style.color = '#fff';
+      board9.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[8] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[8] &&
-      divBoard9.textContent !== 'o' &&
-      divBoard8.textContent !== 'o'
+      board9.textContent !== 'o' &&
+      board8.textContent !== 'o' &&
+      board8.textContent !== 'x'
     ) {
       // 9
-      divBoard8.style.color = '#fff';
-      divBoard8.textContent = activePlayer === 0 ? 'x' : 'o';
+      board8.style.color = '#fff';
+      board8.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[7] = 1;
       gamePlayedFor += 1;
@@ -677,51 +708,57 @@ const playComp = function (positionPlayed) {
       playRandom(positionPlayed);
     }
   } else if (positionPlayed === 7) {
+    console.log('-------------ENTERING---------------');
     console.log(7);
+    console.log(playedBoxes);
     if (
       playedBoxes[1] &&
-      divBoard2.textContent !== 'o' &&
-      divBoard5.textContent !== 'o'
+      board2.textContent !== 'o' &&
+      board5.textContent !== 'o' &&
+      board5.textContent !== 'x'
     ) {
       // 2
-      divBoard5.style.color = '#fff';
-      divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
+      board5.style.color = '#fff';
+      board5.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[4] &&
-      divBoard5.textContent !== 'o' &&
-      divBoard2.textContent !== 'o'
+      board5.textContent !== 'o' &&
+      board2.textContent !== 'o' &&
+      board2.textContent !== 'x'
     ) {
       // 5
-      divBoard2.style.color = '#fff';
-      divBoard2.textContent = activePlayer === 0 ? 'x' : 'o';
+      board2.style.color = '#fff';
+      board2.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[1] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[6] &&
-      divBoard7.textContent !== 'o' &&
-      divBoard9.textContent !== 'o'
+      board7.textContent !== 'o' &&
+      board9.textContent !== 'o' &&
+      board9.textContent !== 'x'
     ) {
       // 7
-      divBoard9.style.color = '#fff';
-      divBoard9.textContent = activePlayer === 0 ? 'x' : 'o';
+      board9.style.color = '#fff';
+      board9.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[8] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[8] &&
-      divBoard9.textContent !== 'o' &&
-      divBoard7.textContent !== 'o'
+      board9.textContent !== 'o' &&
+      board7.textContent !== 'o' &&
+      board7.textContent !== 'x'
     ) {
       // 9
-      divBoard7.style.color = '#fff';
-      divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
+      board7.style.color = '#fff';
+      board7.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[6] = 1;
       gamePlayedFor += 1;
@@ -730,75 +767,83 @@ const playComp = function (positionPlayed) {
       playRandom(positionPlayed);
     }
   } else if (positionPlayed === 8) {
+    console.log('-------------ENTERING---------------');
     console.log(8);
+    console.log(playedBoxes);
     if (
       playedBoxes[0] &&
-      divBoard1.textContent !== 'o' &&
-      divBoard5.textContent !== 'o'
+      board1.textContent !== 'o' &&
+      board5.textContent !== 'o' &&
+      board5.textContent !== 'x'
     ) {
       // 1
-      divBoard5.style.color = '#fff';
-      divBoard5.textContent = activePlayer === 0 ? 'x' : 'o';
+      board5.style.color = '#fff';
+      board5.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[4] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[2] &&
-      divBoard3.textContent !== 'o' &&
-      divBoard6.textContent !== 'o'
+      board3.textContent !== 'o' &&
+      board6.textContent !== 'o' &&
+      board6.textContent !== 'x'
     ) {
       // 3
-      divBoard6.style.color = '#fff';
-      divBoard6.textContent = activePlayer === 0 ? 'x' : 'o';
+      board6.style.color = '#fff';
+      board6.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[5] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[4] &&
-      divBoard5.textContent !== 'o' &&
-      divBoard1.textContent !== 'o'
+      board5.textContent !== 'o' &&
+      board1.textContent !== 'o' &&
+      board1.textContent !== 'x'
     ) {
       // 5
-      divBoard1.style.color = '#fff';
-      divBoard1.textContent = activePlayer === 0 ? 'x' : 'o';
+      board1.style.color = '#fff';
+      board1.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[0] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[5] &&
-      divBoard6.textContent !== 'o' &&
-      divBoard3.textContent !== 'o'
+      board6.textContent !== 'o' &&
+      board3.textContent !== 'o' &&
+      board3.textContent !== 'x'
     ) {
       // 6
-      divBoard3.style.color = '#fff';
-      divBoard3.textContent = activePlayer === 0 ? 'x' : 'o';
+      board3.style.color = '#fff';
+      board3.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[2] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[6] &&
-      divBoard7.textContent !== 'o' &&
-      divBoard8.textContent !== 'o'
+      board7.textContent !== 'o' &&
+      board8.textContent !== 'o' &&
+      board8.textContent !== 'x'
     ) {
       // 7
-      divBoard8.style.color = '#fff';
-      divBoard8.textContent = activePlayer === 0 ? 'x' : 'o';
+      board8.style.color = '#fff';
+      board8.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[7] = 1;
       gamePlayedFor += 1;
       gameOver();
     } else if (
       playedBoxes[7] &&
-      divBoard8.textContent !== 'o' &&
-      divBoard7.textContent !== 'o'
+      board8.textContent !== 'o' &&
+      board7.textContent !== 'o' &&
+      board7.textContent !== 'x'
     ) {
       // 8
-      divBoard7.style.color = '#fff';
-      divBoard7.textContent = activePlayer === 0 ? 'x' : 'o';
+      board7.style.color = '#fff';
+      board7.textContent = activePlayer === 0 ? 'x' : 'o';
       activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
       playedBoxes[6] = 1;
       gamePlayedFor += 1;
@@ -822,7 +867,7 @@ const playGame = function (box, index) {
 const singlePlayerMode = function () {
   showContent();
   gameMode = false;
-  allBox.forEach((box, index) => {
+  boards.forEach((box, index) => {
     box.addEventListener('click', function () {
       if (!playedBoxes[index] && !isGameOver && !gameMode) {
         playGame(box, index);
@@ -839,7 +884,7 @@ const singlePlayerMode = function () {
 const multiPlayerMode = function () {
   showContent();
   gameMode = true;
-  allBox.forEach((box, index) => {
+  boards.forEach((box, index) => {
     box.addEventListener('click', function () {
       if (!playedBoxes[index] && !isGameOver && gameMode) playGame(box, index);
     });
@@ -855,7 +900,8 @@ multiPlayerButton.addEventListener('click', multiPlayerMode);
 /********************************************************************************/
 
 // Go Back - option.
-backOption.addEventListener('click', function () {
+backOption.addEventListener('click', function (e) {
+  e.preventDefault();
   showContent();
   playerOneScore = 0;
   playerTwoScore = 0;
@@ -863,7 +909,8 @@ backOption.addEventListener('click', function () {
 });
 
 // Reset - option.
-resetOption.addEventListener('click', function () {
+resetOption.addEventListener('click', function (e) {
+  e.preventDefault();
   playerOneScore = 0;
   playerTwoScore = 0;
   resetGame(0);

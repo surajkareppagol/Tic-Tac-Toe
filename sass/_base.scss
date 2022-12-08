@@ -1,0 +1,255 @@
+:root {
+  --color-black: #000;
+  --color-white: #fff;
+}
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+
+  @include respond(tab-land) {
+    font-size: 56.25%;
+  }
+
+  @include respond(tab-port) {
+    font-size: 50%;
+  }
+
+  @include respond(phone) {
+    font-size: 43.75%;
+  }
+}
+
+body {
+  font-family: "Press Start 2P", sans-serif;
+  box-sizing: border-box;
+  background-color: var(--color-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+
+  @include respond(tab-land) {
+    max-width: 100;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4rem;
+  max-width: 120rem;
+  // margin: 2rem auto;
+  padding: 6rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6rem;
+
+  @include respond(tab-land) {
+    gap: 2rem;
+  }
+
+  &__link {
+    color: var(--color-white);
+    font-size: 2rem;
+    text-transform: capitalize;
+    text-decoration: none;
+    cursor: pointer;
+
+    @include respond(tab-land) {
+      font-size: 1.8rem;
+    }
+  }
+
+  &__heading {
+    color: var(--color-white);
+    font-size: 6rem;
+    text-transform: capitalize;
+    margin-top: 2rem;
+
+    @include respond(tab-land) {
+      font-size: 2rem;
+    }
+  }
+}
+
+.mode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+
+  @include respond(tab-land) {
+    flex-direction: column;
+  }
+
+  &__card {
+    background-color: var(--color-white);
+    border-radius: 6px;
+    padding: 6rem 5rem;
+    text-transform: capitalize;
+    text-align: center;
+
+    @include respond(tab-land) {
+      padding: 2rem 1rem;
+      margin: 0 2rem;
+    }
+  }
+
+  &__mode {
+    font-size: 6.4rem;
+    @include respond(tab-land) {
+      font-size: 3.2rem;
+    }
+  }
+
+  &__btn {
+    color: var(--color-white);
+    background-color: var(--color-black);
+    font-size: 4rem;
+    margin-top: 4rem;
+    padding: 1rem;
+    transition: all 0.3s;
+
+    @include respond(tab-land) {
+      font-size: 2rem;
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(3, 160px);
+
+    @include respond(tab-land) {
+      grid-template-columns: repeat(3, 90px);
+    }
+  }
+
+  &__board {
+    padding: 3rem;
+    font-size: 8.6rem;
+    text-align: center;
+    cursor: pointer;
+
+    @include respond(tab-land) {
+      font-size: 4.6rem;
+    }
+
+    &--1 {
+      border-top: 2.4px solid transparent;
+      border-bottom: 2.4px solid var(--color-white);
+      border-right: 2.4px solid var(--color-white);
+      border-left: 2.4px solid transparent;
+    }
+
+    &--2 {
+      border-top: 2.4px solid transparent;
+      border-bottom: 2.4px solid var(--color-white);
+      border-left: 2.4px solid var(--color-white);
+      border-right: 2.4px solid var(--color-white);
+    }
+
+    &--3 {
+      border-top: 2.4px solid transparent;
+      border-bottom: 2.4px solid var(--color-white);
+      border-right: 2.4px solid transparent;
+      border-left: 2.4px solid var(--color-white);
+    }
+
+    &--4 {
+      border-top: 2.4px solid var(--color-white);
+      border-bottom: 2.4px solid var(--color-white);
+      border-right: 2.4px solid var(--color-white);
+      border-left: 2.4px solid transparent;
+    }
+
+    &--5 {
+      border-top: 2.4px solid var(--color-white);
+      border-bottom: 2.4px solid var(--color-white);
+      border-left: 2.4px solid var(--color-white);
+      border-right: 2.4px solid var(--color-white);
+    }
+
+    &--6 {
+      border-top: 2.4px solid var(--color-white);
+      border-bottom: 2.4px solid var(--color-white);
+      border-right: 2.4px solid transparent;
+      border-left: 2.4px solid var(--color-white);
+    }
+
+    &--7 {
+      border-top: 2.4px solid var(--color-white);
+      border-right: 2.4px solid var(--color-white);
+      border-bottom: 2.4px solid transparent;
+      border-left: 2.4px solid transparent;
+    }
+
+    &--8 {
+      border-top: 2.4px solid var(--color-white);
+      border-left: 2.4px solid var(--color-white);
+      border-right: 2.4px solid var(--color-white);
+      border-bottom: 2.4px solid transparent;
+    }
+
+    &--9 {
+      border-top: 2.4px solid var(--color-white);
+      border-bottom: 2.4px solid transparent;
+      border-left: 2.4px solid var(--color-white);
+      border-right: 2.4px solid transparent;
+    }
+  }
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rem;
+
+  @include respond(tab-land) {
+    gap: 2rem;
+  }
+
+  &__text {
+    font-size: 2rem;
+    color: var(--color-white);
+    text-transform: capitalize;
+    font-weight: 100;
+    margin-bottom: 4rem;
+
+    @include respond(tab-land) {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.u-display-hide {
+  display: none;
+}

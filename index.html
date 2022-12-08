@@ -4,70 +4,61 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- FONT -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
-    <!-- ---- -->
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="responsive.css" />
-    <!-- --- -->
+    <link rel="stylesheet" href="css/style.comp.css" />
     <title>TicTacToe</title>
   </head>
   <body>
     <!-- NAVIGATION -->
-    <div class="nav-options">
-      <p class="nav-option display-hide back-option">go back</p>
-      <h1 class="primary-heading">tic tac toe</h1>
-      <p class="nav-option display-hide reset-option">reset</p>
-    </div>
+    <header class="header">
+      <nav class="nav">
+        <a href="#" class="nav__link u-display-hide nav__back">Go Back</a>
+        <h1 class="nav__heading">tic tac toe</h1>
+        <a href="#" class="nav__link u-display-hide nav__reset">reset</a>
+      </nav>
 
-    <!-- GAME MODE OPTIONS -->
-    <div class="game-mode-box">
-      <div class="game-mode-card">
-        <p class="game-mode">Single Player</p>
-        <p class="play-button sp-button">play Now</p>
+      <!-- GAME MODE OPTIONS -->
+      <div class="mode">
+        <div class="mode__card">
+          <p class="mode__mode">Single Player</p>
+          <p class="mode__btn mode__single-player">play Now</p>
+        </div>
+        <div class="mode__card">
+          <p class="mode__mode">Multi Player</p>
+          <p class="mode__btn mode__multi-player">play Now</p>
+        </div>
       </div>
-      <div class="game-mode-card">
-        <p class="game-mode">Multi Player</p>
-        <p class="play-button mp-button">play Now</p>
+    </header>
+
+    <section class="section-game">
+      <!-- GAME BOARD -->
+      <div class="board u-display-hide">
+        <div class="board__container">
+          <div class="board__board board__board--1">1</div>
+          <div class="board__board board__board--2">2</div>
+          <div class="board__board board__board--3">3</div>
+          <div class="board__board board__board--4">4</div>
+          <div class="board__board board__board--5">5</div>
+          <div class="board__board board__board--6">6</div>
+          <div class="board__board board__board--7">7</div>
+          <div class="board__board board__board--8">8</div>
+          <div class="board__board board__board--9">9</div>
+        </div>
+
+        <!-- SCORE -->
+        <div class="score">
+          <p class="score__text">
+            player 1 : <span class="score__score score__score--1">0</span>
+          </p>
+          <p class="score__text">
+            player 2 : <span class="score__score score__score--2">0</span>
+          </p>
+        </div>
       </div>
-    </div>
-
-    <!-- GAME BOARD -->
-    <div class="game-board display-hide">
-      <div class="board-box">
-        <div class="board board-1">1</div>
-        <div class="board board-2">2</div>
-        <div class="board board-3">3</div>
-        <div class="board board-4">4</div>
-        <div class="board board-5">5</div>
-        <div class="board board-6">6</div>
-        <div class="board board-7">7</div>
-        <div class="board board-8">8</div>
-        <div class="board board-9">9</div>
-      </div>
-
-      <!-- SCORE -->
-      <div class="score-box">
-        <p class="player-text">
-          player 1 : <span class="player-score-1">0</span>
-        </p>
-        <p class="player-text">
-          player 2 : <span class="player-score-2">0</span>
-        </p>
-      </div>
-    </div>
-
-    <p class="note">
-      &ast; Lots of bugs, if you are stuck just reload the page.
-    </p>
-
+    </section>
     <!-- JS FILE -->
     <script src="index.js"></script>
   </body>
