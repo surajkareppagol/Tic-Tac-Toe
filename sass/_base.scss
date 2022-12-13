@@ -58,10 +58,6 @@ body {
   justify-content: center;
   gap: 6rem;
 
-  @include respond(tab-land) {
-    gap: 2rem;
-  }
-
   &__link {
     color: var(--color-white);
     font-size: 2rem;
@@ -164,26 +160,27 @@ body {
     grid-template-columns: repeat(3, 160px);
 
     @include respond(tab-land) {
-      grid-template-columns: repeat(3, 100px);
+      grid-template-columns: repeat(3, 120px);
     }
   }
 
-  &__board {
-    padding: 3rem;
-    font-size: 8.6rem;
+  &__text {
+    font-size: 7.6rem;
     text-align: center;
+    padding: 4rem;
     cursor: pointer;
 
     @include respond(tab-land) {
-      font-size: 4.2rem;
+      font-size: 6.6rem;
       padding: 5.4rem;
     }
 
     @include respond(phone) {
-      font-size: 4.2rem;
-      padding: 5.4rem;
+      font-size: 5.2rem;
     }
+  }
 
+  &__board {
     &--1 {
       border-top: 2px solid transparent;
       border-bottom: 2px solid var(--color-white);
@@ -256,7 +253,7 @@ body {
   gap: 8rem;
 
   @include respond(tab-land) {
-    gap: 2rem;
+    gap: 4rem;
   }
 
   &__text {

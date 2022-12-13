@@ -12,16 +12,17 @@ const multiPlayerButton = document.querySelector('.mode__multi-player');
 
 const board = document.querySelector('.board');
 const boards = document.querySelectorAll('.board__board');
-const board0 = document.querySelector('.board__board--1');
-const board1 = document.querySelector('.board__board--2');
-const board2 = document.querySelector('.board__board--3');
-const board3 = document.querySelector('.board__board--4');
-const board4 = document.querySelector('.board__board--5');
-const board5 = document.querySelector('.board__board--6');
-const board6 = document.querySelector('.board__board--7');
-const board7 = document.querySelector('.board__board--8');
-const board8 = document.querySelector('.board__board--9');
+const board0 = document.querySelector('.board__text--1');
+const board1 = document.querySelector('.board__text--2');
+const board2 = document.querySelector('.board__text--3');
+const board3 = document.querySelector('.board__text--4');
+const board4 = document.querySelector('.board__text--5');
+const board5 = document.querySelector('.board__text--6');
+const board6 = document.querySelector('.board__text--7');
+const board7 = document.querySelector('.board__text--8');
+const board8 = document.querySelector('.board__text--9');
 
+const boardText = document.querySelectorAll('.board__text');
 const player1 = document.querySelector('.score__score--1');
 const player2 = document.querySelector('.score__score--2');
 
@@ -56,12 +57,15 @@ const resetGame = function (allConditions) {
   }
 
   playedBoxes = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  console.log('----------RESET START----------');
+  console.log(playedBoxes);
+  console.log('----------RESET END----------');
   activePlayer = 0;
   gamePlayedFor = 0;
   setTimeout(function () {
-    boards.forEach((box, index) => {
-      box.style.color = blackColor;
-      box.textContent = index + 1;
+    boardText.forEach((textElement, index) => {
+      textElement.style.color = blackColor;
+      textElement.textContent = index + 1;
     });
     player1.textContent = playerOneScore;
     player2.textContent = playerTwoScore;
@@ -71,7 +75,7 @@ const resetGame = function (allConditions) {
 
 // Check if random number is valid.
 const checkRandomNumber = function (randomNumber) {
-  boards.forEach((box, index) => {
+  boardText.forEach((box, index) => {
     if (
       (box.textContent === 'o' || box.textContent === 'x') &&
       index === randomNumber
@@ -201,6 +205,7 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
+    console.log(playedBoxes, 'IN 0');
   } else if (positionPlayed === 1) {
     if (checkPosition(board0, board2, 0)) {
       // The position played 1 and 0
@@ -221,6 +226,7 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
+    console.log(playedBoxes, 'IN 1');
   } else if (positionPlayed === 2) {
     if (checkPosition(board0, board1, 0)) {
       // The position played 2 and 0
@@ -249,6 +255,7 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
+    console.log(playedBoxes, 'IN 2');
   } else if (positionPlayed === 3) {
     if (checkPosition(board0, board6, 0)) {
       // The position played 3 and 0
@@ -269,6 +276,7 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
+    console.log(playedBoxes, 'IN 3');
   } else if (positionPlayed === 4) {
     if (checkPosition(board0, board8, 0)) {
       // The position played 4 and 0
@@ -305,6 +313,7 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
+    console.log(playedBoxes, 'IN 4');
   } else if (positionPlayed === 5) {
     if (checkPosition(board2, board8, 2)) {
       // The position played 5 and 2
@@ -325,6 +334,7 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
+    console.log(playedBoxes, 'IN 5');
   } else if (positionPlayed === 6) {
     if (checkPosition(board0, board3, 0)) {
       // The position played 6 and 0
@@ -353,6 +363,7 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
+    console.log(playedBoxes, 'IN 6');
   } else if (positionPlayed === 7) {
     if (checkPosition(board1, board4, 1)) {
       // The position played 7 and 1
@@ -373,6 +384,7 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
+    console.log(playedBoxes, 'IN 7');
   } else if (positionPlayed === 8) {
     if (checkPosition(board0, board4, 0)) {
       // The position played 8 and 0
@@ -401,6 +413,7 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
+    console.log(playedBoxes, 'IN 8');
   }
 };
 
@@ -411,7 +424,7 @@ const playComp = function (positionPlayed) {
 const singlePlayerMode = function () {
   showContent();
   gameMode = false;
-  boards.forEach((box, index) => {
+  boardText.forEach((box, index) => {
     box.addEventListener('click', function () {
       if (!playedBoxes[index] && !isGameOver && !gameMode) {
         playGame(box, index);
@@ -433,7 +446,7 @@ const playRandom = function (positionPlayed) {
     checkRandomNumber()
   )
     randomNumber = randInt(0, 8);
-  boards.forEach((box, index) => {
+  boardText.forEach((box, index) => {
     if (randomNumber === index) playGame(box, index);
   });
 };
@@ -448,7 +461,7 @@ singlePlayerButton.addEventListener('click', singlePlayerMode);
 const multiPlayerMode = function () {
   showContent();
   gameMode = true;
-  boards.forEach((box, index) => {
+  boardText.forEach((box, index) => {
     box.addEventListener('click', function () {
       if (!playedBoxes[index] && !isGameOver && gameMode) playGame(box, index);
     });

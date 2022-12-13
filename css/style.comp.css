@@ -48,9 +48,6 @@ body {
   align-items: center;
   justify-content: center;
   gap: 6rem; }
-  @media (max-width: 75em) {
-    .nav {
-      gap: 2rem; } }
   .nav__link {
     color: var(--color-white);
     font-size: 2rem;
@@ -129,65 +126,64 @@ body {
     grid-template-columns: repeat(3, 160px); }
     @media (max-width: 75em) {
       .board__container {
-        grid-template-columns: repeat(3, 100px); } }
-  .board__board {
-    padding: 3rem;
-    font-size: 8.6rem;
+        grid-template-columns: repeat(3, 120px); } }
+  .board__text {
+    font-size: 7.6rem;
     text-align: center;
+    padding: 4rem;
     cursor: pointer; }
     @media (max-width: 75em) {
-      .board__board {
-        font-size: 4.2rem;
+      .board__text {
+        font-size: 6.6rem;
         padding: 5.4rem; } }
     @media (max-width: 37.5em) {
-      .board__board {
-        font-size: 4.2rem;
-        padding: 5.4rem; } }
-    .board__board--1 {
-      border-top: 2px solid transparent;
-      border-bottom: 2px solid var(--color-white);
-      border-right: 2px solid var(--color-white);
-      border-left: 2px solid transparent; }
-    .board__board--2 {
-      border-top: 2px solid transparent;
-      border-bottom: 2px solid var(--color-white);
-      border-left: 2px solid var(--color-white);
-      border-right: 2px solid var(--color-white); }
-    .board__board--3 {
-      border-top: 2px solid transparent;
-      border-bottom: 2px solid var(--color-white);
-      border-right: 2px solid transparent;
-      border-left: 2px solid var(--color-white); }
-    .board__board--4 {
-      border-top: 2px solid var(--color-white);
-      border-bottom: 2px solid var(--color-white);
-      border-right: 2px solid var(--color-white);
-      border-left: 2px solid transparent; }
-    .board__board--5 {
-      border-top: 2px solid var(--color-white);
-      border-bottom: 2px solid var(--color-white);
-      border-left: 2px solid var(--color-white);
-      border-right: 2px solid var(--color-white); }
-    .board__board--6 {
-      border-top: 2px solid var(--color-white);
-      border-bottom: 2px solid var(--color-white);
-      border-right: 2px solid transparent;
-      border-left: 2px solid var(--color-white); }
-    .board__board--7 {
-      border-top: 2px solid var(--color-white);
-      border-right: 2px solid var(--color-white);
-      border-bottom: 2px solid transparent;
-      border-left: 2px solid transparent; }
-    .board__board--8 {
-      border-top: 2px solid var(--color-white);
-      border-left: 2px solid var(--color-white);
-      border-right: 2px solid var(--color-white);
-      border-bottom: 2px solid transparent; }
-    .board__board--9 {
-      border-top: 2px solid var(--color-white);
-      border-bottom: 2px solid transparent;
-      border-left: 2px solid var(--color-white);
-      border-right: 2px solid transparent; }
+      .board__text {
+        font-size: 5.2rem; } }
+  .board__board--1 {
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid var(--color-white);
+    border-right: 2px solid var(--color-white);
+    border-left: 2px solid transparent; }
+  .board__board--2 {
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid var(--color-white);
+    border-left: 2px solid var(--color-white);
+    border-right: 2px solid var(--color-white); }
+  .board__board--3 {
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid var(--color-white);
+    border-right: 2px solid transparent;
+    border-left: 2px solid var(--color-white); }
+  .board__board--4 {
+    border-top: 2px solid var(--color-white);
+    border-bottom: 2px solid var(--color-white);
+    border-right: 2px solid var(--color-white);
+    border-left: 2px solid transparent; }
+  .board__board--5 {
+    border-top: 2px solid var(--color-white);
+    border-bottom: 2px solid var(--color-white);
+    border-left: 2px solid var(--color-white);
+    border-right: 2px solid var(--color-white); }
+  .board__board--6 {
+    border-top: 2px solid var(--color-white);
+    border-bottom: 2px solid var(--color-white);
+    border-right: 2px solid transparent;
+    border-left: 2px solid var(--color-white); }
+  .board__board--7 {
+    border-top: 2px solid var(--color-white);
+    border-right: 2px solid var(--color-white);
+    border-bottom: 2px solid transparent;
+    border-left: 2px solid transparent; }
+  .board__board--8 {
+    border-top: 2px solid var(--color-white);
+    border-left: 2px solid var(--color-white);
+    border-right: 2px solid var(--color-white);
+    border-bottom: 2px solid transparent; }
+  .board__board--9 {
+    border-top: 2px solid var(--color-white);
+    border-bottom: 2px solid transparent;
+    border-left: 2px solid var(--color-white);
+    border-right: 2px solid transparent; }
 
 .score {
   display: flex;
@@ -196,7 +192,7 @@ body {
   gap: 8rem; }
   @media (max-width: 75em) {
     .score {
-      gap: 2rem; } }
+      gap: 4rem; } }
   .score__text {
     font-size: 2rem;
     color: var(--color-white);
