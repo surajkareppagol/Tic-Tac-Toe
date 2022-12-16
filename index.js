@@ -6,6 +6,12 @@
 const headText = document.querySelector('.nav__heading');
 const backOption = document.querySelector('.nav__back');
 const resetOption = document.querySelector('.nav__reset');
+const symbolsNav = document.querySelector('.nav__symbols');
+const symbols = document.querySelector('.symbols');
+const allSymbol = document.querySelectorAll('.symbol__box');
+const symbolOnes = document.querySelectorAll('.symbol__text--1');
+const symbolTwos = document.querySelectorAll('.symbol__text--2');
+
 const optionBox = document.querySelector('.mode');
 const singlePlayerButton = document.querySelector('.mode__single-player');
 const multiPlayerButton = document.querySelector('.mode__multi-player');
@@ -37,6 +43,9 @@ let blackColor = '#000';
 let isGameOver = false;
 let gameMode = false;
 
+let playerOne = 'x';
+let playerTwo = 'o';
+
 /********************************************************************/
 // UTILITY FUNCTIONS
 
@@ -47,6 +56,7 @@ const showContent = function () {
   resetOption.classList.toggle('u-display-hide');
   optionBox.classList.toggle('u-display-hide');
   headText.classList.toggle('u-display-hide');
+  symbolsNav.classList.toggle('u-display-hide');
 };
 
 // Reset game conditions.
@@ -77,7 +87,7 @@ const resetGame = function (allConditions) {
 const checkRandomNumber = function (randomNumber) {
   boardText.forEach((box, index) => {
     if (
-      (box.textContent === 'o' || box.textContent === 'x') &&
+      (box.textContent === playerTwo || box.textContent === playerOne) &&
       index === randomNumber
     )
       return 0;
@@ -89,13 +99,25 @@ const checkRandomNumber = function (randomNumber) {
 const checkPosition = function (boxOne, boxTwo, index) {
   if (
     playedBoxes[index] &&
-    boxOne.textContent === 'x' &&
-    boxTwo.textContent != 'x' &&
-    boxTwo.textContent != 'o'
+    boxOne.textContent === playerOne &&
+    boxTwo.textContent != playerOne &&
+    boxTwo.textContent != playerTwo
   )
     return 1;
   else return 0;
 };
+
+symbolsNav.addEventListener('click', function () {
+  symbols.classList.toggle('u-display-hide');
+});
+
+allSymbol.forEach((el, index) => {
+  el.addEventListener('click', function () {
+    playerOne = symbolOnes[index].textContent;
+    playerTwo = symbolTwos[index].textContent;
+    symbols.classList.toggle('u-display-hide');
+  });
+});
 
 /********************************************************************/
 // GAME MECHANICS
@@ -166,7 +188,7 @@ const gameOver = function () {
 // Play game common to both modes.
 const playGame = function (box, index) {
   box.style.color = boardColor;
-  box.textContent = activePlayer === 0 ? 'x' : 'o';
+  box.textContent = activePlayer === 0 ? playerOne : playerTwo;
   activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
   playedBoxes[index] = 1;
   gamePlayedFor += 1;

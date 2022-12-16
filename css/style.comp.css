@@ -1,6 +1,7 @@
 :root {
   --color-black: #000;
-  --color-white: #fff; }
+  --color-white: #fff;
+  --color-red: #ff0000; }
 
 *,
 *:before,
@@ -50,10 +51,19 @@ body {
   gap: 6rem; }
   .nav__link {
     color: var(--color-white);
-    font-size: 2rem;
+    width: 4.4rem;
+    height: 4.4rem;
     text-transform: capitalize;
     text-decoration: none;
     cursor: pointer; }
+    .nav__link--1 {
+      transition: all 0.2s; }
+      .nav__link--1:hover {
+        transform: translateX(-4px); }
+    .nav__link--2 {
+      transition: all 0.2s; }
+      .nav__link--2:hover {
+        transform: rotate(20deg); }
     @media (max-width: 75em) {
       .nav__link {
         font-size: 3.2rem; } }
@@ -71,6 +81,13 @@ body {
     @media (max-width: 37.5em) {
       .nav__heading {
         font-size: 4rem; } }
+  .nav__symbols {
+    display: inline-block;
+    position: relative; }
+    .nav__symbols:link, .nav__symbols:visited {
+      font-size: 2rem;
+      color: var(--color-white);
+      text-decoration: none; }
 
 .mode {
   display: flex;
@@ -194,10 +211,12 @@ body {
     .score {
       gap: 4rem; } }
   .score__text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
     font-size: 2rem;
     color: var(--color-white);
-    text-transform: capitalize;
-    font-weight: 100;
     margin-bottom: 4rem; }
     @media (max-width: 75em) {
       .score__text {
@@ -205,6 +224,47 @@ body {
     @media (max-width: 37.5em) {
       .score__text {
         font-size: 2.2rem; } }
+  .score__icon {
+    width: 2.6rem;
+    height: 2.6rem;
+    color: var(--color-white); }
 
 .u-display-hide {
   display: none; }
+
+.symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 100rem;
+  margin: 0 auto;
+  border: 2.6px solid var(--color-white);
+  border-radius: 11px;
+  padding: 1rem 2rem;
+  position: absolute;
+  background-color: var(--color-white);
+  top: 14%;
+  right: 30%; }
+  @media (max-width: 37.5em) {
+    .symbol {
+      top: 26%;
+      right: 10%; } }
+  .symbol__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0.2rem 0.4rem; }
+    .symbol__box:hover {
+      background-color: var(--color-black);
+      color: var(--color-white);
+      cursor: pointer; }
+  .symbol__text {
+    font-size: 2.2rem; }
+    @media (max-width: 37.5em) {
+      .symbol__text {
+        font-size: 1.6rem; } }
+    .symbol__text--1, .symbol__text--2 {
+      color: var(--color-red); }

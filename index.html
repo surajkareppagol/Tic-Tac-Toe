@@ -15,9 +15,16 @@
     <!-- NAVIGATION -->
     <header class="header">
       <nav class="nav">
-        <a href="#" class="nav__link u-display-hide nav__back">Go Back</a>
+        <ion-icon
+          name="arrow-back-outline"
+          class="nav__link nav__link--1 u-display-hide nav__back"
+        ></ion-icon>
         <h1 class="nav__heading">tic tac toe</h1>
-        <a href="#" class="nav__link u-display-hide nav__reset">reset</a>
+        <ion-icon
+          name="refresh-outline"
+          class="nav__link nav__link--2 u-display-hide nav__reset"
+        ></ion-icon>
+        <a href="#" class="nav__symbols u-display-hide">symbols</a>
       </nav>
 
       <!-- GAME MODE OPTIONS -->
@@ -69,14 +76,44 @@
         <!-- SCORE -->
         <div class="score">
           <p class="score__text">
-            player 1 : <span class="score__score score__score--1">0</span>
+            <ion-icon name="person" class="score__icon"></ion-icon> :
+            <span class="score__score score__score--1">0</span>
           </p>
           <p class="score__text">
-            player 2 : <span class="score__score score__score--2">0</span>
+            <ion-icon name="person-outline" class="score__icon"></ion-icon> :
+            <span class="score__score score__score--2">0</span>
           </p>
         </div>
       </div>
     </section>
+
+    <section class="symbols u-display-hide">
+      <div class="symbol">
+        <div class="symbol__box">
+          <p class="symbol__text">1.</p>
+          <p class="symbol__text symbol__text--1">x</p>
+          <p class="symbol__text">vs.</p>
+          <p class="symbol__text symbol__text--2">o</p>
+        </div>
+
+        <div class="symbol__box">
+          <p class="symbol__text">2.</p>
+          <p class="symbol__text symbol__text--1">+</p>
+          <p class="symbol__text">vs.</p>
+          <p class="symbol__text symbol__text--2">-</p>
+        </div>
+      </div>
+    </section>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
     <!-- JS FILE -->
     <script src="index.js"></script>
   </body>
