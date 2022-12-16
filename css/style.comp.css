@@ -48,7 +48,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6rem; }
+  gap: 6rem;
+  position: relative; }
   .nav__link {
     color: var(--color-white);
     width: 4.4rem;
@@ -82,36 +83,19 @@ body {
       .nav__heading {
         font-size: 4rem; } }
   .nav__symbols {
-    display: inline-block;
-    position: relative; }
+    display: inline-block; }
     .nav__symbols:link, .nav__symbols:visited {
       font-size: 2rem;
       color: var(--color-white);
       text-decoration: none; }
 
 .symbol {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 2rem;
   max-width: 100rem;
   margin: 0 auto;
   border: 2.6px solid var(--color-white);
   border-radius: 11px;
   padding: 1rem 2rem;
-  background-color: var(--color-white);
-  position: absolute;
-  top: 14%;
-  right: 30%; }
-  @media (max-width: 75em) {
-    .symbol {
-      top: 20%;
-      right: 30%; } }
-  @media (max-width: 37.5em) {
-    .symbol {
-      top: 26%;
-      right: 24%; } }
+  background-color: var(--color-white); }
   .symbol__box {
     display: flex;
     align-items: center;
@@ -129,6 +113,19 @@ body {
         font-size: 1.6rem; } }
     .symbol__text--1, .symbol__text--2 {
       color: var(--color-red); }
+
+.symbols {
+  position: absolute;
+  top: 14%;
+  right: 30%; }
+  @media (max-width: 75em) {
+    .symbols {
+      top: 30%;
+      right: 30%; } }
+  @media (max-width: 37.5em) {
+    .symbols {
+      top: 36%;
+      right: 24%; } }
 
 .mode {
   display: flex;

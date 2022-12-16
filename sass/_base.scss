@@ -58,6 +58,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 6rem;
+  position: relative;
 
   &__link {
     color: var(--color-white);
@@ -109,7 +110,7 @@ body {
 
   &__symbols {
     display: inline-block;
-    position: relative;
+
     &:link,
     &:visited {
       font-size: 2rem;
@@ -120,30 +121,12 @@ body {
 }
 
 .symbol {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 2rem;
   max-width: 100rem;
   margin: 0 auto;
   border: 2.6px solid var(--color-white);
   border-radius: 11px;
   padding: 1rem 2rem;
   background-color: var(--color-white);
-  position: absolute;
-  top: 14%;
-  right: 30%;
-
-  @include respond(tab-land) {
-    top: 20%;
-    right: 30%;
-  }
-
-  @include respond(phone) {
-    top: 26%;
-    right: 24%;
-  }
 
   &__box {
     display: flex;
@@ -169,6 +152,22 @@ body {
     &--2 {
       color: var(--color-red);
     }
+  }
+}
+
+.symbols {
+  position: absolute;
+  top: 14%;
+  right: 30%;
+
+  @include respond(tab-land) {
+    top: 30%;
+    right: 30%;
+  }
+
+  @include respond(phone) {
+    top: 36%;
+    right: 24%;
   }
 }
 
