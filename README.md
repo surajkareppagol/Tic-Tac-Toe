@@ -8,7 +8,7 @@
 
 ![GameImage](imgs/tictactoe.gif)
 
-![GameImage](imgs/gameHome.png)
+![GameImage](imgs/gamehome.png)
 
 ![GameImage](imgs/gameplay-1.png)
 

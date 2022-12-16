@@ -7,7 +7,7 @@ const headText = document.querySelector('.nav__heading');
 const backOption = document.querySelector('.nav__back');
 const resetOption = document.querySelector('.nav__reset');
 const symbolsNav = document.querySelector('.nav__symbols');
-const symbols = document.querySelector('.symbols');
+const symbols = document.querySelector('.symbol');
 const allSymbol = document.querySelectorAll('.symbol__box');
 const symbolOnes = document.querySelectorAll('.symbol__text--1');
 const symbolTwos = document.querySelectorAll('.symbol__text--2');
@@ -95,10 +95,11 @@ const checkRandomNumber = function (randomNumber) {
 // Check the position.
 const checkPosition = function (boxOne, boxTwo, index) {
   if (
+    // 8 , 7
     playedBoxes[index] &&
-    boxOne.textContent === playerOne &&
-    boxTwo.textContent != playerOne &&
-    boxTwo.textContent != playerTwo
+    boxOne.textContent === playerOne && // x
+    boxTwo.textContent != playerOne && // x
+    boxTwo.textContent != playerTwo // o
   )
     return 1;
   else return 0;
@@ -224,7 +225,6 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
-    console.log(playedBoxes, 'IN 0');
   } else if (positionPlayed === 1) {
     if (checkPosition(board0, board2, 0)) {
       // The position played 1 and 0
@@ -245,7 +245,6 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
-    console.log(playedBoxes, 'IN 1');
   } else if (positionPlayed === 2) {
     if (checkPosition(board0, board1, 0)) {
       // The position played 2 and 0
@@ -274,7 +273,6 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
-    console.log(playedBoxes, 'IN 2');
   } else if (positionPlayed === 3) {
     if (checkPosition(board0, board6, 0)) {
       // The position played 3 and 0
@@ -295,7 +293,6 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
-    console.log(playedBoxes, 'IN 3');
   } else if (positionPlayed === 4) {
     if (checkPosition(board0, board8, 0)) {
       // The position played 4 and 0
@@ -332,7 +329,6 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
-    console.log(playedBoxes, 'IN 4');
   } else if (positionPlayed === 5) {
     if (checkPosition(board2, board8, 2)) {
       // The position played 5 and 2
@@ -353,7 +349,6 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
-    console.log(playedBoxes, 'IN 5');
   } else if (positionPlayed === 6) {
     if (checkPosition(board0, board3, 0)) {
       // The position played 6 and 0
@@ -382,7 +377,6 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
-    console.log(playedBoxes, 'IN 6');
   } else if (positionPlayed === 7) {
     if (checkPosition(board1, board4, 1)) {
       // The position played 7 and 1
@@ -403,7 +397,6 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
-    console.log(playedBoxes, 'IN 7');
   } else if (positionPlayed === 8) {
     if (checkPosition(board0, board4, 0)) {
       // The position played 8 and 0
@@ -432,7 +425,6 @@ const playComp = function (positionPlayed) {
     } else {
       playRandom(positionPlayed);
     }
-    console.log(playedBoxes, 'IN 8');
   }
 };
 
@@ -450,7 +442,7 @@ const singlePlayerMode = function () {
         if (!isGameOver)
           setTimeout(function () {
             playComp(index);
-          }, 200);
+          }, 180);
       }
     });
   });
