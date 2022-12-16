@@ -67,9 +67,6 @@ const resetGame = function (allConditions) {
   }
 
   playedBoxes = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-  console.log('----------RESET START----------');
-  console.log(playedBoxes);
-  console.log('----------RESET END----------');
   activePlayer = 0;
   gamePlayedFor = 0;
   setTimeout(function () {

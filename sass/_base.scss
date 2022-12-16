@@ -119,6 +119,59 @@ body {
   }
 }
 
+.symbol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 100rem;
+  margin: 0 auto;
+  border: 2.6px solid var(--color-white);
+  border-radius: 11px;
+  padding: 1rem 2rem;
+  background-color: var(--color-white);
+  position: absolute;
+  top: 14%;
+  right: 30%;
+
+  @include respond(tab-land) {
+    top: 20%;
+    right: 30%;
+  }
+
+  @include respond(phone) {
+    top: 26%;
+    right: 24%;
+  }
+
+  &__box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0.2rem 0.4rem;
+
+    &:hover {
+      background-color: var(--color-black);
+      color: var(--color-white);
+      cursor: pointer;
+    }
+  }
+
+  &__text {
+    font-size: 2.2rem;
+    @include respond(phone) {
+      font-size: 1.6rem;
+    }
+
+    &--1,
+    &--2 {
+      color: var(--color-red);
+    }
+  }
+}
+
 .mode {
   display: flex;
   align-items: center;
@@ -312,52 +365,4 @@ body {
 
 .u-display-hide {
   display: none;
-}
-
-.symbol {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 2rem;
-  max-width: 100rem;
-  margin: 0 auto;
-  border: 2.6px solid var(--color-white);
-  border-radius: 11px;
-  padding: 1rem 2rem;
-  position: absolute;
-  background-color: var(--color-white);
-  top: 14%;
-  right: 30%;
-
-  @include respond(phone) {
-    top: 26%;
-    right: 10%;
-  }
-
-  &__box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    padding: 0.2rem 0.4rem;
-
-    &:hover {
-      background-color: var(--color-black);
-      color: var(--color-white);
-      cursor: pointer;
-    }
-  }
-
-  &__text {
-    font-size: 2.2rem;
-    @include respond(phone) {
-      font-size: 1.6rem;
-    }
-
-    &--1,
-    &--2 {
-      color: var(--color-red);
-    }
-  }
 }
