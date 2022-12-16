@@ -36,7 +36,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  // height: 100vh;
+  height: 100vh;
 
   @include respond(tab-land) {
     max-width: 100;
@@ -50,7 +50,6 @@ body {
   flex-direction: column;
   gap: 4rem;
   max-width: 120rem;
-  // padding: 6rem;
   margin: 3.4rem 0;
 }
 
@@ -130,16 +129,16 @@ body {
   background-color: var(--color-white);
 
   position: absolute;
-  top: 18%;
-  right: 30%;
+  top: 14%;
+  right: 32%;
 
   @include respond(tab-land) {
-    top: 14%;
+    top: 12%;
     right: 26%;
   }
 
   @include respond(phone) {
-    top: 14%;
+    top: 10%;
     right: 22%;
   }
 

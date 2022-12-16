@@ -29,7 +29,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column; }
+  flex-direction: column;
+  height: 100vh; }
   @media (max-width: 75em) {
     body {
       max-width: 100; } }
@@ -96,15 +97,15 @@ body {
   padding: 1rem 2rem;
   background-color: var(--color-white);
   position: absolute;
-  top: 18%;
-  right: 30%; }
+  top: 14%;
+  right: 32%; }
   @media (max-width: 75em) {
     .symbol {
-      top: 14%;
+      top: 12%;
       right: 26%; } }
   @media (max-width: 37.5em) {
     .symbol {
-      top: 14%;
+      top: 10%;
       right: 22%; } }
   .symbol__box {
     display: flex;
