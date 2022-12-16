@@ -105,8 +105,8 @@ body {
       right: 26%; } }
   @media (max-width: 37.5em) {
     .symbol {
-      top: 10%;
-      right: 22%; } }
+      top: 28%;
+      right: 24%; } }
   .symbol__box {
     display: flex;
     align-items: center;
