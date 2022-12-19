@@ -6,7 +6,7 @@
 const headText = document.querySelector('.nav__heading');
 const backOption = document.querySelector('.nav__back');
 const resetOption = document.querySelector('.nav__reset');
-const symbolsNav = document.querySelector('.nav__symbols');
+const symbolsNav = document.querySelector('.nav__symbol-btn');
 const symbols = document.querySelector('.symbol');
 const allSymbol = document.querySelectorAll('.symbol__box');
 const symbolOnes = document.querySelectorAll('.symbol__text--1');
@@ -41,6 +41,7 @@ let winColor = '#a9e34b';
 let boardColor = '#fff';
 let blackColor = '#000';
 let isGameOver = false;
+let singlePlayerOver = true;
 let gameMode = false;
 
 let playerOne = 'x';
@@ -69,6 +70,7 @@ const resetGame = function (allConditions) {
   playedBoxes = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   activePlayer = 0;
   gamePlayedFor = 0;
+  singlePlayerOver = true;
   setTimeout(function () {
     boardText.forEach((textElement, index) => {
       textElement.style.color = blackColor;
@@ -80,26 +82,8 @@ const resetGame = function (allConditions) {
   }, 400);
 };
 
-// Check if random number is valid.
-// const checkRandomNumber = function (randomNumber) {
-//   boardText.forEach((box, index) => {
-//     if (
-//       (box.textContent === playerTwo || box.textContent === playerOne) &&
-//       index === randomNumber
-//     )
-//       return 0;
-//     else return 1;
-//   });
-// };
-
-// Check the position.
-const checkPosition = function (boxOne, indexOne, indexTwo) {
-  if (
-    playedBoxes[indexOne] &&
-    !playedBoxes[indexTwo] &&
-    boxOne.textContent === playerOne
-  )
-    return 1;
+const checkPosition = function (boxOne, index) {
+  if (!playedBoxes[index] && boxOne.textContent === playerOne) return 1;
   return 0;
 };
 
@@ -115,6 +99,10 @@ allSymbol.forEach((el, index) => {
   });
 });
 
+const setWinColor = function (board) {
+  board.forEach(box => (box.style.color = winColor));
+};
+
 /********************************************************************/
 // GAME MECHANICS
 
@@ -125,56 +113,56 @@ const gameOver = function () {
     board0.textContent === board2.textContent &&
     !isGameOver
   ) {
-    board0.style.color = board1.style.color = board2.style.color = winColor;
+    setWinColor([board0, board1, board2]);
     resetGame(1);
   } else if (
     board3.textContent === board4.textContent &&
     board3.textContent === board5.textContent &&
     !isGameOver
   ) {
-    board3.style.color = board4.style.color = board5.style.color = winColor;
+    setWinColor([board3, board4, board5]);
     resetGame(1);
   } else if (
     board6.textContent === board7.textContent &&
     board6.textContent === board8.textContent &&
     !isGameOver
   ) {
-    board6.style.color = board7.style.color = board8.style.color = winColor;
+    setWinColor([board6, board7, board8]);
     resetGame(1);
   } else if (
     board0.textContent === board3.textContent &&
     board0.textContent === board6.textContent &&
     !isGameOver
   ) {
-    board0.style.color = board3.style.color = board6.style.color = winColor;
+    setWinColor([board0, board3, board6]);
     resetGame(1);
   } else if (
     board1.textContent === board4.textContent &&
     board1.textContent === board7.textContent &&
     !isGameOver
   ) {
-    board1.style.color = board4.style.color = board7.style.color = winColor;
+    setWinColor([board1, board4, board7]);
     resetGame(1);
   } else if (
     board2.textContent === board5.textContent &&
     board2.textContent === board8.textContent &&
     !isGameOver
   ) {
-    board2.style.color = board5.style.color = board8.style.color = winColor;
+    setWinColor([board2, board5, board8]);
     resetGame(1);
   } else if (
     board0.textContent === board4.textContent &&
     board0.textContent === board8.textContent &&
     !isGameOver
   ) {
-    board0.style.color = board4.style.color = board8.style.color = winColor;
+    setWinColor([board0, board4, board8]);
     resetGame(1);
   } else if (
     board2.textContent === board4.textContent &&
     board2.textContent === board6.textContent &&
     !isGameOver
   ) {
-    board2.style.color = board4.style.color = board6.style.color = winColor;
+    setWinColor([board2, board4, board6]);
     resetGame(1);
   } else if (gamePlayedFor === 9) {
     resetGame(0);
@@ -196,242 +184,233 @@ const randInt = (min, max) => Math.floor(Math.random() * (max - min) + 1) + min;
 
 const playComp = function (positionPlayed) {
   if (positionPlayed === 0 && !isGameOver) {
-    if (checkPosition(board1, 1, 2)) {
+    if (checkPosition(board1, 2)) {
       // The position played 0 and 1
       // The position to be played 2
       playGame(board2, 2);
-    } else if (checkPosition(board2, 2, 1)) {
+    } else if (checkPosition(board2, 1)) {
       // The position played 0 and 2
       // The position to be played 1
       playGame(board1, 1);
-    } else if (checkPosition(board3, 3, 6)) {
+    } else if (checkPosition(board3, 6)) {
       // The position played 0 and 3
       // The position to be played 6
       playGame(board6, 6);
-    } else if (checkPosition(board4, 4, 8)) {
+    } else if (checkPosition(board4, 8)) {
       // The position played 0 and 4
       // The position to be played 8
       playGame(board8, 8);
-    } else if (checkPosition(board6, 6, 8)) {
+    } else if (checkPosition(board6, 8)) {
       // The position played 0 and 6
       // The position to be played 3
       playGame(board8, 8);
-    } else if (checkPosition(board8, 8, 4)) {
+    } else if (checkPosition(board8, 4)) {
       // The position played 0 and 8
       // The position to be played 4
       playGame(board4, 4);
     } else {
-      playRandom(positionPlayed);
+      playRandom();
     }
-    console.log(playedBoxes, 'at 0');
   } else if (positionPlayed === 1 && !isGameOver) {
-    if (checkPosition(board0, 0, 2)) {
+    if (checkPosition(board0, 2)) {
       // The position played 1 and 0
       // The position to be played 2
       playGame(board2, 2);
-    } else if (checkPosition(board2, 2, 0)) {
+    } else if (checkPosition(board2, 0)) {
       // The position played 1 and 2
       // The position to be played 0
       playGame(board0, 0);
-    } else if (checkPosition(board4, 4, 7)) {
+    } else if (checkPosition(board4, 7)) {
       // The position played 1 and 4
       // The position to be played 7
       playGame(board7, 7);
-    } else if (checkPosition(board7, 7, 4)) {
+    } else if (checkPosition(board7, 4)) {
       // The position played 1 and 7
       // The position to be played 4
       playGame(board4, 4);
     } else {
-      playRandom(positionPlayed);
+      playRandom();
     }
-    console.log(playedBoxes, 'at 1');
   } else if (positionPlayed === 2 && !isGameOver) {
-    if (checkPosition(board0, 0, 1)) {
+    if (checkPosition(board0, 1)) {
       // The position played 2 and 0
       // The position to be played 1
       playGame(board1, 1);
-    } else if (checkPosition(board1, 1, 0)) {
+    } else if (checkPosition(board1, 0)) {
       // The position played 2 and 1
       // The position to be played 0
       playGame(board0, 0);
-    } else if (checkPosition(board4, 4, 6)) {
+    } else if (checkPosition(board4, 6)) {
       // The position played 2 and 4
       // The position to be played 6
       playGame(board6, 6);
-    } else if (checkPosition(board5, 5, 8)) {
+    } else if (checkPosition(board5, 8)) {
       // The position played 2 and 5
       // The position to be played 8
       playGame(board8, 8);
-    } else if (checkPosition(board6, 6, 4)) {
+    } else if (checkPosition(board6, 4)) {
       // The position played 1 and 6
       // The position to be played 4
       playGame(board4, 4);
-    } else if (checkPosition(board8, 8, 5)) {
+    } else if (checkPosition(board8, 5)) {
       // The position played 2 and 8
       // The position to be played 5
       playGame(board5, 5);
     } else {
-      playRandom(positionPlayed);
+      playRandom();
     }
-    console.log(playedBoxes, 'at 2');
   } else if (positionPlayed === 3 && !isGameOver) {
-    if (checkPosition(board0, 0, 6)) {
+    if (checkPosition(board0, 6)) {
       // The position played 3 and 0
       // The position to be played 6
       playGame(board6, 6);
-    } else if (checkPosition(board4, 4, 5)) {
+    } else if (checkPosition(board4, 5)) {
       // The position played 3 and 4
       // The position to be played 5
       playGame(board5, 5);
-    } else if (checkPosition(board5, 5, 4)) {
+    } else if (checkPosition(board5, 4)) {
       // The position played 3 and 5
       // The position to be played 4
       playGame(board5, 4);
-    } else if (checkPosition(board6, 6, 0)) {
+    } else if (checkPosition(board6, 0)) {
       // The position played 3 and 6
       // The position to be played 0
       playGame(board0, 0);
     } else {
-      playRandom(positionPlayed);
+      playRandom();
     }
-    console.log(playedBoxes, 'at 3');
   } else if (positionPlayed === 4 && !isGameOver) {
-    if (checkPosition(board0, 0, 8)) {
+    if (checkPosition(board0, 8)) {
       // The position played 4 and 0
       // The position to be played 8
       playGame(board8, 8);
-    } else if (checkPosition(board1, 1, 7)) {
+    } else if (checkPosition(board1, 7)) {
       // The position played 4 and 1
       // The position to be played 7
       playGame(board7, 7);
-    } else if (checkPosition(board2, 2, 6)) {
+    } else if (checkPosition(board2, 6)) {
       // The position played 4 and 2
       // The position to be played 6
       playGame(board6, 6);
-    } else if (checkPosition(board3, 3, 5)) {
+    } else if (checkPosition(board3, 5)) {
       // The position played 4 and 3
       // The position to be played 5
       playGame(board5, 5);
-    } else if (checkPosition(board5, 5, 3)) {
+    } else if (checkPosition(board5, 3)) {
       // The position played 4 and 5
       // The position to be played 3
       playGame(board3, 3);
-    } else if (checkPosition(board6, 6, 2)) {
+    } else if (checkPosition(board6, 2)) {
       // The position played 4 and 6
       // The position to be played 2
       playGame(board2, 2);
-    } else if (checkPosition(board7, 7, 1)) {
+    } else if (checkPosition(board7, 1)) {
       // The position played 4 and 7
       // The position to be played 1
       playGame(board1, 1);
-    } else if (checkPosition(board8, 8, 0)) {
+    } else if (checkPosition(board8, 0)) {
       // The position played 4 and 8
       // The position to be played 0
       playGame(board0, 0);
     } else {
-      playRandom(positionPlayed);
+      playRandom();
     }
-    console.log(playedBoxes, 'at 4');
   } else if (positionPlayed === 5 && !isGameOver) {
-    if (checkPosition(board2, 2, 8)) {
+    if (checkPosition(board2, 8)) {
       // The position played 5 and 2
       // The position to be played 8
       playGame(board8, 8);
-    } else if (checkPosition(board3, 3, 4)) {
+    } else if (checkPosition(board3, 4)) {
       // The position played 5 and 3
       // The position to be played 4
       playGame(board4, 4);
-    } else if (checkPosition(board4, 4, 3)) {
+    } else if (checkPosition(board4, 3)) {
       // The position played 5 and 4
       // The position to be played 3
       playGame(board3, 3);
-    } else if (checkPosition(board8, 8, 2)) {
+    } else if (checkPosition(board8, 2)) {
       // The position played 5 and 8
       // The position to be played 2
       playGame(board2, 2);
     } else {
-      playRandom(positionPlayed);
+      playRandom();
     }
-    console.log(playedBoxes, 'at 5');
   } else if (positionPlayed === 6 && !isGameOver) {
-    if (checkPosition(board0, 0, 3)) {
+    if (checkPosition(board0, 3)) {
       // The position played 6 and 0
       // The position to be played 3
       playGame(board3, 3);
-    } else if (checkPosition(board2, 2, 4)) {
+    } else if (checkPosition(board2, 4)) {
       // The position played 6 and 2
       // The position to be played 4
       playGame(board4, 4);
-    } else if (checkPosition(board3, 3, 0)) {
+    } else if (checkPosition(board3, 0)) {
       // The position played 6 and 3
       // The position to be played 0
       playGame(board0, 0);
-    } else if (checkPosition(board4, 4, 2)) {
+    } else if (checkPosition(board4, 2)) {
       // The position played 6 and 4
       // The position to be played 2
       playGame(board2, 2);
-    } else if (checkPosition(board7, 7, 8)) {
+    } else if (checkPosition(board7, 8)) {
       // The position played 6 and 7
       // The position to be played 8
       playGame(board8, 8);
-    } else if (checkPosition(board8, 8, 7)) {
+    } else if (checkPosition(board8, 7)) {
       // The position played 6 and 8
       // The position to be played 7
       playGame(board7, 7);
     } else {
-      playRandom(positionPlayed);
+      playRandom();
     }
-    console.log(playedBoxes, 'at 6');
   } else if (positionPlayed === 7 && !isGameOver) {
-    if (checkPosition(board1, 1, 4)) {
+    if (checkPosition(board1, 4)) {
       // The position played 7 and 1
       // The position to be played 4
       playGame(board4, 4);
-    } else if (checkPosition(board4, 4, 1)) {
+    } else if (checkPosition(board4, 1)) {
       // The position played 7 and 4
       // The position to be played 1
       playGame(board1, 1);
-    } else if (checkPosition(board6, 6, 8)) {
+    } else if (checkPosition(board6, 8)) {
       // The position played 7 and 6
       // The position to be played 8
       playGame(board8, 8);
-    } else if (checkPosition(board8, 8, 6)) {
+    } else if (checkPosition(board8, 6)) {
       // The position played 7 and 8
       // The position to be played 6
       playGame(board6, 6);
     } else {
-      playRandom(positionPlayed);
+      playRandom();
     }
-    console.log(playedBoxes, 'at 7');
   } else if (positionPlayed === 8 && !isGameOver) {
-    if (checkPosition(board0, 0, 4)) {
+    if (checkPosition(board0, 4)) {
       // The position played 8 and 0
       // The position to be played 4
       playGame(board4, 4);
-    } else if (checkPosition(board2, 2, 5)) {
+    } else if (checkPosition(board2, 5)) {
       // The position played 8 and 2
       // The position to be played 5
       playGame(board5, 5);
-    } else if (checkPosition(board4, 4, 0)) {
+    } else if (checkPosition(board4, 0)) {
       // The position played 8 and 4
       // The position to be played 0
       playGame(board0, 0);
-    } else if (checkPosition(board5, 5, 2)) {
+    } else if (checkPosition(board5, 2)) {
       // The position played 8 and 5
       // The position to be played 2
       playGame(board2, 2);
-    } else if (checkPosition(board6, 6, 7)) {
+    } else if (checkPosition(board6, 7)) {
       // The position played 8 and 6
       // The position to be played 7
       playGame(board7, 7);
-    } else if (checkPosition(board7, 7, 6)) {
+    } else if (checkPosition(board7, 6)) {
       // The position played 8 and 7
       // The position to be played 6
       playGame(board6, 6);
     } else {
-      playRandom(positionPlayed);
+      playRandom();
     }
-    console.log(playedBoxes, 'at 8');
   }
 };
 
@@ -445,26 +424,18 @@ const singlePlayerMode = function () {
   boardText.forEach((box, index) => {
     box.addEventListener('click', function () {
       if (!playedBoxes[index] && !isGameOver && !gameMode) {
+        if (gamePlayedFor === 0) singlePlayerOver = false;
         playGame(box, index);
-        if (!isGameOver)
-          setTimeout(function () {
-            playComp(index);
-          }, 180);
+        if (!singlePlayerOver) playComp(index);
       }
     });
   });
 };
 
 // If no position is possible for computer.
-const playRandom = function (positionPlayed) {
+const playRandom = function () {
   let randomNumber = randInt(0, 8);
-  while (
-    randomNumber === positionPlayed ||
-    playedBoxes[randomNumber] === 1
-    // ||
-    // checkRandomNumber(randomNumber)
-  )
-    randomNumber = randInt(0, 8);
+  while (playedBoxes[randomNumber] === 1) randomNumber = randInt(0, 8);
   boardText.forEach((box, index) => {
     if (randomNumber === index) playGame(box, index);
   });

@@ -79,13 +79,11 @@ body {
     @media (max-width: 37.5em) {
       .nav__heading {
         font-size: 4rem; } }
-  .nav__symbols {
-    display: inline-block;
-    position: relative; }
-    .nav__symbols:link, .nav__symbols:visited {
-      font-size: 2rem;
-      color: var(--color-white);
-      text-decoration: none; }
+  .nav__symbol-btn {
+    position: relative;
+    font-size: 2rem;
+    color: var(--color-white);
+    cursor: pointer; }
 
 .symbol {
   display: flex;
@@ -107,13 +105,10 @@ body {
     .symbol {
       top: 28%;
       right: 24%; } }
-  .symbol__box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
+  .symbol__item {
+    list-style: none;
     padding: 0.2rem 0.4rem; }
-    .symbol__box:hover {
+    .symbol__item:hover {
       background-color: var(--color-black);
       color: var(--color-white);
       cursor: pointer; }
