@@ -6,10 +6,14 @@
 
 ## GamePlay
 
-![GameImage](imgs/tictactoe.gif)
+![GameImage](/imgs/tictactoe.gif)
 
-![GameImage](imgs/gamehome.png)
+![GameImage](/imgs/gamehome.png)
 
-![GameImage](imgs/gameplay-1.png)
+![GameImage](/imgs/gameplay-1.png)
 
-![GameImage](imgs/gameplay-2.png)
+![GameImage](/imgs/gameplay-2.png)
+
+not posii = 1
+
+not posii = 1

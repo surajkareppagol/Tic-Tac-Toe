@@ -204,6 +204,7 @@ body {
     margin-top: 4rem;
     padding: 1rem;
     transition: all 0.3s;
+    border-radius: 11px;
 
     @include respond(tab-land) {
       font-size: 4.2rem;

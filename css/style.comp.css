@@ -152,7 +152,8 @@ body {
     font-size: 4rem;
     margin-top: 4rem;
     padding: 1rem;
-    transition: all 0.3s; }
+    transition: all 0.3s;
+    border-radius: 11px; }
     @media (max-width: 75em) {
       .mode__btn {
         font-size: 4.2rem; } }
