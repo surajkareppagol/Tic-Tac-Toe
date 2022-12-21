@@ -378,7 +378,7 @@ const computerPlays = function (positionPlayed) {
         // The position played 0 and 4
         // The position to be played 8
         playAt(board8, 8);
-      } else if (isPositionValid(board6, 8)) {
+      } else if (isPositionValid(board6, 3)) {
         // The position played 0 and 6
         // The position to be played 3
         playAt(board8, 8);
