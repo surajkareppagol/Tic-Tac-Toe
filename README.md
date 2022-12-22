@@ -12,3 +12,4 @@
 
 ![GameImage](/imgs/gameplay-2.png)
 
+![GameImage](/imgs/gameplay-3.png)

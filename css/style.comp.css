@@ -68,6 +68,40 @@ body {
     @media (max-width: 37.5em) {
       .nav__link {
         font-size: 3.2rem; } }
+  .nav .blah {
+    position: relative; }
+  .nav__symbol {
+    width: 200%;
+    position: absolute;
+    top: 240%;
+    right: -50%; }
+    .nav__symbol--link:link, .nav__symbol--link:visited {
+      color: var(--color-white);
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 2.4rem; }
+    .nav__symbol--ul {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 2rem;
+      background-color: var(--color-white);
+      padding: 1rem 2rem;
+      border-radius: 6px; }
+    .nav__symbol--item {
+      list-style: none;
+      cursor: pointer; }
+      .nav__symbol--item:hover p {
+        background-color: var(--color-black);
+        color: var(--color-white); }
+    .nav__symbol--type {
+      color: var(--color-black);
+      font-size: 2rem;
+      border-radius: 6px;
+      padding: 0.4rem 2rem; }
+      .nav__symbol--type--1, .nav__symbol--type--2 {
+        color: var(--color-red); }
   .nav__heading {
     color: var(--color-white);
     font-size: 6rem;

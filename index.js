@@ -4,6 +4,14 @@ const headText = document.querySelector('.nav__heading');
 const backOption = document.querySelector('.nav__back');
 const resetOption = document.querySelector('.nav__reset');
 
+const symbolOption = document.querySelector('.nav__symbol--link');
+const symbolBox = document.querySelector('.nav__symbol');
+const symbolUlBox = document.querySelector('.nav__symbol--ul');
+
+const allSymbols = document.querySelectorAll('.nav__symbol--item');
+const playerOneCharacters = document.querySelectorAll('.nav__symbol--type--1');
+const playerTwoCharacters = document.querySelectorAll('.nav__symbol--type--2');
+
 const optionBox = document.querySelector('.mode');
 const singlePlayerButton = document.querySelector('.mode__single-player');
 const multiPlayerButton = document.querySelector('.mode__multi-player');
@@ -40,7 +48,14 @@ let playerTwoCharacter = 'o';
 const winYellow = '#a9e34b';
 const playWhite = '#fff';
 const playBlack = '#000';
-const showComponents = [board, backOption, resetOption, optionBox, headText];
+const showComponents = [
+  board,
+  backOption,
+  resetOption,
+  optionBox,
+  headText,
+  symbolOption,
+];
 
 /************************************************/
 /* Utility Functions */
@@ -546,6 +561,8 @@ backOption.addEventListener('click', function (e) {
   showContent(showComponents);
   scorePlayerOne = 0;
   scorePlayerTwo = 0;
+  playerOneCharacter = 'x';
+  playerTwoCharacter = 'o';
   resetGameConditions(0);
 });
 
@@ -556,6 +573,25 @@ resetOption.addEventListener('click', function (e) {
   scorePlayerTwo = 0;
   resetGameConditions(0);
 });
+
+// Show symbols.
+symbolOption.addEventListener('click', function (e) {
+  e.preventDefault();
+  symbolBox.classList.toggle('u-display-hide');
+});
+
+// Select a symbol
+allSymbols.forEach((symbol, index) => {
+  symbol.addEventListener('click', function () {
+    playerOneCharacter = playerOneCharacters[index].textContent;
+    playerTwoCharacter = playerTwoCharacters[index].textContent;
+    symbolBox.classList.toggle('u-display-hide');
+  });
+});
+
+// const selectCharacter = function () {
+
+// };
 
 /************************************************/
 /* Game Modes */

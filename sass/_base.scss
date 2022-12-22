@@ -90,6 +90,61 @@ body {
     }
   }
 
+  .blah {
+    position: relative;
+  }
+
+  &__symbol {
+    width: 200%;
+    position: absolute;
+    top: 240%;
+    right: -50%;
+
+    &--link {
+      &:link,
+      &:visited {
+        color: var(--color-white);
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 2.4rem;
+      }
+    }
+
+    &--ul {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 2rem;
+
+      background-color: var(--color-white);
+      padding: 1rem 2rem;
+      border-radius: 6px;
+    }
+
+    &--item {
+      list-style: none;
+      cursor: pointer;
+
+      &:hover p {
+        background-color: var(--color-black);
+        color: var(--color-white);
+      }
+    }
+
+    &--type {
+      color: var(--color-black);
+      font-size: 2rem;
+      border-radius: 6px;
+      padding: 0.4rem 2rem;
+
+      &--1,
+      &--2 {
+        color: var(--color-red);
+      }
+    }
+  }
+
   &__heading {
     color: var(--color-white);
     font-size: 6rem;
