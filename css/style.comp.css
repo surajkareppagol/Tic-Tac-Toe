@@ -79,46 +79,6 @@ body {
     @media (max-width: 37.5em) {
       .nav__heading {
         font-size: 4rem; } }
-  .nav__symbol-btn {
-    position: relative;
-    font-size: 2rem;
-    color: var(--color-white);
-    cursor: pointer; }
-
-.symbol {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 2rem;
-  border: 2.6px solid var(--color-white);
-  border-radius: 11px;
-  padding: 1rem 2rem;
-  background-color: var(--color-white);
-  position: absolute;
-  top: 14%;
-  right: 32%; }
-  @media (max-width: 75em) {
-    .symbol {
-      top: 12%;
-      right: 26%; } }
-  @media (max-width: 37.5em) {
-    .symbol {
-      top: 28%;
-      right: 24%; } }
-  .symbol__item {
-    list-style: none;
-    padding: 0.2rem 0.4rem; }
-    .symbol__item:hover {
-      background-color: var(--color-black);
-      color: var(--color-white);
-      cursor: pointer; }
-  .symbol__text {
-    font-size: 2.2rem; }
-    @media (max-width: 37.5em) {
-      .symbol__text {
-        font-size: 1.6rem; } }
-    .symbol__text--1, .symbol__text--2 {
-      color: var(--color-red); }
 
 .mode {
   display: flex;

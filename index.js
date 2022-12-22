@@ -3,11 +3,6 @@
 const headText = document.querySelector('.nav__heading');
 const backOption = document.querySelector('.nav__back');
 const resetOption = document.querySelector('.nav__reset');
-const symbolsNav = document.querySelector('.nav__symbol-btn');
-const symbols = document.querySelector('.symbol');
-const allSymbol = document.querySelectorAll('.symbol__box');
-const symbolOnes = document.querySelectorAll('.symbol__text--1');
-const symbolTwos = document.querySelectorAll('.symbol__text--2');
 
 const optionBox = document.querySelector('.mode');
 const singlePlayerButton = document.querySelector('.mode__single-player');
@@ -45,14 +40,7 @@ let playerTwoCharacter = 'o';
 const winYellow = '#a9e34b';
 const playWhite = '#fff';
 const playBlack = '#000';
-const showComponents = [
-  board,
-  backOption,
-  resetOption,
-  optionBox,
-  headText,
-  symbolsNav,
-];
+const showComponents = [board, backOption, resetOption, optionBox, headText];
 
 /************************************************/
 /* Utility Functions */
@@ -94,6 +82,16 @@ const setWinColor = function (board) {
 const generateRandomNumber = (min, max) =>
   Math.floor(Math.random() * (max - min) + 1) + min;
 
+const canComputerWinConditionValid = function (boardOne, boardTwo, boardThree) {
+  if (
+    boardOne.textContent === playerTwoCharacter &&
+    boardTwo.textContent === playerTwoCharacter &&
+    boardThree.textContent !== playerOneCharacter
+  )
+    return 1;
+  return 0;
+};
+
 /************************************************/
 /* Game Mechanics */
 /************************************************/
@@ -101,176 +99,80 @@ const generateRandomNumber = (min, max) =>
 // Check if there is a winning condition for computer.
 const canComputerWin = function () {
   // Check horizontal
-  if (
-    board0.textContent === playerTwoCharacter &&
-    board1.textContent === playerTwoCharacter &&
-    board2.textContent !== playerOneCharacter
-  ) {
+  if (canComputerWinConditionValid(board0, board1, board2)) {
     computerWinNotPossible = 0;
     playAt(board2, 2);
-  } else if (
-    board1.textContent === playerTwoCharacter &&
-    board2.textContent === playerTwoCharacter &&
-    board0.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board1, board2, board0)) {
     computerWinNotPossible = 0;
     playAt(board0, 0);
-  } else if (
-    board0.textContent === playerTwoCharacter &&
-    board2.textContent === playerTwoCharacter &&
-    board1.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board0, board2, board1)) {
     computerWinNotPossible = 0;
     playAt(board1, 1);
-  } else if (
-    board3.textContent === playerTwoCharacter &&
-    board4.textContent === playerTwoCharacter &&
-    board5.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board3, board4, board5)) {
     computerWinNotPossible = 0;
     playAt(board5, 5);
-  } else if (
-    board4.textContent === playerTwoCharacter &&
-    board5.textContent === playerTwoCharacter &&
-    board3.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board4, board5, board3)) {
     computerWinNotPossible = 0;
     playAt(board3, 3);
-  } else if (
-    board3.textContent === playerTwoCharacter &&
-    board5.textContent === playerTwoCharacter &&
-    board4.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board3, board5, board4)) {
     computerWinNotPossible = 0;
     playAt(board4, 4);
-  } else if (
-    board6.textContent === playerTwoCharacter &&
-    board7.textContent === playerTwoCharacter &&
-    board8.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board6, board7, board8)) {
     computerWinNotPossible = 0;
     playAt(board8, 8);
-  } else if (
-    board7.textContent === playerTwoCharacter &&
-    board8.textContent === playerTwoCharacter &&
-    board6.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board7, board8, board6)) {
     computerWinNotPossible = 0;
     playAt(board6, 6);
-  } else if (
-    board6.textContent === playerTwoCharacter &&
-    board8.textContent === playerTwoCharacter &&
-    board7.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board6, board8, board7)) {
     computerWinNotPossible = 0;
     playAt(board7, 7);
   }
   // Check vertical
-  else if (
-    board0.textContent === playerTwoCharacter &&
-    board3.textContent === playerTwoCharacter &&
-    board6.textContent !== playerOneCharacter
-  ) {
+  else if (canComputerWinConditionValid(board0, board3, board6)) {
     computerWinNotPossible = 0;
     playAt(board6, 6);
-  } else if (
-    board0.textContent === playerTwoCharacter &&
-    board6.textContent === playerTwoCharacter &&
-    board3.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board0, board6, board3)) {
     computerWinNotPossible = 0;
     playAt(board3, 3);
-  } else if (
-    board3.textContent === playerTwoCharacter &&
-    board6.textContent === playerTwoCharacter &&
-    board0.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board3, board6, board0)) {
     computerWinNotPossible = 0;
     playAt(board0, 0);
-  } else if (
-    board1.textContent === playerTwoCharacter &&
-    board7.textContent === playerTwoCharacter &&
-    board4.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board1, board7, board4)) {
     computerWinNotPossible = 0;
     playAt(board4, 4);
-  } else if (
-    board1.textContent === playerTwoCharacter &&
-    board4.textContent === playerTwoCharacter &&
-    board7.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board1, board4, board7)) {
     computerWinNotPossible = 0;
     playAt(board7, 7);
-  } else if (
-    board4.textContent === playerTwoCharacter &&
-    board7.textContent === playerTwoCharacter &&
-    board1.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board4, board7, board1)) {
     computerWinNotPossible = 0;
     playAt(board1, 1);
-  } else if (
-    board2.textContent === playerTwoCharacter &&
-    board8.textContent === playerTwoCharacter &&
-    board5.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board2, board8, board5)) {
     computerWinNotPossible = 0;
     playAt(board5, 5);
-  } else if (
-    board2.textContent === playerTwoCharacter &&
-    board5.textContent === playerTwoCharacter &&
-    board8.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board2, board5, board8)) {
     computerWinNotPossible = 0;
     playAt(board8, 8);
-  } else if (
-    board5.textContent === playerTwoCharacter &&
-    board8.textContent === playerTwoCharacter &&
-    board2.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board5, board8, board2)) {
     computerWinNotPossible = 0;
     playAt(board2, 2);
   }
   // Check diagonal
-  else if (
-    board0.textContent === playerTwoCharacter &&
-    board8.textContent === playerTwoCharacter &&
-    board4.textContent !== playerOneCharacter
-  ) {
+  else if (canComputerWinConditionValid(board0, board8, board4)) {
     computerWinNotPossible = 0;
     playAt(board4, 4);
-  } else if (
-    board0.textContent === playerTwoCharacter &&
-    board4.textContent === playerTwoCharacter &&
-    board8.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board0, board4, board8)) {
     computerWinNotPossible = 0;
     playAt(board8, 8);
-  } else if (
-    board4.textContent === playerTwoCharacter &&
-    board8.textContent === playerTwoCharacter &&
-    board0.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board4, board8, board0)) {
     computerWinNotPossible = 0;
     playAt(board0, 0);
-  } else if (
-    board2.textContent === playerTwoCharacter &&
-    board4.textContent === playerTwoCharacter &&
-    board6.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board2, board4, board6)) {
     computerWinNotPossible = 0;
     playAt(board6, 6);
-  } else if (
-    board2.textContent === playerTwoCharacter &&
-    board6.textContent === playerTwoCharacter &&
-    board4.textContent !== playerOneCharacter
-  ) {
+  } else if (canComputerWinConditionValid(board2, board6, board4)) {
     computerWinNotPossible = 0;
     playAt(board4, 4);
-  } else if (
-    board4.textContent === playerTwoCharacter &&
-    board6.textContent === playerTwoCharacter &&
-    board2.textContent !== playerOneCharacter
-  )
+  } else if (canComputerWinConditionValid(board4, board6, board2))
     playAt(board2, 2);
   else computerWinNotPossible = 1;
 };
@@ -637,20 +539,6 @@ const multiPlayerMode = function () {
 /************************************************/
 /* Event Listeners */
 /************************************************/
-
-// Toggle symbol nav.
-symbolsNav.addEventListener('click', function () {
-  symbols.classList.toggle('u-display-hide');
-});
-
-// Choose symbol and toggle the nav.
-allSymbol.forEach((el, index) => {
-  el.addEventListener('click', function () {
-    playerOneCharacter = symbolOnes[index].textContent;
-    playerTwoCharacter = symbolTwos[index].textContent;
-    symbols.classList.toggle('u-display-hide');
-  });
-});
 
 // Go Back - option.
 backOption.addEventListener('click', function (e) {
