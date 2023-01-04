@@ -38,6 +38,8 @@ body {
   flex-direction: column;
   height: 100vh;
 
+  position: relative;
+
   @include respond(tab-land) {
     max-width: 100;
   }
@@ -355,4 +357,21 @@ body {
 
 .u-display-hide {
   display: none;
+}
+
+.light-dark-mode {
+  &__icon {
+    width: 2.4rem;
+    height: 2.4rem;
+    color: var(--color-black);
+
+    position: absolute;
+    top: 4%;
+    left: 4%;
+
+    background-color: var(--color-white);
+    padding: 0.6rem;
+    border-radius: 100%;
+    cursor: pointer;
+  }
 }

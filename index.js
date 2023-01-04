@@ -8,6 +8,30 @@ const symbolOption = document.querySelector('.nav__symbol--link');
 const symbolBox = document.querySelector('.nav__symbol');
 const symbolUlBox = document.querySelector('.nav__symbol--ul');
 
+const changeModeBtn = document.querySelector('.light-dark-mode');
+const lightBtn = document.querySelector('.light-dark-mode__light');
+const darkBtn = document.querySelector('.light-dark-mode__dark');
+
+// Change Color Mode
+const body = document.querySelector('body');
+const modeCard = document.querySelectorAll('.mode__card');
+const modeMode = document.querySelectorAll('.mode__mode');
+const modeBtn = document.querySelectorAll('.mode__btn');
+const scoreText = document.querySelectorAll('.score__text');
+const scoreIcon = document.querySelectorAll('.score__icon');
+const navSymbolUl = document.querySelector('.nav__symbol--ul');
+
+// Select Board
+const boardBoard0 = document.querySelector('.board__board--1');
+const boardBoard1 = document.querySelector('.board__board--2');
+const boardBoard2 = document.querySelector('.board__board--3');
+const boardBoard3 = document.querySelector('.board__board--4');
+const boardBoard4 = document.querySelector('.board__board--5');
+const boardBoard5 = document.querySelector('.board__board--6');
+const boardBoard6 = document.querySelector('.board__board--7');
+const boardBoard7 = document.querySelector('.board__board--8');
+const boardBoard8 = document.querySelector('.board__board--9');
+
 const allSymbols = document.querySelectorAll('.nav__symbol--item');
 const playerOneCharacters = document.querySelectorAll('.nav__symbol--type--1');
 const playerTwoCharacters = document.querySelectorAll('.nav__symbol--type--2');
@@ -45,6 +69,12 @@ let computerWinNotPossible = 1;
 let playerOneCharacter = 'x';
 let playerTwoCharacter = 'o';
 
+// Set 0 For Dark
+let colorState = 0;
+
+// Set 0 For Not Playing
+let gameState = 0;
+
 const winYellow = '#a9e34b';
 const playWhite = '#fff';
 const playBlack = '#000';
@@ -79,13 +109,15 @@ const resetGameConditions = function (fullReset) {
   singlePlayerOver = true;
   setTimeout(function () {
     boardText.forEach((textElement, index) => {
-      textElement.style.color = playBlack;
+      if (!colorState) textElement.style.color = playBlack;
+      else textElement.style.color = playWhite;
       textElement.textContent = index + 1;
     });
     player1.textContent = scorePlayerOne;
     player2.textContent = scorePlayerTwo;
     isGameOver = false;
   }, 400);
+  gameState = 0;
 };
 
 // Set winning color.
@@ -264,7 +296,8 @@ const isGameFinished = function () {
 
 // Play game common to both modes.
 const playAt = function (box, index) {
-  box.style.color = playWhite;
+  if (!colorState) box.style.color = playWhite;
+  else box.style.color = playBlack;
   box.textContent =
     activePlayer === 0 ? playerOneCharacter : playerTwoCharacter;
   activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
@@ -520,7 +553,10 @@ const singlePlayerMode = function () {
   boardText.forEach((box, index) => {
     box.addEventListener('click', function () {
       if (!playedBoxes[index] && !isGameOver && !gameMode) {
-        if (gamePlayedFor === 0) singlePlayerOver = false;
+        if (gamePlayedFor === 0) {
+          singlePlayerOver = false;
+          gameState = 1; // Playing
+        }
         playAt(box, index);
         if (!singlePlayerOver) computerPlays(index);
       }
@@ -546,7 +582,12 @@ const multiPlayerMode = function () {
   gameMode = true;
   boardText.forEach((box, index) => {
     box.addEventListener('click', function () {
-      if (!playedBoxes[index] && !isGameOver && gameMode) playAt(box, index);
+      if (!playedBoxes[index] && !isGameOver && gameMode) {
+        if (gamePlayedFor === 0) {
+          gameState = 1; // Playing
+        }
+        playAt(box, index);
+      }
     });
   });
 };
@@ -583,15 +624,13 @@ symbolOption.addEventListener('click', function (e) {
 // Select a symbol
 allSymbols.forEach((symbol, index) => {
   symbol.addEventListener('click', function () {
-    playerOneCharacter = playerOneCharacters[index].textContent;
-    playerTwoCharacter = playerTwoCharacters[index].textContent;
+    if (!gameState) {
+      playerOneCharacter = playerOneCharacters[index].textContent;
+      playerTwoCharacter = playerTwoCharacters[index].textContent;
+    }
     symbolBox.classList.toggle('u-display-hide');
   });
 });
-
-// const selectCharacter = function () {
-
-// };
 
 /************************************************/
 /* Game Modes */
@@ -602,3 +641,91 @@ singlePlayerButton.addEventListener('click', singlePlayerMode);
 
 // Multi player button - listen to event.
 multiPlayerButton.addEventListener('click', multiPlayerMode);
+
+/************************************************/
+/* Change Color Mode */
+/************************************************/
+
+const changeColorToBlack = items =>
+  items.forEach(el => (el.style.color = playBlack));
+
+const changeBackgroundColorToBlack = items =>
+  items.forEach(el => (el.style.backgroundColor = playBlack));
+
+const changeColorToWhite = items =>
+  items.forEach(el => (el.style.color = playWhite));
+
+const changeBackgroundColorToWhite = items =>
+  items.forEach(el => (el.style.backgroundColor = playWhite));
+
+const setBorder = () => {
+  boardBoard0.style.borderTop = '2px solid transparent';
+  boardBoard0.style.borderLeft = '2px solid transparent';
+  boardBoard1.style.borderTop = '2px solid transparent';
+  boardBoard2.style.borderTop = '2px solid transparent';
+  boardBoard2.style.borderRight = '2px solid transparent';
+  boardBoard3.style.borderLeft = '2px solid transparent';
+  boardBoard5.style.borderRight = '2px solid transparent';
+  boardBoard6.style.borderBottom = '2px solid transparent';
+  boardBoard6.style.borderLeft = '2px solid transparent';
+  boardBoard7.style.borderBottom = '2px solid transparent';
+  boardBoard8.style.borderBottom = '2px solid transparent';
+  boardBoard8.style.borderRight = '2px solid transparent';
+};
+
+const changeColorModeToLight = function () {
+  changeBackgroundColorToBlack([lightBtn, ...modeCard]);
+
+  changeBackgroundColorToWhite([body, ...modeBtn]);
+
+  changeColorToWhite([lightBtn, ...modeMode, ...boardText]);
+
+  changeColorToBlack([
+    headText,
+    backOption,
+    resetOption,
+    symbolOption,
+    ...modeBtn,
+    ...scoreText,
+    ...scoreIcon,
+  ]);
+
+  boards.forEach(el => (el.style.borderColor = '#000'));
+  navSymbolUl.style.border = '2px solid #000';
+
+  setBorder();
+};
+
+const changeColorModeToDark = function () {
+  changeBackgroundColorToBlack([body, ...modeBtn]);
+  changeBackgroundColorToWhite([lightBtn, ...modeCard]);
+  changeColorToBlack([lightBtn, ...modeMode, ...boardText]);
+  changeColorToWhite([
+    symbolOption,
+    headText,
+    backOption,
+    resetOption,
+    ...modeBtn,
+    ...scoreText,
+    ...scoreIcon,
+  ]);
+
+  boards.forEach(el => (el.style.borderColor = '#fff'));
+  navSymbolUl.style.border = '2px solid transparent';
+
+  setBorder();
+};
+
+changeModeBtn.addEventListener('click', function () {
+  if (!gameState) {
+    if (lightBtn.classList.contains('u-display-hide')) {
+      changeColorModeToLight();
+      colorState = 1;
+    } else {
+      changeColorModeToDark();
+      colorState = 0;
+    }
+    lightBtn.classList.toggle('u-display-hide');
+    darkBtn.classList.toggle('u-display-hide');
+  }
+});
