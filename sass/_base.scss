@@ -92,11 +92,11 @@ body {
     }
   }
 
-  .blah {
-    position: relative;
-  }
-
   &__symbol {
+    &--div {
+      position: relative;
+    }
+
     width: 200%;
     position: absolute;
     top: 240%;

@@ -20,6 +20,7 @@ const modeBtn = document.querySelectorAll('.mode__btn');
 const scoreText = document.querySelectorAll('.score__text');
 const scoreIcon = document.querySelectorAll('.score__icon');
 const navSymbolUl = document.querySelector('.nav__symbol--ul');
+const navSymbolDiv = document.querySelector('.nav__symbol--div');
 
 // Select Board
 const boardBoard0 = document.querySelector('.board__board--1');
@@ -85,6 +86,7 @@ const showComponents = [
   optionBox,
   headText,
   symbolOption,
+  navSymbolDiv,
 ];
 
 /************************************************/
@@ -600,6 +602,7 @@ const multiPlayerMode = function () {
 backOption.addEventListener('click', function (e) {
   e.preventDefault();
   showContent(showComponents);
+  // symbolUlBox.classList.add('u-display-hide');
   scorePlayerOne = 0;
   scorePlayerTwo = 0;
   playerOneCharacter = 'x';

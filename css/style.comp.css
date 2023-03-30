@@ -69,13 +69,13 @@ body {
     @media (max-width: 37.5em) {
       .nav__link {
         font-size: 3.2rem; } }
-  .nav .blah {
-    position: relative; }
   .nav__symbol {
     width: 200%;
     position: absolute;
     top: 240%;
     right: -50%; }
+    .nav__symbol--div {
+      position: relative; }
     .nav__symbol--link:link, .nav__symbol--link:visited {
       color: var(--color-white);
       cursor: pointer;
