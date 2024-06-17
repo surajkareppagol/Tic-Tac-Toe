@@ -2,22 +2,14 @@
 
 `Tic Tac Toe` game created with html, css and javascript.
 
-[Check out the game 🔗🔗](https://dev-shadoww.github.io/tic-tac-toe)
+[Check out the game 🔗🔗](https://surajkareppagol.github.io/Tic-Tac-Toe/)
 
-## What's new ?
-
-Added the light and dark mode.
-
-![GameColor](/imgs/color.gif)
+![TTT](https://raw.githubusercontent.com/surajkareppagol/Assets/main/32%20-%20Tic-Tac-Toe/TTT.gif)
 
 ## GamePlay
 
-![GameImage](/imgs/tictactoe.gif)
+![TTT Home](https://raw.githubusercontent.com/surajkareppagol/Assets/main/32%20-%20Tic-Tac-Toe/TTT%20Home.gif)
 
-![GameImage](/imgs/gameplay-1.png)
+![TTT 1](https://raw.githubusercontent.com/surajkareppagol/Assets/main/32%20-%20Tic-Tac-Toe/TTT%201.png)
 
-![GameImage](/imgs/gameplay-2.png)
-
-![GameImage](/imgs/gameplay-3.png)
-
-
+![TTT 2](https://raw.githubusercontent.com/surajkareppagol/Assets/main/32%20-%20Tic-Tac-Toe/TTT%202.png)
